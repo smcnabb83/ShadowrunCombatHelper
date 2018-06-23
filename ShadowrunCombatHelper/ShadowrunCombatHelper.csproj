@@ -54,6 +54,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Globals\CharacterList.cs" />
+    <Compile Include="UserControls\CharacterSummaryDisplay.xaml.cs">
+      <DependentUpon>CharacterSummaryDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\CharacterCreator_ViewModel.cs" />
+    <Compile Include="ViewModels\InitiativeTracker_ViewModel.cs" />
+    <Compile Include="Views\CharacterCreator_View.xaml.cs">
+      <DependentUpon>CharacterCreator_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InitiativeTracker_View.xaml.cs">
+      <DependentUpon>InitiativeTracker_View.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -66,8 +78,21 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="UserControls\CharacterSummaryDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CharacterCreator_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InitiativeTracker_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Character.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -93,5 +118,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

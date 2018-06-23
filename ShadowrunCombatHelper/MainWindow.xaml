@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ShadowrunCombatHelper"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <Frame Name="mainFrame">
         
-    </Grid>
+    </Frame>
 </Window>

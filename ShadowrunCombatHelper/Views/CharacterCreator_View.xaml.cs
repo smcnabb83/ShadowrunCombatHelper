@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShadowrunCombatHelper.Views;
 
-namespace ShadowrunCombatHelper
+namespace ShadowrunCombatHelper.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CharacterCreator_View.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CharacterCreator_View : Page
     {
-        public MainWindow()
+        public CharacterCreator_View()
         {
             InitializeComponent();
-            mainFrame.Navigate(new InitiativeTracker_View());
         }
     }
 }

@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="ShadowrunCombatHelper.UserControls.CharacterSummaryDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShadowrunCombatHelper.UserControls"
+             x:Name="CharacterDisplay"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="300" MouseDown="CharacterDisplay_MouseDown"
+             Background="Blue" DataContextChanged="CharacterDisplay_DataContextChanged">
+    <Border BorderThickness="1" BorderBrush="Black" >
+    <Grid DataContext="{Binding BoundCharacter}" Background="Transparent">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <TextBlock>Name: </TextBlock>
+            <TextBlock Text="{Binding BoundCharacter.CharacterName}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <TextBlock>Affiliation:</TextBlock>
+            <TextBlock Text="{Binding BoundCharacter.Affiliation}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+            <TextBlock>Status:</TextBlock>
+            <TextBlock Text="{Binding BoundCharacter.CharStatus}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+            <TextBlock>Initiative</TextBlock>
+            <TextBlock Text="{Binding BoundCharacter.Initiative}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>AGI</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.AGI}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>BOD</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.BOD}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>CHA</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.CHA}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>EDGE</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.EDGE}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>INT</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.INTU}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>ESS</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.ESS}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>LOG</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.LOG}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>REA</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.REA}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>STR</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.STR}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <TextBlock>WIL</TextBlock>
+                <TextBlock Text="{Binding BoundCharacter.WIL}"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+    </Border>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="End Round" Name="mnuEndRound" Click="mnuEndRound_Click"/>
+            <MenuItem Header="Check Health"/>
+        </ContextMenu>
+    </UserControl.ContextMenu>
+</UserControl>

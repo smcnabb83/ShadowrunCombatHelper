@@ -27,6 +27,8 @@ namespace ShadowrunCombatHelper.Models
         public Character()
         {
             _charId = Guid.NewGuid();
+            CurrentPhysicalDamage = 0;
+            CurrentStunDamage = 0;
         }
 
         public Character BoundCharacter
@@ -37,8 +39,21 @@ namespace ShadowrunCombatHelper.Models
         public string Affiliation
         {
             get { return _affiliation; }
-            set { _affiliation = value; }
+            set { _affiliation = value;
+                NotifyPropertyChanged("Affiliation");
+            }
         }
+
+        private bool _manuallyRollInitiative;
+
+        public bool ManuallyRollInitiative
+        {
+            get { return _manuallyRollInitiative; }
+            set { _manuallyRollInitiative = value;
+                NotifyPropertyChanged("ManuallyRollInitiative");
+            }
+        }
+        
 
         public int AGI
         {
@@ -73,7 +88,9 @@ namespace ShadowrunCombatHelper.Models
         public string CharacterName
         {
             get { return _name; }
-            set { _name = value; }
+            set { _name = value;
+                NotifyPropertyChanged("CharacterName");
+            }
         }
 
         public Guid CharID
@@ -92,6 +109,10 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _currentPhysicalDamage = value;
+                if(CharStatus != Status.CONSCIOUS)
+                {
+                    Initiative = 0;
+                }
                 NotifyPropertyChanged("CurrentPhysicalDamage");
                 NotifyPropertyChanged("CurrentDamagePenalty");
                 NotifyPropertyChanged("CharStatus");
@@ -137,11 +158,11 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
-                if(CurrentPhysicalDamage < MaxPhysicalHealth)
+                if(CurrentPhysicalDamage <= MaxPhysicalHealth)
                 {
                     return Status.CONSCIOUS;
                 }
-                else if(CurrentPhysicalDamage >= MaxPhysicalHealth && CurrentPhysicalDamage < (MaxPhysicalHealth + MaxOverFlowHealth))
+                else if(CurrentPhysicalDamage > MaxPhysicalHealth && CurrentPhysicalDamage <= (MaxPhysicalHealth + MaxOverFlowHealth))
                 {
                     return Status.BLEEDING_OUT;
                 }

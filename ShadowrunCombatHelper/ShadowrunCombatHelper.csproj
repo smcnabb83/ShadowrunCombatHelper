@@ -54,17 +54,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ExternalData\CharacterDataReader.cs" />
     <Compile Include="Globals\CharacterList.cs" />
+    <Compile Include="Globals\ItemChangeObservableCollection.cs" />
+    <Compile Include="ViewModels\CharacterSelectionDialog_ViewModel.cs" />
     <Compile Include="UserControls\CharacterSummaryDisplay.xaml.cs">
       <DependentUpon>CharacterSummaryDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\HealthDisplay.xaml.cs">
+      <DependentUpon>HealthDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LabelTextBox.xaml.cs">
+      <DependentUpon>LabelTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CharacterCreator_ViewModel.cs" />
     <Compile Include="ViewModels\InitiativeTracker_ViewModel.cs" />
+    <Compile Include="ViewModels\MainMenu_ViewModel.cs" />
     <Compile Include="Views\CharacterCreator_View.xaml.cs">
       <DependentUpon>CharacterCreator_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CharacterSelectionDialog_View.xaml.cs">
+      <DependentUpon>CharacterSelectionDialog_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InitiativeTracker_View.xaml.cs">
       <DependentUpon>InitiativeTracker_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenu_View.xaml.cs">
+      <DependentUpon>MainMenu_View.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -82,11 +98,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\HealthDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LabelTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CharacterCreator_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CharacterSelectionDialog_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InitiativeTracker_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainMenu_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

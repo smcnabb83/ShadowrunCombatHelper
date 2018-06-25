@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ShadowrunCombatHelper.ViewModels;
+using ShadowrunCombatHelper.Models;
 
 namespace ShadowrunCombatHelper.Views
 {
@@ -22,7 +24,18 @@ namespace ShadowrunCombatHelper.Views
     {
         public InitiativeTracker_View()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            CharacterSelectionDialog_View selectDialog = new CharacterSelectionDialog_View();
+            bool? result = selectDialog.ShowDialog();
+            if(result ?? false)
+            {
+                InitiativeTracker_ViewModel model = new InitiativeTracker_ViewModel();
+                DataContext = model;
+                model.AddCombatants(selectDialog.ReturnedCombatants);
+            }
+            else
+            {
+            }
         }
     }
 }

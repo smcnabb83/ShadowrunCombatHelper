@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.ExternalData;
 
 namespace ShadowrunCombatHelper.Globals
 {
@@ -23,11 +24,19 @@ namespace ShadowrunCombatHelper.Globals
         public void AddCharacter(Character c)
         {
             CharList.Add(c);
+            CharacterDataReader.WriteCharacterListToXMLFile();
         }
 
         public void RemoveCharacter(Character c)
         {
             CharList.Remove(c);
+            CharacterDataReader.WriteCharacterListToXMLFile();
+        }
+        
+        public void OverwriteCharacterList(List<Character> clist)
+        {
+            CharList = clist;
+            CharacterDataReader.WriteCharacterListToXMLFile();
         }
 
         public void RemoveCharacterAtIndex(int i)
@@ -42,9 +51,14 @@ namespace ShadowrunCombatHelper.Globals
             }            
         }
 
+        public void ReadCharacterDataFromFile()
+        {
+            CharList = ExternalData.CharacterDataReader.ReadCharacterDataToCharacterList();
+        }
+
         private CharacterList()
         {
-
+           
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="ShadowrunCombatHelper.UserControls.LabelTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShadowrunCombatHelper.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="22.131" d:DesignWidth="205.225">
+    <Grid Name="Canvas">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Name="labelText" Text="Text" Grid.Column="0"/>
+        <TextBox Name="textBox" Text="Text" Grid.Column="1"/>
+    </Grid>
+</UserControl>

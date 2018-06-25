@@ -36,7 +36,9 @@
             <TextBlock>Initiative</TextBlock>
             <TextBlock Text="{Binding BoundCharacter.Initiative}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
+            <local:HealthDisplay MaxHealth="{Binding BoundCharacter.MaxPhysicalHealth}" OverflowHealthLimit="{Binding BoundCharacter.MaxOverFlowHealth}" CurrentDamage="{Binding BoundCharacter.CurrentPhysicalDamage}" IsPhysicalDamageGrid="True"  Grid.Row="1" Grid.Column="1"/>
+            <local:HealthDisplay MaxHealth="{Binding BoundCharacter.MaxStunHealth}" OverflowHealthLimit="0" CurrentDamage="{Binding BoundCharacter.CurrentStunDamage}" IsPhysicalDamageGrid="False"  Grid.Row="1" Grid.Column="2"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
             <StackPanel Orientation="Vertical" Margin="0,0,3,0">
                 <TextBlock>AGI</TextBlock>
                 <TextBlock Text="{Binding BoundCharacter.AGI}"/>
@@ -85,6 +87,7 @@
         <ContextMenu>
             <MenuItem Header="End Round" Name="mnuEndRound" Click="mnuEndRound_Click"/>
             <MenuItem Header="Check Health"/>
+            <MenuItem Header="Deal 1 Physical Damage" Name="btnDealOnePhysicalDamage" Click="btnDealOnePhysicalDamage_Click"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 </UserControl>

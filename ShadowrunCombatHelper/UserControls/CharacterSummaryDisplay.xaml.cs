@@ -59,5 +59,10 @@ namespace ShadowrunCombatHelper.UserControls
                 BoundCharacter = (DataContext as Character);
             }
         }
+
+        private void btnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.CurrentPhysicalDamage++;
+        }
     }
 }

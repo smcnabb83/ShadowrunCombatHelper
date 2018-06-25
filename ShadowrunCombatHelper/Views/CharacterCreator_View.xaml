@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ShadowrunCombatHelper.Views"
+      xmlns:custom="clr-namespace:ShadowrunCombatHelper.UserControls"
       xmlns:vm="clr-namespace:ShadowrunCombatHelper.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -20,23 +21,97 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <ListView Grid.Column="0" ItemsSource="{Binding CharacterList}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding CharacterName}"/>
-                            <TextBlock Text="{Binding Affiliation}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <ScrollViewer>
+                <ListView Name="CharSelectionList" Grid.Column="0" ItemsSource="{Binding CharacterList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding CharacterName, Mode=OneWay}"/>
+                                <TextBlock Text="  -  "/>
+                                <TextBlock Text="{Binding Affiliation, Mode=OneWay}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
             <StackPanel Grid.Row="1">
-                <Button Name="btnAddNew">Add New Character</Button>
-                <Button Name="btnDeleteSelected">Delete Selected Character</Button>
+                <Button Name="btnAddNew" Click="btnAddNew_Click">Add New Character</Button>
+                <Button Name="btnDeleteSelected" Click="btnDeleteSelected_Click">Delete Selected Character</Button>
+                <Button Name="btnSaveChanges" Click="btnSaveChanges_Click">Save Changes</Button>
             </StackPanel>
-        </Grid>
 
+        </Grid>
+        <Grid Name="EditArea" Grid.Column="1" DataContext="{Binding ElementName=CharSelectionList, Path=SelectedItem}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Name="generalInfoPanel">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433"/>
+                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top"/>
+                <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding Affiliation}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002"/>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Name="CharAttributes" Grid.Column="0" Orientation="Vertical">
+                    <TextBlock TextAlignment="Center" >Character Attributes</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">Agi</TextBlock>
+                        <TextBox Text="{Binding AGI}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">BOD</TextBlock>
+                        <TextBox Text="{Binding BOD}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">CHA</TextBlock>
+                        <TextBox Text="{Binding CHA}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">INT</TextBlock>
+                        <TextBox Text="{Binding INTU}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">LOG</TextBlock>
+                        <TextBox Text="{Binding LOG}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">REA</TextBlock>
+                        <TextBox Text="{Binding REA}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">STR</TextBlock>
+                        <TextBox Text="{Binding STR}" Width="50"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">WIL</TextBlock>
+                        <TextBox Text="{Binding WIL}" Width="50"/>
+                    </StackPanel>
+                    <TextBlock TextAlignment="Center" >Limits</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">Physical</TextBlock>
+                        <TextBox Text="{Binding PhysicalLimit, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">Social</TextBlock>
+                        <TextBox Text="{Binding SocialLimit, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="50">Mental</TextBlock>
+                        <TextBox Text="{Binding MentalLimit, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                    </StackPanel>
+
+                    <TextBlock TextAlignment="Center" >Other Computed Attr</TextBlock>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
     </Grid>
 </Page>

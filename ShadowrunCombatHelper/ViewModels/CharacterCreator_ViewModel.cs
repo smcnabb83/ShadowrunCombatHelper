@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,9 +15,9 @@ namespace ShadowrunCombatHelper.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private List<Character> _characterList;
+        private ItemChangeObservableCollection<Character> _characterList = new ItemChangeObservableCollection<Character>();
 
-        public List<Character> CharacterList
+        public ItemChangeObservableCollection<Character> CharacterList
         {
             get { return _characterList; }
             set { _characterList = value;
@@ -23,14 +25,31 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        private Character _selectedCharacter;
-
-        public Character SelectedCharacter
+        public CharacterCreator_ViewModel()
         {
-            get { return _selectedCharacter; }
-            set { _selectedCharacter = value;
-                NotifyPropertyChanged("SelectedCharacter");
+            CharacterList clist = Globals.CharacterList.Instance;
+            foreach(Character c in clist.GetCharacterList())
+            {
+                CharacterList.Add(c);
             }
+        }
+        
+        public void SaveCharactersToCharacterList()
+        {
+            CharacterList clist = Globals.CharacterList.Instance;
+            clist.OverwriteCharacterList(CharacterList.ToList());
+        }
+
+        public void CreateNewCharacter()
+        {
+            Character newCharacter = new Character();
+            newCharacter.CharacterName = "New Character";
+            CharacterList.Add(newCharacter);
+        }
+
+        public void RemoveCharacterFromList(Character C)
+        {
+            CharacterList.Remove(C);
         }
 
         public void NotifyPropertyChanged(string property)
@@ -40,8 +59,6 @@ namespace ShadowrunCombatHelper.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
-
-
-
+             
     }
 }

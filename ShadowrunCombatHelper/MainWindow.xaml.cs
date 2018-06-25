@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShadowrunCombatHelper.Views;
+using ShadowrunCombatHelper.Globals;
 
 namespace ShadowrunCombatHelper
 {
@@ -24,7 +25,8 @@ namespace ShadowrunCombatHelper
         public MainWindow()
         {
             InitializeComponent();
-            mainFrame.Navigate(new InitiativeTracker_View());
+            CharacterList.Instance.ReadCharacterDataFromFile();
+            mainFrame.Navigate(new MainMenu_View());
         }
     }
 }

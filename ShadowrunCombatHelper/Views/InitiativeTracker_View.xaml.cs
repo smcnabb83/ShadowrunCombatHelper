@@ -25,6 +25,7 @@ namespace ShadowrunCombatHelper.Views
         public InitiativeTracker_View()
         {
             InitializeComponent();
+            CombatStates.ItemsSource = Enum.GetValues(typeof(Character.CombatState)).Cast<Character.CombatState>();
             CharacterSelectionDialog_View selectDialog = new CharacterSelectionDialog_View();
             bool? result = selectDialog.ShowDialog();
             if(result ?? false)

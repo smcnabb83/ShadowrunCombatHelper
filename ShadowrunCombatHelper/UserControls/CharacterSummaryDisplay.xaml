@@ -87,7 +87,7 @@
         <ContextMenu>
             <MenuItem Header="End Round" Name="mnuEndRound" Click="mnuEndRound_Click"/>
             <MenuItem Header="Check Health"/>
-            <MenuItem Header="Deal 1 Physical Damage" Name="btnDealOnePhysicalDamage" Click="btnDealOnePhysicalDamage_Click"/>
+            <MenuItem Header="Deal Damage" Name="btnDealDamage" Click="btnDealDamage_Click"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 </UserControl>

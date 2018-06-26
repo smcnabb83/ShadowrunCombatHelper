@@ -53,6 +53,8 @@
                 <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433"/>
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top"/>
                 <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding Affiliation}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Manually Roll Initiative"/>
+                <CheckBox Name="chkRollInitiative" IsChecked="{Binding ManuallyRollInitiative, Mode=TwoWay}"/>
             </StackPanel>
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>

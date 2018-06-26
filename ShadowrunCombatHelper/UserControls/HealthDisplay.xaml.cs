@@ -91,6 +91,10 @@ namespace ShadowrunCombatHelper.UserControls
                 {
                     item.Background = Brushes.Red;
                 }
+                else if(!IsPhysicalDamageGrid && textBoxGrid.IndexOf(item) > (MaxHealth - 1))
+                {
+                    item.Background = Brushes.Black;
+                }
                 else
                 {
                     item.Background = Brushes.White;

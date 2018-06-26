@@ -57,6 +57,12 @@
     <Compile Include="ExternalData\CharacterDataReader.cs" />
     <Compile Include="Globals\CharacterList.cs" />
     <Compile Include="Globals\ItemChangeObservableCollection.cs" />
+    <Compile Include="UserControls\DealDamageDialog.xaml.cs">
+      <DependentUpon>DealDamageDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\InitiativeDialog.xaml.cs">
+      <DependentUpon>InitiativeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\CharacterSelectionDialog_ViewModel.cs" />
     <Compile Include="UserControls\CharacterSummaryDisplay.xaml.cs">
       <DependentUpon>CharacterSummaryDisplay.xaml</DependentUpon>
@@ -98,7 +104,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\DealDamageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\HealthDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\InitiativeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

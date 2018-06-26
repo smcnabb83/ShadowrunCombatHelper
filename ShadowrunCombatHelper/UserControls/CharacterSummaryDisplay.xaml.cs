@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.UserControls;
 
 namespace ShadowrunCombatHelper.UserControls
 {
@@ -63,6 +64,23 @@ namespace ShadowrunCombatHelper.UserControls
         private void btnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.CurrentPhysicalDamage++;
+        }
+
+        private void btnDealDamage_Click(object sender, RoutedEventArgs e)
+        {
+            DealDamageDialog dealDamage = new DealDamageDialog(BoundCharacter);
+            bool? result = dealDamage.ShowDialog();
+            if(result ?? false)
+            {
+                if (dealDamage.PhysicalDamage)
+                {
+                    BoundCharacter.CurrentPhysicalDamage += dealDamage.DamageDealt;
+                }
+                else
+                {
+                    BoundCharacter.CurrentStunDamage += dealDamage.DamageDealt;
+                }
+            }
         }
     }
 }

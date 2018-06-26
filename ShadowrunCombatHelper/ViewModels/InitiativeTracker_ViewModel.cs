@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.Views;
+using ShadowrunCombatHelper.UserControls;
 
 namespace ShadowrunCombatHelper.ViewModels
 {
@@ -54,10 +55,11 @@ namespace ShadowrunCombatHelper.ViewModels
         {
             foreach(Character c in combatants)
             {
-                c.Initiative = roller.Next(1, 20);
+                RollInitiative(c);
                 c.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(c);
             }
+            NotifyPropertyChanged("CurrentCharacter");
         }
 
         private void GenerateRandomCombatants()
@@ -119,18 +121,37 @@ namespace ShadowrunCombatHelper.ViewModels
             foreach (var i in tempQueue)
             {
                 i.PropertyChanged -= OnInitiativeChanged;
-                if (i.ManuallyRollInitiative)
-                {
-                    i.Initiative = roller.Next(1, 20);
-                }
-                else
-                {
-                    i.Initiative = roller.Next(1, 20);
-                }
+                RollInitiative(i);
                 i.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(i);
             }
             NotifyPropertyChanged("CurrentCharacter");
+        }
+
+        private static void RollInitiative(Character i)
+        {
+            if (i.ManuallyRollInitiative)
+            {
+                try
+                {
+                    InitiativeDialog getInitiative = new InitiativeDialog(i);
+                    bool? result = false;
+                    while ((result ?? false) == false)
+                    {
+                        result = getInitiative.ShowDialog();
+                    }
+
+                    i.Initiative = getInitiative.InitiativeRolledValue;
+                }
+                catch
+                {
+                    RollInitiative(i);
+                }
+            }
+            else
+            {
+                i.Initiative = i.RollInitiative;
+            }
         }
     }
 }

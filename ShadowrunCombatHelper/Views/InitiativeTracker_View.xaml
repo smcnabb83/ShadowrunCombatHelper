@@ -7,6 +7,8 @@
       xmlns:viewmodels="clr-namespace:ShadowrunCombatHelper.ViewModels"
       xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
       xmlns:charsummary="clr-namespace:ShadowrunCombatHelper.UserControls"
+      xmlns:System="clr-namespace:System;assembly=mscorlib"
+
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="InitiativeTracker_View">
@@ -56,9 +58,10 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical" Grid.Column="0">
             <TextBlock Text="{Binding CurrentCharacter.CharacterName}"/>
             <TextBlock Text="{Binding CurrentCharacter.CharStatus}"/>
+            <ComboBox Name="CombatStates" SelectedItem="{Binding CurrentCharacter.CharCombatState}"/>
         </StackPanel>
 
     </Grid>

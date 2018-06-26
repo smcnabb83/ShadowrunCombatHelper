@@ -5,24 +5,46 @@ namespace ShadowrunCombatHelper.Models
 {
     public class Character : INotifyPropertyChanged
     {
-        public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
-
         private static Random gen = new Random();
+        private static Random roller = new Random();
+
         private string _affiliation;
+
         private int _agi;
+
         private int _bod;
+
         private int _cha;
+
+        private CombatState _charCombatState;
+
         private Guid _charId;
+
         private int _currentPhysicalDamage;
+
         private int _currentStunDamage;
+
         private int _edge;
+
+        private int _ess;
+
         private int _initiative;
+
         private int _intu;
+
         private int _log;
+
+        private bool _manuallyRollInitiative;
+
         private string _name;
+
         private int _rea;
+
         private int _str;
+
         private int _wil;
+
+        private string _player;
 
         public Character()
         {
@@ -31,29 +53,20 @@ namespace ShadowrunCombatHelper.Models
             CurrentStunDamage = 0;
         }
 
-        public Character BoundCharacter
-        { get { return this; } }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public enum CombatState { PHYSICAL, ASTRAL, VRCOLDSIM, VRHOTSIM, AR, }
+
+        public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
         public string Affiliation
         {
             get { return _affiliation; }
-            set { _affiliation = value;
+            set
+            {
+                _affiliation = value;
                 NotifyPropertyChanged("Affiliation");
             }
         }
-
-        private bool _manuallyRollInitiative;
-
-        public bool ManuallyRollInitiative
-        {
-            get { return _manuallyRollInitiative; }
-            set { _manuallyRollInitiative = value;
-                NotifyPropertyChanged("ManuallyRollInitiative");
-            }
-        }
-        
 
         public int AGI
         {
@@ -74,6 +87,8 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public Character BoundCharacter
+        { get { return this; } }
         public int CHA
         {
             get { return _cha; }
@@ -88,14 +103,45 @@ namespace ShadowrunCombatHelper.Models
         public string CharacterName
         {
             get { return _name; }
-            set { _name = value;
+            set
+            {
+                _name = value;
                 NotifyPropertyChanged("CharacterName");
+            }
+        }
+
+        public CombatState CharCombatState
+        {
+            get { return _charCombatState; }
+            set
+            {
+                _charCombatState = value;
+                NotifyPropertyChanged("CharCombatState");
             }
         }
 
         public Guid CharID
         {
             get { return _charId; }
+        }
+
+        public Status CharStatus
+        {
+            get
+            {
+                if (CurrentPhysicalDamage <= MaxPhysicalHealth)
+                {
+                    return Status.CONSCIOUS;
+                }
+                else if (CurrentPhysicalDamage > MaxPhysicalHealth && CurrentPhysicalDamage <= (MaxPhysicalHealth + MaxOverFlowHealth))
+                {
+                    return Status.BLEEDING_OUT;
+                }
+                else
+                {
+                    return Status.DEAD;
+                }
+            }
         }
 
         public int CurrentDamagePenalty
@@ -109,7 +155,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _currentPhysicalDamage = value;
-                if(CharStatus != Status.CONSCIOUS)
+                if (CharStatus != Status.CONSCIOUS)
                 {
                     Initiative = 0;
                 }
@@ -124,7 +170,16 @@ namespace ShadowrunCombatHelper.Models
             get { return _currentStunDamage; }
             set
             {
-                _currentStunDamage = value;
+                if (value > MaxStunHealth)
+                {
+                    int overflow = value - MaxStunHealth;
+                    CurrentPhysicalDamage += overflow / 2;
+                    _currentStunDamage = MaxStunHealth;
+                }
+                else
+                {
+                    _currentStunDamage = value;
+                }
                 NotifyPropertyChanged("CurrentStunDamage");
                 NotifyPropertyChanged("CurrentDamagePenalty");
             }
@@ -136,11 +191,51 @@ namespace ShadowrunCombatHelper.Models
             set { _edge = value; NotifyPropertyChanged("EDGE"); }
         }
 
+        public int ESS
+        {
+            get { return _ess; }
+            set
+            {
+                _ess = value;
+                NotifyPropertyChanged("ESS");
+                NotifyPropertyChanged("SocialLimit");
+            }
+        }
+
         public int Initiative
         {
             get { return _initiative; }
-            set { _initiative = value;
+            set
+            {
+                _initiative = value;
                 NotifyPropertyChanged("Initiative");
+            }
+        }
+
+        public string InitiativeRollText
+        {
+            get
+            {
+                switch (CharCombatState)
+                {
+                    case CombatState.PHYSICAL:
+                        return $"Roll {REA + INTU} + 1D6";
+
+                    case CombatState.ASTRAL:
+                        return $"Roll {INTU * 2} + 2D6";
+
+                    case CombatState.AR:
+                        return $"Roll {REA + INTU} + 1D6";
+
+                    case CombatState.VRCOLDSIM:
+                        return $"Roll {LOG + INTU} + 3D6";
+
+                    case CombatState.VRHOTSIM:
+                        return $"Roll {LOG + INTU} + 4D6";
+
+                    default:
+                        return "";
+                }
             }
         }
 
@@ -151,38 +246,6 @@ namespace ShadowrunCombatHelper.Models
             {
                 _intu = value; NotifyPropertyChanged("INTU");
                 NotifyPropertyChanged("MentalLimit");
-            }
-        }
-
-        public Status CharStatus
-        {
-            get
-            {
-                if(CurrentPhysicalDamage <= MaxPhysicalHealth)
-                {
-                    return Status.CONSCIOUS;
-                }
-                else if(CurrentPhysicalDamage > MaxPhysicalHealth && CurrentPhysicalDamage <= (MaxPhysicalHealth + MaxOverFlowHealth))
-                {
-                    return Status.BLEEDING_OUT;
-                }
-                else
-                {
-                    return Status.DEAD;
-                }
-            }
-        }
-
-        private int _ess;
-
-        public int ESS
-        {
-            get { return _ess; }
-            set
-            {
-                _ess = value;
-                NotifyPropertyChanged("ESS");
-                NotifyPropertyChanged("SocialLimit");
             }
         }
 
@@ -197,6 +260,15 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public bool ManuallyRollInitiative
+        {
+            get { return _manuallyRollInitiative; }
+            set
+            {
+                _manuallyRollInitiative = value;
+                NotifyPropertyChanged("ManuallyRollInitiative");
+            }
+        }
         public int MaxOverFlowHealth => BOD;
 
         public int MaxPhysicalHealth => (int)Math.Ceiling((decimal)BOD / 2) + 8;
@@ -221,15 +293,15 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public int SocialLimit
+        public string Player
         {
-            get
+            get { return _player; }
+            set
             {
-                int intermediateCalculation = (CHA * 2) + WIL + ESS;
-                return (int)Math.Ceiling((decimal)intermediateCalculation / 3);
+                _player = value;
+                NotifyPropertyChanged("Player");
             }
         }
-
         public int REA
         {
             get { return _rea; }
@@ -241,6 +313,40 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public int RollInitiative
+        {
+            get
+            {
+                switch (CharCombatState)
+                {
+                    case CombatState.PHYSICAL:
+                        return REA + INTU + roller.Next(1, 7);
+
+                    case CombatState.ASTRAL:
+                        return INTU * 2 + roller.Next(2, 13);
+
+                    case CombatState.AR:
+                        return REA + INTU + roller.Next(1, 7);
+
+                    case CombatState.VRCOLDSIM:
+                        return LOG + INTU + roller.Next(3, 19);
+
+                    case CombatState.VRHOTSIM:
+                        return LOG + INTU + roller.Next(4, 25);
+
+                    default:
+                        return 1;
+                }
+            }
+        }
+        public int SocialLimit
+        {
+            get
+            {
+                int intermediateCalculation = (CHA * 2) + WIL + ESS;
+                return (int)Math.Ceiling((decimal)intermediateCalculation / 3);
+            }
+        }
         public int STR
         {
             get { return _str; }

@@ -28,9 +28,44 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
+        private Character CustomAggregator(Character x1, Character x2)
+        {
+            if(x1.Initiative > x2.Initiative)
+            {
+                return x1;
+            }
+            else if (x1.Initiative < x2.Initiative)
+            {
+                return x2;
+            }
+            else
+            {
+                if(string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) > 0)
+                {
+                    return x1;
+                }
+
+                else if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) > 0)
+                {
+                    return x2;
+                }
+                else
+                {
+                    if(string.Compare(x1.CharacterName, x2.CharacterName) > 0)
+                    {
+                        return x1;
+                    }
+                    else
+                    {
+                        return x2;
+                    }
+                }
+            }
+        }
+
         public Character CurrentCharacter
         {
-            get { return CombatQueue.Aggregate((x1, x2) => x1.Initiative >= x2.Initiative ? x1 : x2); }
+            get { return CombatQueue.Aggregate(CustomAggregator); }
         }
 
         private int _currentRound;
@@ -60,26 +95,6 @@ namespace ShadowrunCombatHelper.ViewModels
                 CombatQueue.Add(c);
             }
             NotifyPropertyChanged("CurrentCharacter");
-        }
-
-        private void GenerateRandomCombatants()
-        {
-            Character newChar = new Character();
-            for (int i = 0; i < 2; i++)
-            {
-                newChar = new Character();
-                newChar.generateRandomStats($"Player{i}", "Players");
-                newChar.PropertyChanged += OnInitiativeChanged;
-                CombatQueue.Add(newChar);
-            }
-
-            for (int j = 0; j < 2; j++)
-            {
-                newChar = new Character();
-                newChar.generateRandomStats($"Enemy{j}", "Enemies");
-                newChar.PropertyChanged += OnInitiativeChanged;
-                CombatQueue.Add(newChar);
-            }
         }
 
         private bool IsRoundOver()

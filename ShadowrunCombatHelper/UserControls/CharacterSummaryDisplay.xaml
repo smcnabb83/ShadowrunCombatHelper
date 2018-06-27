@@ -7,7 +7,9 @@
              x:Name="CharacterDisplay"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300" MouseDown="CharacterDisplay_MouseDown"
-             Background="Blue" DataContextChanged="CharacterDisplay_DataContextChanged">
+             Background="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}"
+             Foreground="{Binding BoundCharacter.Affiliation.ForegroundColorBrush}"
+             DataContextChanged="CharacterDisplay_DataContextChanged">
     <Border BorderThickness="1" BorderBrush="Black" >
     <Grid DataContext="{Binding BoundCharacter}" Background="Transparent">
         <Grid.ColumnDefinitions>
@@ -26,7 +28,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
             <TextBlock>Affiliation:</TextBlock>
-            <TextBlock Text="{Binding BoundCharacter.Affiliation}"/>
+            <TextBlock Text="{Binding BoundCharacter.Affiliation.Name}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
             <TextBlock>Status:</TextBlock>

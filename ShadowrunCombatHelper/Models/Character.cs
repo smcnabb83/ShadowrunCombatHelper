@@ -8,7 +8,7 @@ namespace ShadowrunCombatHelper.Models
         private static Random gen = new Random();
         private static Random roller = new Random();
 
-        private string _affiliation;
+        private Affiliation _affiliation;
 
         private int _agi;
 
@@ -58,7 +58,7 @@ namespace ShadowrunCombatHelper.Models
         public enum CombatState { PHYSICAL, ASTRAL, VRCOLDSIM, VRHOTSIM, AR, }
 
         public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
-        public string Affiliation
+        public Affiliation Affiliation
         {
             get { return _affiliation; }
             set
@@ -383,7 +383,7 @@ namespace ShadowrunCombatHelper.Models
             Initiative -= 10;
         }
 
-        public void generateRandomStats(string name, string affil)
+        public void generateRandomStats(string name)
         {
             AGI = gen.Next(1, 11);
             BOD = gen.Next(1, 11);
@@ -396,7 +396,7 @@ namespace ShadowrunCombatHelper.Models
             WIL = gen.Next(1, 11);
             Initiative = gen.Next(1, 20);
             CharacterName = name;
-            Affiliation = affil;
+            Affiliation = new Affiliation();
         }
 
         public void NotifyPropertyChanged(string propName)

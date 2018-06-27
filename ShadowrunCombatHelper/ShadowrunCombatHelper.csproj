@@ -55,6 +55,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ExternalData\CharacterDataReader.cs" />
+    <Compile Include="Globals\AffiliationList.cs" />
     <Compile Include="Globals\CharacterList.cs" />
     <Compile Include="Globals\ItemChangeObservableCollection.cs" />
     <Compile Include="Models\Affiliation.cs" />

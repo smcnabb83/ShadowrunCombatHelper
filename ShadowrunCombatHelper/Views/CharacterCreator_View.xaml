@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ShadowrunCombatHelper.Views"
       xmlns:custom="clr-namespace:ShadowrunCombatHelper.UserControls"
+      xmlns:globals="clr-namespace:ShadowrunCombatHelper.Globals"
       xmlns:vm="clr-namespace:ShadowrunCombatHelper.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -52,7 +53,7 @@
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
                 <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433"/>
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding Affiliation}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002"/>
+                <ComboBox HorizontalAlignment="Left" Height="23" Name="AffiliationComboBox"  SelectedItem="{Binding Affiliation, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002"/>
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Manually Roll Initiative"/>
                 <CheckBox Name="chkRollInitiative" IsChecked="{Binding ManuallyRollInitiative, Mode=TwoWay}"/>
             </StackPanel>

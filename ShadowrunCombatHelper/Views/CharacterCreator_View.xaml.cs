@@ -25,6 +25,8 @@ namespace ShadowrunCombatHelper.Views
         public CharacterCreator_View()
         {
             InitializeComponent();
+            AffiliationComboBox.ItemsSource = ShadowrunCombatHelper.Globals.AffiliationList.Affiliations;
+            AffiliationComboBox.DisplayMemberPath = "Name";
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)

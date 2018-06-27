@@ -57,6 +57,7 @@
     <Compile Include="ExternalData\CharacterDataReader.cs" />
     <Compile Include="Globals\CharacterList.cs" />
     <Compile Include="Globals\ItemChangeObservableCollection.cs" />
+    <Compile Include="Models\Skill.cs" />
     <Compile Include="UserControls\DealDamageDialog.xaml.cs">
       <DependentUpon>DealDamageDialog.xaml</DependentUpon>
     </Compile>

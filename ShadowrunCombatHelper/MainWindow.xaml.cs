@@ -25,6 +25,7 @@ namespace ShadowrunCombatHelper
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowState = System.Windows.WindowState.Maximized;
             CharacterList.Instance.ReadCharacterDataFromFile();
             mainFrame.Navigate(new MainMenu_View());
         }

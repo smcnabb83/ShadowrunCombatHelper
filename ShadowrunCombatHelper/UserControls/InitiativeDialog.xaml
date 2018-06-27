@@ -15,7 +15,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <TextBlock Name="InitiativeLabel" Grid.Row="0"/>
-        <TextBox Name="InitiativeInput" Grid.Row="1"/>
+        <TextBox Name="InitiativeInput" Grid.Row="1" KeyDown="InitiativeInput_KeyDown"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
             <Button Name="btnOK" Width="100" Margin="0,0,35,0" Click="btnOK_Click">OK</Button>
             <Button Name="btnCancel" Width="100" Margin="35,0,0,0" Click="btnCancel_Click">Cancel</Button>

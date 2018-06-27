@@ -23,6 +23,7 @@ namespace ShadowrunCombatHelper.UserControls
         private string initiativeRollText = "";
         private int initiativeRolledValue = 0;
 
+       
         public string InitiativeRollText
         {
             get
@@ -43,10 +44,17 @@ namespace ShadowrunCombatHelper.UserControls
         public InitiativeDialog(Character CharForInitiative)
         {
             InitializeComponent();
-            InitiativeLabel.Text = $"Please {CharForInitiative.InitiativeRollText} for initiative and put the result below: ";        
+            InitiativeInput.Focus();
+            InitiativeLabel.Text = $"Please {CharForInitiative.InitiativeRollText} for initiative and put the result below: ";
+            Title += $" for {CharForInitiative.CharacterName}.";
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            CompleteEnteringInitiative();
+        }
+
+        private void CompleteEnteringInitiative()
         {
             try
             {
@@ -57,7 +65,7 @@ namespace ShadowrunCombatHelper.UserControls
             {
                 FlashTitle();
                 this.Title = $"{InitiativeInput.Text} is not a valid input - please input a number";
-                
+
             }
         }
 
@@ -74,6 +82,14 @@ namespace ShadowrunCombatHelper.UserControls
         {
             this.initiativeRolledValue = -1;
             this.DialogResult = false;
+        }
+
+        private void InitiativeInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                CompleteEnteringInitiative();
+            }
         }
     }
 }

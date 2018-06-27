@@ -207,7 +207,14 @@ namespace ShadowrunCombatHelper.Models
             get { return _initiative; }
             set
             {
-                _initiative = value;
+                if (CharStatus == Status.CONSCIOUS)
+                {
+                    _initiative = value;
+                }
+                else
+                {
+                    _initiative = 0;
+                }
                 NotifyPropertyChanged("Initiative");
             }
         }

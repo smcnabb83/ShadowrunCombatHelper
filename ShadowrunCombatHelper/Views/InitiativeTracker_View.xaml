@@ -10,7 +10,7 @@
       xmlns:System="clr-namespace:System;assembly=mscorlib"
 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="301.333" d:DesignWidth="572"
       Title="InitiativeTracker_View">
 
     <Page.Resources>
@@ -19,29 +19,17 @@
                 <scm:SortDescription PropertyName="Initiative" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+        <GridLength x:Key="CurrentCharViewColumnWidth">130</GridLength>
     </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-
-        
-        <!--<DataGrid Grid.Column="1" ItemsSource="{Binding Source={StaticResource CombatantSource}}" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <charsummary:CharacterSummaryDisplay/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding CharacterName}"/>
-                <DataGridTextColumn Header="Affiliation" Binding="{Binding Affiliation}"/>
-                <DataGridTextColumn Header="Initiative" Binding="{Binding Initiative}"/>
-            </DataGrid.Columns>
-        </DataGrid>-->
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
         <ScrollViewer Grid.Column="1">
             <ItemsControl x:Name="CharacterStack" ItemsSource="{Binding Source={StaticResource CombatantSource}}">
@@ -58,11 +46,41 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <StackPanel Orientation="Vertical" Grid.Column="0">
-            <TextBlock Text="{Binding CurrentCharacter.CharacterName}"/>
-            <TextBlock Text="{Binding CurrentCharacter.CharStatus}"/>
-            <ComboBox Name="CombatStates" SelectedItem="{Binding CurrentCharacter.CharCombatState}"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="0" Name="grdActivePlayerInfoPanel">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0">Active Player Information</TextBlock>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Character Name"/>
+                    <TextBlock Grid.Column="1" Text="{Binding CurrentCharacter.CharacterName}"/>
+                </Grid>
+                
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Character Status"/>
+                    <TextBlock Grid.Column="1" Text="{Binding CurrentCharacter.CharStatus}"/>                    
+                </Grid>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Current Combat State" Grid.Column="0"/>
+                    <ComboBox Grid.Column="1" Name="CombatStates" SelectedItem="{Binding CurrentCharacter.CharCombatState}"/>
+                </Grid>
+            </StackPanel>
+        </Grid>
 
     </Grid>
 </Page>

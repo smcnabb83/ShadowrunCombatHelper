@@ -32,7 +32,7 @@ namespace ShadowrunCombatHelper.Views
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
         {
             CharacterCreator_ViewModel ccvm = (CharacterCreator_ViewModel)DataContext;
-            ccvm.CreateNewCharacter();          
+            ccvm.CreateNewCharacter();
         }
 
         private void btnDeleteSelected_Click(object sender, RoutedEventArgs e)

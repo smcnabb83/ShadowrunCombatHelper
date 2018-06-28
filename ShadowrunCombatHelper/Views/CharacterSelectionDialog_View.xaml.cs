@@ -24,6 +24,7 @@ namespace ShadowrunCombatHelper.Views
         public CharacterSelectionDialog_View()
         {
             InitializeComponent();
+            
         }
 
         private List<Character> _returnedCombatants = new List<Character>();

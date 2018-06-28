@@ -18,6 +18,16 @@ namespace ShadowrunCombatHelper.ViewModels
             get { return _allCharactersList; }
             set { _allCharactersList = value;
                 NotifyPropertyChanged("AllCharactersList");
+                }
+        }
+
+
+
+        public List<Character.CombatState> CombatStates
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Character.CombatState)).Cast<Character.CombatState>().ToList();
             }
         }
 

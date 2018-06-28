@@ -43,6 +43,8 @@
                         <TextBlock Text="{Binding CharacterName}"/>
                         <TextBlock Text=" - "/>
                         <TextBlock Text="{Binding Affiliation}"/>
+                        <TextBlock Text="   Beginning Combat Mode"/>
+                        <ComboBox Name="cboCombatMode" SelectedItem="{Binding CharCombatState}" ItemsSource="{Binding CombatStatesList, Mode=OneTime}"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

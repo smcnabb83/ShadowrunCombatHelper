@@ -1,13 +1,32 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace ShadowrunCombatHelper.Models
 {
     public class Character : INotifyPropertyChanged
     {
+        #region public enumerations
+        public enum CombatState { PHYSICAL, ASTRAL, VRCOLDSIM, VRHOTSIM, AR, }
+
+        public List<CombatState> CombatStatesList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(CombatState)).Cast<CombatState>().ToList();
+            }
+        }
+
+        public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
+        #endregion
+
+        #region private static declarations
         private static Random gen = new Random();
         private static Random roller = new Random();
+        #endregion
 
+        #region private member variables
         private Affiliation _affiliation;
 
         private int _agi;
@@ -45,6 +64,7 @@ namespace ShadowrunCombatHelper.Models
         private int _wil;
 
         private string _player;
+        #endregion
 
         public Character()
         {
@@ -55,9 +75,7 @@ namespace ShadowrunCombatHelper.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public enum CombatState { PHYSICAL, ASTRAL, VRCOLDSIM, VRHOTSIM, AR, }
-
-        public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
+        #region general character properties
         public Affiliation Affiliation
         {
             get { return _affiliation; }
@@ -68,6 +86,34 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public Character BoundCharacter
+        {
+            get
+            {
+                return this;
+            }
+        }
+
+
+        public string CharacterName
+        {
+            get { return _name; }
+            set
+            {
+                _name = value;
+                NotifyPropertyChanged("CharacterName");
+            }
+        }
+
+
+        public Guid CharID
+        {
+            get { return _charId; }
+        }
+
+        #endregion
+
+        #region entered attribute properties
         public int AGI
         {
             get { return _agi; }
@@ -84,11 +130,11 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("MaxPhysicalHealth");
                 NotifyPropertyChanged("MaxOverflowHealth");
                 NotifyPropertyChanged("PhysicalLimit");
+                NotifyPropertyChanged("LiftCarry");
             }
         }
 
-        public Character BoundCharacter
-        { get { return this; } }
+
         public int CHA
         {
             get { return _cha; }
@@ -97,18 +143,103 @@ namespace ShadowrunCombatHelper.Models
                 _cha = value;
                 NotifyPropertyChanged("CHA");
                 NotifyPropertyChanged("SocialLimit");
+                NotifyPropertyChanged("Composure");
+                NotifyPropertyChanged("JudgeIntentions");
             }
         }
 
-        public string CharacterName
+        public int EDGE
         {
-            get { return _name; }
+            get { return _edge; }
+            set { _edge = value; NotifyPropertyChanged("EDGE"); }
+        }
+
+        public int ESS
+        {
+            get { return _ess; }
             set
             {
-                _name = value;
-                NotifyPropertyChanged("CharacterName");
+                _ess = value;
+                NotifyPropertyChanged("ESS");
+                NotifyPropertyChanged("SocialLimit");
             }
         }
+
+        public int INTU
+        {
+            get { return _intu; }
+            set
+            {
+                _intu = value; NotifyPropertyChanged("INTU");
+                NotifyPropertyChanged("MentalLimit");
+                NotifyPropertyChanged("JudgeIntentions");
+            }
+        }
+
+        public int LOG
+        {
+            get { return _log; }
+            set
+            {
+                _log = value;
+                NotifyPropertyChanged("LOG");
+                NotifyPropertyChanged("MentalLimit");
+                NotifyPropertyChanged("Memory");
+            }
+        }
+
+        public int REA
+        {
+            get { return _rea; }
+            set
+            {
+                _rea = value;
+                NotifyPropertyChanged("REA");
+                NotifyPropertyChanged("PhysicalLimit");
+            }
+        }
+
+        public int STR
+        {
+            get { return _str; }
+            set
+            {
+                _str = value;
+                NotifyPropertyChanged("STR");
+                NotifyPropertyChanged("PhysicalLimit");
+                NotifyPropertyChanged("LiftCarry");
+            }
+        }
+
+        public int WIL
+        {
+            get { return _wil; }
+            set
+            {
+                _wil = value;
+                NotifyPropertyChanged("WIL");
+                NotifyPropertyChanged("MaxStunHealth");
+                NotifyPropertyChanged("MentalLimit");
+                NotifyPropertyChanged("SocialLimit");
+                NotifyPropertyChanged("Composure");
+                NotifyPropertyChanged("Memory");
+            }
+        }
+
+        private int _magres;
+
+        public int MAGRES
+        {
+            get { return _magres; }
+            set { _magres = value;
+                NotifyPropertyChanged("MAGRES");
+            }
+        }
+
+
+        #endregion
+
+        #region derived attribute properties
 
         public CombatState CharCombatState
         {
@@ -120,10 +251,6 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public Guid CharID
-        {
-            get { return _charId; }
-        }
 
         public Status CharStatus
         {
@@ -185,22 +312,7 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public int EDGE
-        {
-            get { return _edge; }
-            set { _edge = value; NotifyPropertyChanged("EDGE"); }
-        }
-
-        public int ESS
-        {
-            get { return _ess; }
-            set
-            {
-                _ess = value;
-                NotifyPropertyChanged("ESS");
-                NotifyPropertyChanged("SocialLimit");
-            }
-        }
+      
 
         public int Initiative
         {
@@ -246,26 +358,39 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public int INTU
+        public int Composure
         {
-            get { return _intu; }
-            set
+            get
             {
-                _intu = value; NotifyPropertyChanged("INTU");
-                NotifyPropertyChanged("MentalLimit");
+                return CHA + WIL;
             }
         }
 
-        public int LOG
+        public int JudgeIntentions
         {
-            get { return _log; }
-            set
+            get
             {
-                _log = value;
-                NotifyPropertyChanged("LOG");
-                NotifyPropertyChanged("MentalLimit");
+                return CHA + INTU;
             }
         }
+
+        public int LiftCarry
+        {
+            get
+            {
+                return BOD + STR;
+            }
+        }
+
+        public int Memory
+        {
+            get
+            {
+                return LOG + WIL;
+            }
+        }
+
+      
 
         public bool ManuallyRollInitiative
         {
@@ -309,16 +434,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("Player");
             }
         }
-        public int REA
-        {
-            get { return _rea; }
-            set
-            {
-                _rea = value;
-                NotifyPropertyChanged("REA");
-                NotifyPropertyChanged("PhysicalLimit");
-            }
-        }
+       
 
         public int RollInitiative
         {
@@ -354,29 +470,7 @@ namespace ShadowrunCombatHelper.Models
                 return (int)Math.Ceiling((decimal)intermediateCalculation / 3);
             }
         }
-        public int STR
-        {
-            get { return _str; }
-            set
-            {
-                _str = value;
-                NotifyPropertyChanged("STR");
-                NotifyPropertyChanged("PhysicalLimit");
-            }
-        }
-
-        public int WIL
-        {
-            get { return _wil; }
-            set
-            {
-                _wil = value;
-                NotifyPropertyChanged("WIL");
-                NotifyPropertyChanged("MaxStunHealth");
-                NotifyPropertyChanged("MentalLimit");
-                NotifyPropertyChanged("SocialLimit");
-            }
-        }
+       
 
         public void EndTurn()
         {
@@ -406,5 +500,6 @@ namespace ShadowrunCombatHelper.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+        #endregion
     }
 }

@@ -83,7 +83,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public InitiativeTracker_ViewModel()
         {
-            CurrentRound = 0;           
+            CurrentRound = 1;           
         }
 
         public void AddCombatants(List<Character> combatants)

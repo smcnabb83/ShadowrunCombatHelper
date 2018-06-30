@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Linq;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using ShadowrunCombatHelper.Globals;
 
 namespace ShadowrunCombatHelper.Models
 {
@@ -240,6 +242,18 @@ namespace ShadowrunCombatHelper.Models
         #endregion
 
         #region derived attribute properties
+
+        private ItemChangeObservableCollection<Skill> _skills = new ItemChangeObservableCollection<Skill>();
+
+        public ItemChangeObservableCollection<Skill> Skills
+        {
+            get { return _skills; }
+            set {
+                _skills = value;
+                NotifyPropertyChanged("Skills");
+            }
+        }
+
 
         public CombatState CharCombatState
         {

@@ -53,7 +53,11 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Name="generalInfoPanel">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Name="generalInfoPanel">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top"/>
                 <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433"/>
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top"/>
@@ -142,6 +146,30 @@
                         <TextBox Text="{Binding Memory, Mode=OneWay}" Width="50" IsReadOnly="True"/>
                     </StackPanel>
                 </StackPanel>
+                <ItemsControl Name="SkillsPanel" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Skills}">
+
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding SkillName, Mode=OneWay}"/>
+                                <TextBox Grid.Column="1" Text="{Binding TrainingValue}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding AttributeModifier, Mode=OneWay}"/>
+                                <TextBlock Grid.Column="3" Text="{Binding TotalSkillValue, Mode=OneWay}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Grid>
 
         </Grid>

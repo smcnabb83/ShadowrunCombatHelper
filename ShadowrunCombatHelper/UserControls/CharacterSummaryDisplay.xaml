@@ -7,11 +7,10 @@
              x:Name="CharacterDisplay"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300" MouseDown="CharacterDisplay_MouseDown"
-             Background="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}"
              Foreground="{Binding BoundCharacter.Affiliation.ForegroundColorBrush}"
              DataContextChanged="CharacterDisplay_DataContextChanged">
-    <Border BorderThickness="1" BorderBrush="Black" >
-    <Grid DataContext="{Binding BoundCharacter}" Background="Transparent">
+    <Border BorderThickness="1" BorderBrush="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}" >
+        <Grid DataContext="{Binding BoundCharacter}" Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>

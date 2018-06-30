@@ -58,6 +58,7 @@
     <Compile Include="Globals\AffiliationList.cs" />
     <Compile Include="Globals\CharacterList.cs" />
     <Compile Include="Globals\ItemChangeObservableCollection.cs" />
+    <Compile Include="Globals\SkillsList.cs" />
     <Compile Include="Models\Affiliation.cs" />
     <Compile Include="Models\Skill.cs" />
     <Compile Include="UserControls\DealDamageDialog.xaml.cs">

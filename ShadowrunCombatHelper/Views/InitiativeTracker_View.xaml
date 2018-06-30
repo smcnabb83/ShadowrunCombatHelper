@@ -8,8 +8,6 @@
       xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
       xmlns:charsummary="clr-namespace:ShadowrunCombatHelper.UserControls"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
-      Background="{Binding CurrentCharacter.Affiliation.BackgroundColorBrush}"
-      Foreground="{Binding CurrentCharacter.Affiliatoin.ForegroundColorBrush}"
 
       mc:Ignorable="d" 
       d:DesignHeight="301.333" d:DesignWidth="572"

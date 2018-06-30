@@ -4,11 +4,11 @@ using System.ComponentModel;
 
 namespace ShadowrunCombatHelper.Models
 {
-    internal class Skill : INotifyPropertyChanged
+    public class Skill : INotifyPropertyChanged
     {
         private Character _assignedCharacter;
 
-        private ObservableCollection<Attributes> _relatedAttributes;
+        private ObservableCollection<Attributes> _relatedAttributes = new ObservableCollection<Attributes>();
 
         private string _skillName;
 
@@ -30,7 +30,7 @@ namespace ShadowrunCombatHelper.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public enum Attributes { AGI, BOD, CHA, EDGE, INT, LOG, REA, STR, WIL }
+        public enum Attributes { AGI, BOD, CHA, EDGE, INT, LOG, REA, STR, WIL, MAG, ESS }
         public Character AssignedCharacter
         {
             set
@@ -47,6 +47,7 @@ namespace ShadowrunCombatHelper.Models
                 _relatedAttributes = value;
                 NotifyPropertyChanged("RelatedAttributes");
                 NotifyPropertyChanged("TotalSkillValue");
+                NotifyPropertyChanged("AttributeModifier");
             }
         }
 
@@ -83,20 +84,29 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
-                int totValue = TrainingValue;
-                if(_assignedCharacter != null)
+                return TrainingValue + AttributeModifier;
+            }
+        }
+
+        public int AttributeModifier
+        {
+            get
+            {
+                int totalValue = 0;
+                foreach(Attributes attr in RelatedAttributes)
                 {
-                    foreach(Attributes attr in RelatedAttributes)
-                    {
-                        totValue += GetCharacterAttribute(attr);
-                    }
+                    totalValue += GetCharacterAttribute(attr);
                 }
-                return totValue;
+                return totalValue;
             }
         }
 
         private int GetCharacterAttribute(Attributes a)
         {
+            if(_assignedCharacter == null)
+            {
+
+            }
             switch (a)
             {
                 case Attributes.AGI:
@@ -117,9 +127,30 @@ namespace ShadowrunCombatHelper.Models
                     return _assignedCharacter.STR;
                 case Attributes.WIL:
                     return _assignedCharacter.WIL;
+                case Attributes.MAG:
+                    return _assignedCharacter.MAGRES;
+                case Attributes.ESS:
+                    return _assignedCharacter.ESS;
                 default:
                     return 0;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            Skill compObj = (Skill)obj;
+            return SkillName == compObj.SkillName;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 23;
+            hash = hash * 47 + SkillName.GetHashCode();
+            return hash;
         }
     }
 }

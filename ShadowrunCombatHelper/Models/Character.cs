@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ShadowrunCombatHelper.Globals;
+using ShadowrunCombatHelper.Objects;
 
 namespace ShadowrunCombatHelper.Models
 {
@@ -71,6 +72,7 @@ namespace ShadowrunCombatHelper.Models
         public Character()
         {
             _charId = Guid.NewGuid();
+            _skills = new CharacterBindingObservableCollection<Skill>(this);
             CurrentPhysicalDamage = 0;
             CurrentStunDamage = 0;
         }
@@ -243,9 +245,9 @@ namespace ShadowrunCombatHelper.Models
 
         #region derived attribute properties
 
-        private ItemChangeObservableCollection<Skill> _skills = new ItemChangeObservableCollection<Skill>();
+        private CharacterBindingObservableCollection<Skill> _skills;
 
-        public ItemChangeObservableCollection<Skill> Skills
+        public CharacterBindingObservableCollection<Skill> Skills
         {
             get { return _skills; }
             set {

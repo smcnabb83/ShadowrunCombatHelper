@@ -101,7 +101,7 @@
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">STR</TextBlock>
                         <TextBox Text="{Binding STR}" Width="50"/>
                     </StackPanel>
-                
+
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">WIL</TextBlock>
                         <TextBox Text="{Binding WIL}" Width="50"/>
@@ -146,6 +146,8 @@
                         <TextBox Text="{Binding Memory, Mode=OneWay}" Width="50" IsReadOnly="True"/>
                     </StackPanel>
                 </StackPanel>
+                
+                
                 <ItemsControl Name="SkillsPanel" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Skills}">
 
                     <ItemsControl.ItemsPanel>

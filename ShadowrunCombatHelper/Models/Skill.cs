@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using ShadowrunCombatHelper.Interfaces;
 
 namespace ShadowrunCombatHelper.Models
 {
-    public class Skill : INotifyPropertyChanged
+    public class Skill : INotifyPropertyChanged, ICharacterBindable
     {
         private Character _assignedCharacter;
 
         private ObservableCollection<Attributes> _relatedAttributes = new ObservableCollection<Attributes>();
+
+
 
         private string _skillName;
 
@@ -23,6 +26,27 @@ namespace ShadowrunCombatHelper.Models
                 RelatedAttributes.Add(a);
             }
         }
+
+        private Attributes _limitBy;
+
+        public Attributes LimitBy
+        {
+            get { return _limitBy; }
+            set { _limitBy = value;
+                NotifyPropertyChanged("LimitBy");
+                NotifyPropertyChanged("Limit");
+            }
+        }
+
+        public int Limit
+        {
+            get
+            {
+                return GetCharacterAttribute(LimitBy);
+            }
+        }
+
+
 
         public Skill()
         {
@@ -71,6 +95,8 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("TotalSkillValue");
             }
         }
+
+        
 
         public void NotifyPropertyChanged(string propName)
         {
@@ -151,6 +177,11 @@ namespace ShadowrunCombatHelper.Models
             int hash = 23;
             hash = hash * 47 + SkillName.GetHashCode();
             return hash;
+        }
+
+        public void BindToCharacter(Character c)
+        {
+            AssignedCharacter = c;
         }
     }
 }

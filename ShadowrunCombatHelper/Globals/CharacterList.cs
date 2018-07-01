@@ -25,7 +25,6 @@ namespace ShadowrunCombatHelper.Globals
         public void AddCharacter(Character c)
         {
             CharList.Add(c);
-            AddSkillsToCharacter(c);
             CharacterDataReader.WriteCharacterListToXMLFile();
         }
 
@@ -38,10 +37,6 @@ namespace ShadowrunCombatHelper.Globals
         public void OverwriteCharacterList(List<Character> clist)
         {
             CharList = clist;
-            foreach(Character c in CharList)
-            {
-                AddSkillsToCharacter(c);
-            }
             CharacterDataReader.WriteCharacterListToXMLFile();
         }
 
@@ -60,28 +55,6 @@ namespace ShadowrunCombatHelper.Globals
         public void ReadCharacterDataFromFile()
         {
             CharList = ExternalData.CharacterDataReader.ReadCharacterDataToCharacterList();
-            foreach(Character c in CharList)
-            {
-                AddSkillsToCharacter(c);
-            }
-        }
-
-        private void AddSkillsToCharacter(Character c)
-        {
-            SkillsList sl = SkillsList.Instance;
-            foreach(Skill toAdd in sl.Skills)
-            {
-                if (!c.Skills.Contains(toAdd))
-                {
-                    toAdd.AssignedCharacter = c;
-                    c.Skills.Add(toAdd);
-                }
-                else
-                {
-                    int index = c.Skills.IndexOf(toAdd);
-                    c.Skills[index].AssignedCharacter = c;
-                }
-            }
         }
 
         private CharacterList()

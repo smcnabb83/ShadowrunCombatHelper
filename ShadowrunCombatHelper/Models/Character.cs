@@ -135,6 +135,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("MaxOverflowHealth");
                 NotifyPropertyChanged("PhysicalLimit");
                 NotifyPropertyChanged("LiftCarry");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -149,13 +150,16 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("SocialLimit");
                 NotifyPropertyChanged("Composure");
                 NotifyPropertyChanged("JudgeIntentions");
+                NotifyPropertyChanged("Skills");
             }
         }
 
         public int EDGE
         {
             get { return _edge; }
-            set { _edge = value; NotifyPropertyChanged("EDGE"); }
+            set { _edge = value; NotifyPropertyChanged("EDGE");
+                NotifyPropertyChanged("Skills");
+            }
         }
 
         public int ESS
@@ -166,6 +170,7 @@ namespace ShadowrunCombatHelper.Models
                 _ess = value;
                 NotifyPropertyChanged("ESS");
                 NotifyPropertyChanged("SocialLimit");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -177,6 +182,7 @@ namespace ShadowrunCombatHelper.Models
                 _intu = value; NotifyPropertyChanged("INTU");
                 NotifyPropertyChanged("MentalLimit");
                 NotifyPropertyChanged("JudgeIntentions");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -189,6 +195,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("LOG");
                 NotifyPropertyChanged("MentalLimit");
                 NotifyPropertyChanged("Memory");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -200,6 +207,7 @@ namespace ShadowrunCombatHelper.Models
                 _rea = value;
                 NotifyPropertyChanged("REA");
                 NotifyPropertyChanged("PhysicalLimit");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -212,6 +220,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("STR");
                 NotifyPropertyChanged("PhysicalLimit");
                 NotifyPropertyChanged("LiftCarry");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -227,6 +236,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("SocialLimit");
                 NotifyPropertyChanged("Composure");
                 NotifyPropertyChanged("Memory");
+                NotifyPropertyChanged("Skills");
             }
         }
 
@@ -237,6 +247,7 @@ namespace ShadowrunCombatHelper.Models
             get { return _magres; }
             set { _magres = value;
                 NotifyPropertyChanged("MAGRES");
+                NotifyPropertyChanged("Skills");
             }
         }
 

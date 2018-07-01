@@ -24,6 +24,7 @@ namespace ShadowrunCombatHelper.Objects
             BoundCharacter = c;
             foreach(var item in inputList)
             {
+                BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
                 Add(item);
             }
         }
@@ -31,12 +32,14 @@ namespace ShadowrunCombatHelper.Objects
         protected override void InsertItem(int index, T item)
         {
             item.BindToCharacter(BoundCharacter);
+            BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
             base.InsertItem(index, item);
         }
 
         protected override void SetItem(int index, T item)
         {
             item.BindToCharacter(BoundCharacter);
+            BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
             base.SetItem(index, item);
         }
     }

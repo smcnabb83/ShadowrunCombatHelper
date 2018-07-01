@@ -2,6 +2,8 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using ShadowrunCombatHelper.Interfaces;
+using System;
+using System.Linq;
 
 namespace ShadowrunCombatHelper.Models
 {
@@ -17,7 +19,7 @@ namespace ShadowrunCombatHelper.Models
 
         private int _trainingValue;
 
-        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr)
+        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr, Attributes limit)
         {
             SkillName = skillName;
             _assignedCharacter = assigned;
@@ -25,6 +27,7 @@ namespace ShadowrunCombatHelper.Models
             {
                 RelatedAttributes.Add(a);
             }
+            LimitBy = limit;
         }
 
         private Attributes _limitBy;
@@ -182,6 +185,16 @@ namespace ShadowrunCombatHelper.Models
         public void BindToCharacter(Character c)
         {
             AssignedCharacter = c;
+        }
+
+        public void CharacterPropertyChangedEventHandler(object c, PropertyChangedEventArgs e)
+        {
+            if (Enum.GetNames(typeof(Attributes)).Contains(e.PropertyName))
+            {
+                NotifyPropertyChanged("TotalSkillValue");
+                NotifyPropertyChanged("AttributeModifier");
+                NotifyPropertyChanged("Limit");
+            }
         }
     }
 }

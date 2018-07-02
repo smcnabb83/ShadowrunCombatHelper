@@ -147,33 +147,19 @@
                     </StackPanel>
                 </StackPanel>
                 
-                
-                <ItemsControl Name="SkillsPanel" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Skills}">
 
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="{Binding SkillName, Mode=OneWay}"/>
-                                <TextBox Grid.Column="1" Text="{Binding TrainingValue}"/>
-                                <TextBlock Grid.Column="2" Text="{Binding AttributeModifier, Mode=OneWay}"/>
-                                <TextBlock Grid.Column="3" Text="{Binding TotalSkillValue, Mode=OneWay}"/>
-                                <TextBlock Grid.Column="4" Text="{Binding Limit, Mode=OneWay}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+                <DataGrid Name="SkillsPanelAlt" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Skills}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Skill Value" Binding="{Binding TrainingValue}"/>
+                        <DataGridTextColumn Header="Attribute Adj." Binding="{Binding AttributeModifier, Mode=OneWay}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Total Die Pool" Binding="{Binding TotalSkillValue, Mode=OneWay}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Limit" Binding="{Binding Limit, Mode=OneWay}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Limited By" Binding="{Binding LimitBy, Mode=OneWay}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                    
+                </DataGrid>
+
             </Grid>
 
         </Grid>

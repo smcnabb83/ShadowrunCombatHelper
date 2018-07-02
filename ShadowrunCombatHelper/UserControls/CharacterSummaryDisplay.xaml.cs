@@ -82,5 +82,60 @@ namespace ShadowrunCombatHelper.UserControls
                 }
             }
         }
+
+        private void mnuFullDefense_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.FullDefense();
+        }
+
+        private void mnuBlock_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.Block();
+        }
+
+        private void mnuDodge_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.Dodge();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.HitTheDirt();
+        }
+
+        private void mnuIntercept_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.Intercept();
+        }
+
+        private void mnuParry_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.Parry();
+        }
+
+        private void mnuRunningToggle_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.ToggleRunning();
+        }
+
+        private void mnuSimpleAction_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.ConsumeSimpleAction();
+        }
+
+        private void mnuComplexAction_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.ConsumeComplexAction();
+        }
+
+        private void mnuFreeAction_Click(object sender, RoutedEventArgs e)
+        {
+            BoundCharacter.ConsumeFreeAction();
+        }
+
+        private void mnuMoveCharacter_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

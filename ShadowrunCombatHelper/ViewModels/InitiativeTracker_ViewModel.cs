@@ -91,6 +91,7 @@ namespace ShadowrunCombatHelper.ViewModels
             foreach(Character c in combatants)
             {
                 RollInitiative(c);
+                c.StartRound();
                 c.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(c);
             }
@@ -137,6 +138,7 @@ namespace ShadowrunCombatHelper.ViewModels
             {
                 i.PropertyChanged -= OnInitiativeChanged;
                 RollInitiative(i);
+                i.StartRound();
                 i.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(i);
             }

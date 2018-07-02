@@ -8,7 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300" MouseDown="CharacterDisplay_MouseDown"
              Foreground="{Binding BoundCharacter.Affiliation.ForegroundColorBrush}"
-             DataContextChanged="CharacterDisplay_DataContextChanged">
+             DataContextChanged="CharacterDisplay_DataContextChanged"
+             ToolTip="Right click for actions to perform.">
     <Border BorderThickness="1" BorderBrush="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}" >
         <Grid DataContext="{Binding BoundCharacter}" Background="Transparent">
         <Grid.ColumnDefinitions>
@@ -33,10 +34,28 @@
             <TextBlock>Status:</TextBlock>
             <TextBlock Text="{Binding BoundCharacter.CharStatus}"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
-            <TextBlock>Initiative</TextBlock>
-            <TextBlock Text="{Binding BoundCharacter.Initiative}"/>
-        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Initiative</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.Initiative}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Movement</TextBlock>
+                    <TextBlock>
+                        <Run Text="{Binding BoundCharacter.DistanceMoved}"/>
+                        /
+                        <Run Text="{Binding BoundCharacter.MaxMovementThisTurn, Mode=OneWay}"/>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Actions</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.ActionsRemaining}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Free Actions</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.FreeActionsRemaining}"/>
+                </StackPanel>
+            </StackPanel>
             <local:HealthDisplay MaxHealth="{Binding BoundCharacter.MaxPhysicalHealth}" OverflowHealthLimit="{Binding BoundCharacter.MaxOverFlowHealth}" CurrentDamage="{Binding BoundCharacter.CurrentPhysicalDamage}" IsPhysicalDamageGrid="True"  Grid.Row="1" Grid.Column="1"/>
             <local:HealthDisplay MaxHealth="{Binding BoundCharacter.MaxStunHealth}" OverflowHealthLimit="0" CurrentDamage="{Binding BoundCharacter.CurrentStunDamage}" IsPhysicalDamageGrid="False"  Grid.Row="1" Grid.Column="2"/>
             <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
@@ -87,8 +106,22 @@
     <UserControl.ContextMenu>
         <ContextMenu>
             <MenuItem Header="End Round" Name="mnuEndRound" Click="mnuEndRound_Click"/>
-            <MenuItem Header="Check Health"/>
             <MenuItem Header="Deal Damage" Name="btnDealDamage" Click="btnDealDamage_Click"/>
+            <MenuItem Header="Interrupt Actions">
+                <MenuItem Header="Full Defense" Name="mnuFullDefense" Click="mnuFullDefense_Click" IsEnabled="{Binding BoundCharacter.CanFullDefense}"/>
+                <MenuItem Header="Block" Name="mnuBlock" Click="mnuBlock_Click" IsEnabled="{Binding BoundCharacter.CanInterrupt}"/>
+                <MenuItem Header="Dodge" Name="mnuDodge" Click="mnuDodge_Click" IsEnabled="{Binding BoundCharacter.CanInterrupt}"/>
+                <MenuItem Header="Hit The Dirt" Name="mnuHitTheDirt" Click="MenuItem_Click" IsEnabled="{Binding BoundCharacter.CanInterrupt}"/>
+                <MenuItem Header="Intercept" Name="mnuIntercept" Click="mnuIntercept_Click" IsEnabled="{Binding BoundCharacter.CanInterrupt}"/>
+                <MenuItem Header="Parry" Name="mnuParry" Click="mnuParry_Click" IsEnabled="{Binding BoundCharacter.CanInterrupt}"/>
+            </MenuItem>
+            <MenuItem IsChecked="{Binding BoundCharacter.Running, Mode=OneWay}" Header="Running" Name="mnuRunningToggle" Click="mnuRunningToggle_Click"/>
+            <MenuItem Header="Actions">
+                <MenuItem Header="Simple Action" Name="mnuSimpleAction" IsEnabled="{Binding BoundCharacter.CanSimpleAction}" Click="mnuSimpleAction_Click"/>
+                <MenuItem Header="Complex Action" Name="mnuComplexAction" IsEnabled="{Binding BoundCharacter.CanComplexAction}" Click="mnuComplexAction_Click"/>
+                <MenuItem Header="Free Action" Name="mnuFreeAction" IsEnabled="{Binding BoundCharacter.CanFreeAction}" Click="mnuFreeAction_Click"/>
+            </MenuItem>
+            <MenuItem Header="Move" Name="mnuMoveCharacter" Click="mnuMoveCharacter_Click" IsEnabled="{Binding BoundCharacter.CanMove}"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 </UserControl>

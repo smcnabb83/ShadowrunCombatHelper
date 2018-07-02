@@ -121,7 +121,10 @@ namespace ShadowrunCombatHelper.Models
         public int AGI
         {
             get { return _agi; }
-            set { _agi = value; NotifyPropertyChanged("AGI"); }
+            set { _agi = value; NotifyPropertyChanged("AGI");
+                NotifyPropertyChanged("WalkRate");
+                NotifyPropertyChanged("RunRate");
+            }
         }
 
         public int BOD
@@ -355,6 +358,25 @@ namespace ShadowrunCombatHelper.Models
                     _initiative = 0;
                 }
                 NotifyPropertyChanged("Initiative");
+                NotifyPropertyChanged("CanInterrupt");
+                NotifyPropertyChanged("CanFullDefense");
+
+            }
+        }
+
+        public bool CanInterrupt
+        {
+            get
+            {
+                return Initiative >= 5;
+            }
+        }
+
+        public bool CanFullDefense
+        {
+            get
+            {
+                return Initiative >= 10;
             }
         }
 
@@ -417,7 +439,116 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-      
+        private int _actionsRemaining;
+
+        public int ActionsRemaining
+        {
+            get { return _actionsRemaining; }
+            set { _actionsRemaining = value;
+                NotifyPropertyChanged("ActionsRemaining");
+                NotifyPropertyChanged("CanSimpleAction");
+                NotifyPropertyChanged("CanComplexAction");
+            }
+        }
+
+        public bool CanSimpleAction
+        {
+            get
+            {
+                return ActionsRemaining > 0;
+            }
+        }
+
+        public bool CanComplexAction
+        {
+            get
+            {
+                return ActionsRemaining > 1;
+            }
+        }
+
+        public bool CanFreeAction
+        {
+            get
+            {
+                return FreeActionsRemaining > 0;
+            }
+        }
+
+        private int _freeActionsRemaining;
+
+        public int FreeActionsRemaining
+        {
+            get { return _freeActionsRemaining; }
+            set { _freeActionsRemaining = value;
+                NotifyPropertyChanged("FreeActionsRemaining");
+                NotifyPropertyChanged("CanFreeAction");
+            }
+        }
+
+        public int WalkRate
+        {
+            get
+            {
+                return AGI * 2;
+            }
+        }
+
+        public int RunRate
+        {
+            get
+            {
+                return AGI * 4;
+            }
+        }
+
+        private bool _running;
+
+        public bool Running
+        {
+            get { return _running; }
+            set { _running = value;
+                NotifyPropertyChanged("Running");
+                NotifyPropertyChanged("MaxMovementThisTurn");
+            }
+        }
+
+        private int _distanceMoved;
+
+        public int DistanceMoved
+        {
+            get { return _distanceMoved; }
+            set
+            {
+                if (value > MaxMovementThisTurn)
+                {
+                    _distanceMoved = MaxMovementThisTurn;
+                }
+                else
+                {
+                    _distanceMoved = value;
+                }
+                NotifyPropertyChanged("DistanceMoved");
+                NotifyPropertyChanged("CanMove");
+            }
+        }
+
+        public int MaxMovementThisTurn
+        {
+            get
+            {
+                return Running ? RunRate : WalkRate;
+            }
+        }
+
+        public bool CanMove
+        {
+            get
+            {
+                return DistanceMoved < MaxMovementThisTurn;
+            }
+        }
+
 
         public bool ManuallyRollInitiative
         {
@@ -526,6 +657,66 @@ namespace ShadowrunCombatHelper.Models
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
+        }
+        #endregion
+        #region CombatActions
+        public void FullDefense()
+        {
+            Initiative -= 10;
+        }
+
+        public void Block()
+        {
+            Initiative -= 5;
+        }
+
+        public void Dodge()
+        {
+            Initiative -= 5;
+        }
+
+        public void HitTheDirt()
+        {
+            Initiative -= 5;
+        }
+
+        public void Intercept()
+        {
+            Initiative -= 5;
+        }
+
+        public void Parry()
+        {
+            Initiative -= 5;
+        }
+
+        public void StartRound()
+        {
+            ActionsRemaining = 2;
+            FreeActionsRemaining = 1;
+            DistanceMoved = 0;
+            Running = false;
+        }
+
+        public void ConsumeSimpleAction()
+        {
+            ActionsRemaining -= 1;
+        }
+
+        public void ConsumeComplexAction()
+        {
+            ActionsRemaining -= 2;
+        }
+
+        public void ConsumeFreeAction()
+        {
+            FreeActionsRemaining -= 1;
+        }
+
+        public void ToggleRunning()
+        {
+
+            Running = !Running;
         }
         #endregion
     }

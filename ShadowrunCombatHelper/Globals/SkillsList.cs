@@ -25,8 +25,8 @@ namespace ShadowrunCombatHelper.Globals
 
         private SkillsList()
         {
-            Skills.Add(new Skill("Archery", 0, null, new List<Skill.Attributes>() { Skill.Attributes.AGI }, Skill.Attributes.AGI));
-            Skills.Add(new Skill("Automatics", 0, null, new List<Skill.Attributes>() { Skill.Attributes.AGI }, Skill.Attributes.AGI));
+            Skills.Add(new Skill("Archery", 0, null, new List<Skill.Attributes>() { Skill.Attributes.AGI }, Skill.Attributes.AGI, "Combat"));
+            Skills.Add(new Skill("Automatics", 0, null, new List<Skill.Attributes>() { Skill.Attributes.AGI }, Skill.Attributes.AGI, "Combat"));
             Skills.Add(new Skill("Diving", 0, null, new List<Skill.Attributes>() { Skill.Attributes.BOD }, Skill.Attributes.BOD));
         }
 

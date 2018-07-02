@@ -19,7 +19,7 @@ namespace ShadowrunCombatHelper.Models
 
         private int _trainingValue;
 
-        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr, Attributes limit)
+        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr, Attributes limit, string skillType = "Generic")
         {
             SkillName = skillName;
             _assignedCharacter = assigned;
@@ -28,6 +28,7 @@ namespace ShadowrunCombatHelper.Models
                 RelatedAttributes.Add(a);
             }
             LimitBy = limit;
+            SkillType = SkillType;
         }
 
         private Attributes _limitBy;
@@ -46,6 +47,16 @@ namespace ShadowrunCombatHelper.Models
             get
             {
                 return GetCharacterAttribute(LimitBy);
+            }
+        }
+
+        private String _skillType;
+
+        public String SkillType
+        {
+            get { return _skillType; }
+            set { _skillType = value;
+                NotifyPropertyChanged("SkillType");
             }
         }
 

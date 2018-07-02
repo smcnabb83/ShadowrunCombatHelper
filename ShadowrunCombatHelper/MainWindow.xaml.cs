@@ -27,7 +27,21 @@ namespace ShadowrunCombatHelper
             InitializeComponent();
             this.WindowState = System.Windows.WindowState.Maximized;
             CharacterList.Instance.ReadCharacterDataFromFile();
-            mainFrame.Navigate(new MainMenu_View());
+        }
+
+                private void btnCharacterCreator_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new CharacterCreator_View());
+        }
+
+        private void btnInitiativeTracker_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new InitiativeTracker_View());
+        }
+
+        private void mnuExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

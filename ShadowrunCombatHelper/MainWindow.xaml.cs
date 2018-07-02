@@ -43,5 +43,10 @@ namespace ShadowrunCombatHelper
         {
             Application.Current.Shutdown();
         }
+
+        private void mnuCreateEditSkills_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(new SkillsEditor_View());
+        }
     }
 }

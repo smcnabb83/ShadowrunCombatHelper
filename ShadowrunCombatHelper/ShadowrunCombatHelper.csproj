@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="ViewModels\CharacterCreator_ViewModel.cs" />
     <Compile Include="ViewModels\InitiativeTracker_ViewModel.cs" />
+    <Compile Include="ViewModels\SkillsEditor_ViewModel.cs" />
     <Compile Include="Views\CharacterCreator_View.xaml.cs">
       <DependentUpon>CharacterCreator_View.xaml</DependentUpon>
     </Compile>
@@ -89,6 +90,9 @@
     </Compile>
     <Compile Include="Views\InitiativeTracker_View.xaml.cs">
       <DependentUpon>InitiativeTracker_View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SkillsEditor_View.xaml.cs">
+      <DependentUpon>SkillsEditor_View.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InitiativeTracker_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SkillsEditor_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

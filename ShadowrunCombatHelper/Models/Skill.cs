@@ -4,6 +4,7 @@ using System.ComponentModel;
 using ShadowrunCombatHelper.Interfaces;
 using System;
 using System.Linq;
+using ShadowrunCombatHelper.Globals;
 
 namespace ShadowrunCombatHelper.Models
 {
@@ -13,7 +14,15 @@ namespace ShadowrunCombatHelper.Models
 
         private ObservableCollection<Attributes> _relatedAttributes = new ObservableCollection<Attributes>();
 
+        private static ObservableCollection<string> _typesUsed = new ObservableCollection<string>();
 
+        public ObservableCollection<string> TypesUsed
+        {
+            get
+            {
+                return _typesUsed;
+            }
+        }
 
         private string _skillName;
 
@@ -55,8 +64,14 @@ namespace ShadowrunCombatHelper.Models
         public String SkillType
         {
             get { return _skillType; }
-            set { _skillType = value;
+            set {
+                _skillType = value;
                 NotifyPropertyChanged("SkillType");
+                if (!_typesUsed.Contains(value))
+                {
+                    _typesUsed.Add(value);
+                    NotifyPropertyChanged("TypesUsed");
+                }
             }
         }
 
@@ -64,6 +79,7 @@ namespace ShadowrunCombatHelper.Models
 
         public Skill()
         {
+            SkillName = "New Skill";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -206,6 +222,28 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("AttributeModifier");
                 NotifyPropertyChanged("Limit");
             }
+        }
+
+        public List<Attributes> AttributeList
+        {
+            get
+            {
+                return Enum.GetValues(typeof(Attributes)).Cast<Attributes>().ToList();
+            }
+        }
+
+        public string GetRelatedAttributeString
+        {
+         get
+            {
+                string relAttrString = "";
+                foreach (var attribute in RelatedAttributes)
+                {
+                    relAttrString += attribute.ToString();
+                }
+                relAttrString.TrimEnd(';');
+                return relAttrString;
+            }                    
         }
     }
 }

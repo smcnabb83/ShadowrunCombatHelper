@@ -90,6 +90,7 @@ namespace ShadowrunCombatHelper.ViewModels
         {
             foreach(Character c in combatants)
             {
+
                 RollInitiative(c);
                 c.StartRound();
                 c.PropertyChanged += OnInitiativeChanged;
@@ -147,27 +148,30 @@ namespace ShadowrunCombatHelper.ViewModels
 
         private static void RollInitiative(Character i)
         {
-            if (i.ManuallyRollInitiative)
+            if (i.CharStatus == Character.Status.CONSCIOUS)
             {
-                try
+                if (i.ManuallyRollInitiative)
                 {
-                    InitiativeDialog getInitiative = new InitiativeDialog(i);
-                    bool? result = false;
-                    while ((result ?? false) == false)
+                    try
                     {
-                        result = getInitiative.ShowDialog();
-                    }
+                        InitiativeDialog getInitiative = new InitiativeDialog(i);
+                        bool? result = false;
+                        while ((result ?? false) == false)
+                        {
+                            result = getInitiative.ShowDialog();
+                        }
 
-                    i.Initiative = getInitiative.InitiativeRolledValue;
+                        i.Initiative = getInitiative.InitiativeRolledValue;
+                    }
+                    catch
+                    {
+                        RollInitiative(i);
+                    }
                 }
-                catch
+                else
                 {
-                    RollInitiative(i);
+                    i.Initiative = i.RollInitiative;
                 }
-            }
-            else
-            {
-                i.Initiative = i.RollInitiative;
             }
         }
     }

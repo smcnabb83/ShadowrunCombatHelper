@@ -135,7 +135,8 @@ namespace ShadowrunCombatHelper.UserControls
 
         private void mnuMoveCharacter_Click(object sender, RoutedEventArgs e)
         {
-
+            int amountMoved = GetInputDialog<int>.Show($"Input {BoundCharacter.CharacterName} Movement", "Enter Movement");
+            BoundCharacter.DistanceMoved += amountMoved;
         }
     }
 }

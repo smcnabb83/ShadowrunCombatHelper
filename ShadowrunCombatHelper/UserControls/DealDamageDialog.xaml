@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShadowrunCombatHelper.UserControls"
         mc:Ignorable="d"
-        Title="Input Damage to be dealt to" Height="84.93" Width="636.479">
+        Title="Input Damage to be dealt to" Height="88.356" Width="636.479">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>

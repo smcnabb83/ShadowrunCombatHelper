@@ -67,6 +67,10 @@
     <Compile Include="UserControls\DealDamageDialog.xaml.cs">
       <DependentUpon>DealDamageDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\GetInputDialog.cs" />
+    <Compile Include="UserControls\GetInputDialogUI\GetInputDialog_Window.xaml.cs">
+      <DependentUpon>GetInputDialog_Window.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\InitiativeDialog.xaml.cs">
       <DependentUpon>InitiativeDialog.xaml</DependentUpon>
     </Compile>
@@ -112,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\DealDamageDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\GetInputDialogUI\GetInputDialog_Window.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

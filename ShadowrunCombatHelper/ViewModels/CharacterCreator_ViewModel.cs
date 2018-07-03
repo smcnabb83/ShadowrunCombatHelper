@@ -30,7 +30,15 @@ namespace ShadowrunCombatHelper.ViewModels
             CharacterList clist = Globals.CharacterList.Instance;
             foreach(Character c in clist.GetCharacterList())
             {
+                foreach(var skill in Globals.SkillsList.Instance.Skills)
+                {
+                    if (!c.Skills.Contains(skill))
+                    {
+                        c.Skills.Add(skill);
+                    }
+                }
                 CharacterList.Add(c);
+                
             }
         }
         

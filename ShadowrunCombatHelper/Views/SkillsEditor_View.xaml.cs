@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.ViewModels;
 
 namespace ShadowrunCombatHelper.Views
 {
@@ -72,6 +73,16 @@ namespace ShadowrunCombatHelper.Views
             Console.Write("Called here");
             allowDelete = false;
             e.Handled = true;
+        }
+
+        private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as SkillsEditor_ViewModel).WriteToGlobalSkillsList();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+           
         }
     }
 }

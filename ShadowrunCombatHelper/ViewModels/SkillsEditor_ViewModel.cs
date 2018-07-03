@@ -39,5 +39,25 @@ namespace ShadowrunCombatHelper.ViewModels
                 SkillListToEdit.Add(skill);
             }
         }
+
+        public void WriteToGlobalSkillsList()
+        {
+            Globals.SkillsList.Instance.OverwriteSkills(SkillListToEdit.ToList());
+            foreach(var c in Globals.CharacterList.Instance.GetCharacterList())
+            {
+                foreach(var d in Globals.SkillsList.Instance.Skills)
+                {
+                    int index = c.Skills.IndexOf(d);
+                    if (index >= 0)
+                    {
+                        c.Skills[index].UpdateProperties(d);
+                    }
+                    else
+                    {
+                        c.Skills.Add(d);
+                    }
+                }
+            }
+        }
     }
 }

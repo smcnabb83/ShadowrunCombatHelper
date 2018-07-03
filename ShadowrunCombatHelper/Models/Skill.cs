@@ -239,11 +239,17 @@ namespace ShadowrunCombatHelper.Models
                 string relAttrString = "";
                 foreach (var attribute in RelatedAttributes)
                 {
-                    relAttrString += attribute.ToString();
+                    relAttrString += attribute.ToString() + ";";
                 }
-                relAttrString.TrimEnd(';');
+                relAttrString = relAttrString.TrimEnd(';');
                 return relAttrString;
             }                    
+        }
+
+        public void UpdateProperties(Skill updateTo)
+        {
+            this.RelatedAttributes = updateTo.RelatedAttributes;
+            this.LimitBy = updateTo.LimitBy;
         }
     }
 }

@@ -37,7 +37,8 @@
 
         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center">
             <Run  Text="{Binding Path=CurrentRound, StringFormat='Round {0}'}"/>  
-            <Run Text="{Binding Path=CurrentCharacter.CharacterName, StringFormat='  -  Character {0} turn'}"/>
+            <Run Text="{Binding Path=CurrentCharacter.Affiliation, StringFormat='  -  {0}'}"/>
+            <Run Text="{Binding Path=CurrentCharacter.CharacterName, StringFormat=' {0} turn'}"/>
         </TextBlock>
 
         <ScrollViewer Grid.Column="1" Grid.Row="1">

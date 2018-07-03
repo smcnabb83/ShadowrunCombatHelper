@@ -39,9 +39,15 @@ namespace ShadowrunCombatHelper.UserControls
         {
             InitializeComponent();
             Title += $" {c.CharacterName}.";
+            TxtDamage.Focus();
         }
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
+        {
+            Submit();
+        }
+
+        private void Submit()
         {
             try
             {
@@ -77,6 +83,25 @@ namespace ShadowrunCombatHelper.UserControls
             this.Background = bgBrush;
             await Task.Delay(800);
             this.Title = originalTitle;            
+        }
+
+        private void TxtDamage_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                Submit();
+                e.Handled = true;
+            }
+            else if(e.Key == Key.P)
+            {
+                PhysDamageOption.IsChecked = true;
+                e.Handled = true;
+            }
+            else if (e.Key == Key.S)
+            {
+                StunDamageOption.IsChecked = true;
+                e.Handled = true;
+            }
         }
     }
 }

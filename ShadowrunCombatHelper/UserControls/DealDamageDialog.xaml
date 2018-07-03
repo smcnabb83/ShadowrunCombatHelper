@@ -17,12 +17,15 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Damage Amount" Grid.Column="0" Grid.Row="0"/>
-        <TextBox Name="TxtDamage" Grid.Column="1" Grid.Row="0"/>
+        <TextBox Name="TxtDamage" Grid.Column="1" Grid.Row="0" KeyDown="TxtDamage_KeyDown"/>
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0">
             <TextBlock TextAlignment="Center">Select Damage Type</TextBlock>
             <UniformGrid Rows="1" Columns="2">
-                <RadioButton GroupName="DamageType" Name="PhysDamageOption" Content="Physical" IsChecked="True"/>
-                <RadioButton GroupName="DamageType" Name="StunDamageOption" Content="Stun"/>
+                <RadioButton GroupName="DamageType" Name="PhysDamageOption" IsChecked="True">
+                    <TextBlock><Bold><Underline>P</Underline></Bold>hysical</TextBlock></RadioButton>
+                <RadioButton GroupName="DamageType" Name="StunDamageOption">
+                    <TextBlock><Bold><Underline>S</Underline></Bold>tun</TextBlock>
+                </RadioButton>
             </UniformGrid>
         </StackPanel>
         <Button Name="btnOK" Grid.Row="1" Grid.Column="1" Click="btnOK_Click">OK</Button>

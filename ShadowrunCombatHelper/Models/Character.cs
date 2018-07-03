@@ -633,6 +633,8 @@ namespace ShadowrunCombatHelper.Models
         public void EndTurn()
         {
             Initiative -= 10;
+            ActionsRemaining = 2;
+            FreeActionsRemaining = 1;
         }
 
         public void generateRandomStats(string name)

@@ -8,10 +8,10 @@ Current Features
 * Can add characters and save changes to disk
 * Can add skills and save changes to disk
 * Can run an initiative tracker, which tracks many shadowrun related stats, including
-** Damage
-** Initiative order
-** Damage Penalties
-** Actions Used/Remaining
-** Movement Used/Remaining
-** Whether a character is running
+  * Damage
+  * Initiative order
+  * Damage Penalties
+  * Actions Used/Remaining
+  * Movement Used/Remaining
+  * Whether a character is running
 

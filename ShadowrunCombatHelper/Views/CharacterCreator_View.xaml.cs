@@ -27,6 +27,9 @@ namespace ShadowrunCombatHelper.Views
             InitializeComponent();
             AffiliationComboBox.ItemsSource = ShadowrunCombatHelper.Globals.AffiliationList.Affiliations;
             AffiliationComboBox.DisplayMemberPath = "Name";
+
+            cboMagicalTradition.ItemsSource = ShadowrunCombatHelper.Globals.TraditionsList.Instance.TraditionList;
+            cboMagicalTradition.DisplayMemberPath = "TraditionName";
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)

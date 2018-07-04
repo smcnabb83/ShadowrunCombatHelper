@@ -55,6 +55,22 @@
                     <TextBlock>Free Actions</TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.FreeActionsRemaining}"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Defense Base</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.BaseDefense}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Armor Base</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.BaseArmor}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Resist Drain</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.ResistDrain}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>Damage Penalty</TextBlock>
+                    <TextBlock Text="{Binding BoundCharacter.CurrentDamagePenalty}"/>
+                </StackPanel>
             </StackPanel>
             <local:HealthDisplay MaxHealth="{Binding BoundCharacter.MaxPhysicalHealth}" OverflowHealthLimit="{Binding BoundCharacter.MaxOverFlowHealth}" CurrentDamage="{Binding BoundCharacter.CurrentPhysicalDamage}" IsPhysicalDamageGrid="True"  Grid.Row="1" Grid.Column="1"/>
             <local:HealthDisplay MaxHealth="{Binding BoundCharacter.MaxStunHealth}" OverflowHealthLimit="0" CurrentDamage="{Binding BoundCharacter.CurrentStunDamage}" IsPhysicalDamageGrid="False"  Grid.Row="1" Grid.Column="2"/>

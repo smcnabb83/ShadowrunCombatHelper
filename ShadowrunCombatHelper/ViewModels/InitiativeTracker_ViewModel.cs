@@ -45,7 +45,7 @@ namespace ShadowrunCombatHelper.ViewModels
                     return x1;
                 }
 
-                else if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) > 0)
+                else if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) < 0)
                 {
                     return x2;
                 }

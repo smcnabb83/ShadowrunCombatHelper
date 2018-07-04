@@ -16,6 +16,7 @@
     </Page.DataContext>
     <Page.Resources>
         <system:Double x:Key="CharCreatorColumn1Width">90</system:Double>
+        <system:Double x:Key="CharCreatorColumn2Width">80</system:Double>
     </Page.Resources>
 
     <Grid>
@@ -75,75 +76,100 @@
                     <TextBlock TextAlignment="Center" >Character Attributes</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Agi</TextBlock>
-                        <TextBox Text="{Binding AGI}" Width="50"/>
+                        <TextBox Text="{Binding AGI}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">BOD</TextBlock>
-                        <TextBox Text="{Binding BOD}" Width="50"/>
+                        <TextBox Text="{Binding BOD}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">CHA</TextBlock>
-                        <TextBox Text="{Binding CHA}" Width="50"/>
+                        <TextBox Text="{Binding CHA}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">INT</TextBlock>
-                        <TextBox Text="{Binding INTU}" Width="50"/>
+                        <TextBox Text="{Binding INTU}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">LOG</TextBlock>
-                        <TextBox Text="{Binding LOG}" Width="50"/>
+                        <TextBox Text="{Binding LOG}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">REA</TextBlock>
-                        <TextBox Text="{Binding REA}" Width="50"/>
+                        <TextBox Text="{Binding REA}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">STR</TextBlock>
-                        <TextBox Text="{Binding STR}" Width="50"/>
+                        <TextBox Text="{Binding STR}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">WIL</TextBlock>
-                        <TextBox Text="{Binding WIL}" Width="50"/>
+                        <TextBox Text="{Binding WIL}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">EDGE</TextBlock>
-                        <TextBox Text="{Binding EDGE}" Width="50"/>
+                        <TextBox Text="{Binding EDGE}" Width="{StaticResource CharCreatorColumn2Width}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">ESS</TextBlock>
+                        <TextBox Text="{Binding ESS}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Mag/Res</TextBlock>
-                        <TextBox Text="{Binding MAGRES}" Width="50"/>
+                        <TextBox Text="{Binding MAGRES}" Width="{StaticResource CharCreatorColumn2Width}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Armor</TextBlock>
+                        <TextBox Text="{Binding ArmorValue}" Width="{StaticResource CharCreatorColumn2Width}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Magic Tradition</TextBlock>
+                        <ComboBox Name="cboMagicalTradition" SelectedItem="{Binding Tradition}" Width="{StaticResource CharCreatorColumn2Width}"/>
                     </StackPanel>
                     <TextBlock TextAlignment="Center" >Limits</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Physical</TextBlock>
-                        <TextBox Text="{Binding PhysicalLimit, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding PhysicalLimit, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Social</TextBlock>
-                        <TextBox Text="{Binding SocialLimit, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding SocialLimit, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Mental</TextBlock>
-                        <TextBox Text="{Binding MentalLimit, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding MentalLimit, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
+                    
 
                     <TextBlock TextAlignment="Center" >Other Computed Attr</TextBlock>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Judge Intentions</TextBlock>
-                        <TextBox Text="{Binding JudgeIntentions, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding JudgeIntentions, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Composure</TextBlock>
-                        <TextBox Text="{Binding Composure, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding Composure, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Lift/Carry</TextBlock>
-                        <TextBox Text="{Binding LiftCarry, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding LiftCarry, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Memory</TextBlock>
-                        <TextBox Text="{Binding Memory, Mode=OneWay}" Width="50" IsReadOnly="True"/>
+                        <TextBox Text="{Binding Memory, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Resist Drain</TextBlock>
+                        <TextBox Text="{Binding ResistDrain, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Base Defense</TextBlock>
+                        <TextBox Text="{Binding BaseDefense, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Base Armor</TextBlock>
+                        <TextBox Text="{Binding BaseArmor, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True"/>
                     </StackPanel>
                 </StackPanel>
                 

@@ -139,6 +139,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("PhysicalLimit");
                 NotifyPropertyChanged("LiftCarry");
                 NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged("BaseArmor");
             }
         }
 
@@ -186,6 +187,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("MentalLimit");
                 NotifyPropertyChanged("JudgeIntentions");
                 NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged("BaseDefense");
             }
         }
 
@@ -211,6 +213,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("REA");
                 NotifyPropertyChanged("PhysicalLimit");
                 NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged("BaseDefense");
             }
         }
 
@@ -253,6 +256,29 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("Skills");
             }
         }
+
+        private int _armorValue;
+
+        public int ArmorValue
+        {
+            get { return _armorValue; }
+            set { _armorValue = value;
+                NotifyPropertyChanged("ArmorValue");
+                NotifyPropertyChanged("BaseArmor");
+            }
+        }
+
+        private MagicTradition _tradition;
+
+        public MagicTradition Tradition
+        {
+            get { return _tradition; }
+            set { _tradition = value;
+                NotifyPropertyChanged("Tradition");
+                NotifyPropertyChanged("ResistDrain");
+            }
+        }
+
 
 
         #endregion
@@ -439,6 +465,22 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public int BaseDefense
+        {
+            get
+            {
+                return REA + INTU;
+            }
+        }
+
+        public int BaseArmor
+        {
+            get
+            {
+                return BOD + ArmorValue;
+            }
+        }
+
         private int _actionsRemaining;
 
         public int ActionsRemaining
@@ -583,6 +625,26 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public int ResistDrain
+        {
+            get
+            {
+                if(Tradition != null)
+                {
+                    int total = 0;
+                    foreach(var attr in Tradition.ResistDrainAttributes)
+                    {
+                        total += ProcessExternalAttributeDefinition(attr);
+                    }
+                    return total;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
         public string Player
         {
             get { return _player; }
@@ -721,5 +783,36 @@ namespace ShadowrunCombatHelper.Models
             Running = !Running;
         }
         #endregion
+
+        private int ProcessExternalAttributeDefinition(Skill.Attributes a)
+        {
+            switch (a)
+            {
+                case Skill.Attributes.AGI:
+                    return AGI;
+                case Skill.Attributes.BOD:
+                    return BOD;
+                case Skill.Attributes.CHA:
+                    return CHA;
+                case Skill.Attributes.EDGE:
+                    return EDGE;
+                case Skill.Attributes.INT:
+                    return INTU;
+                case Skill.Attributes.LOG:
+                    return LOG;
+                case Skill.Attributes.REA:
+                    return REA;
+                case Skill.Attributes.STR:
+                    return STR;
+                case Skill.Attributes.WIL:
+                    return WIL;
+                case Skill.Attributes.MAG:
+                    return MAGRES;
+                case Skill.Attributes.ESS:
+                    return ESS;
+                default:
+                    return 0;
+            }
+        }
     }
 }

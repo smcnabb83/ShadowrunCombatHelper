@@ -14,16 +14,6 @@ namespace ShadowrunCombatHelper.Models
 
         private ObservableCollection<Attributes> _relatedAttributes = new ObservableCollection<Attributes>();
 
-        private static ObservableCollection<string> _typesUsed = new ObservableCollection<string>();
-
-        public ObservableCollection<string> TypesUsed
-        {
-            get
-            {
-                return _typesUsed;
-            }
-        }
-
         private string _skillName;
 
         private int _trainingValue;
@@ -67,12 +57,7 @@ namespace ShadowrunCombatHelper.Models
             set {
                 _skillType = value;
                 NotifyPropertyChanged("SkillType");
-                if (!_typesUsed.Contains(value))
-                {
-                    _typesUsed.Add(value);
-                    NotifyPropertyChanged("TypesUsed");
-                }
-            }
+             }
         }
 
 

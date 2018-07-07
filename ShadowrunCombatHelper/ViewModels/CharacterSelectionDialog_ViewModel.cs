@@ -54,12 +54,14 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void AddCharacterToCombatantsList(Character c)
         {
+            AllCharactersList.Remove(c);
             CombatantsList.Add(c);
         }
 
         public void RemoveCharacterFromCombatantsList(Character c)
         {
             CombatantsList.Remove(c);
+            AllCharactersList.Add(c);
         }
 
         public void NotifyPropertyChanged(string property)

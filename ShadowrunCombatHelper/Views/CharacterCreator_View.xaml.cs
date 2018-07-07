@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShadowrunCombatHelper.ViewModels;
 using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.Objects;
 
 namespace ShadowrunCombatHelper.Views
 {
@@ -30,6 +31,7 @@ namespace ShadowrunCombatHelper.Views
 
             cboMagicalTradition.ItemsSource = ShadowrunCombatHelper.Globals.TraditionsList.Instance.TraditionList;
             cboMagicalTradition.DisplayMemberPath = "TraditionName";
+
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
@@ -49,6 +51,26 @@ namespace ShadowrunCombatHelper.Views
         {
             CharacterCreator_ViewModel ccvm = (CharacterCreator_ViewModel)DataContext;
             ccvm.SaveCharactersToCharacterList();
+        }
+
+        private void CharSelectionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Character selectedCharacter = (Character)CharSelectionList.SelectedItem;
+            CollectionViewSource myCvs = (CollectionViewSource)this.FindResource("CharacterSkillsViewSource");
+            myCvs.Source = null;
+            myCvs.Source = selectedCharacter.Skills;
+            myCvs.GroupDescriptions.Clear();
+            myCvs.GroupDescriptions.Add(new PropertyGroupDescription("SkillType"));
+            
+        }
+
+        private void FilterSkillsBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void CollectionViewSource_Filter(object sender, FilterEventArgs e)
+        {
+
         }
     }
 }

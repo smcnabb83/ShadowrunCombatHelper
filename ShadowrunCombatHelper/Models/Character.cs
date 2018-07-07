@@ -21,6 +21,15 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        private CharacterSettings _settings;
+
+        public CharacterSettings Settings
+        {
+            get { return _settings; }
+            set { _settings = value; }
+        }
+
+
         public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
         #endregion
 
@@ -75,6 +84,7 @@ namespace ShadowrunCombatHelper.Models
             _skills = new CharacterBindingObservableCollection<Skill>(this);
             CurrentPhysicalDamage = 0;
             CurrentStunDamage = 0;
+            Settings = new CharacterSettings();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

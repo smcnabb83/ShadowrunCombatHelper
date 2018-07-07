@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="300" MouseDown="CharacterDisplay_MouseDown"
              Foreground="{Binding BoundCharacter.Affiliation.ForegroundColorBrush}"
+             Background="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}"
              DataContextChanged="CharacterDisplay_DataContextChanged"
              ToolTip="Right click for actions to perform.">
     <Border BorderThickness="1" BorderBrush="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}" >

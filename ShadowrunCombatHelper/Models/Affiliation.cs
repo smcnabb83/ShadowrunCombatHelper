@@ -59,7 +59,7 @@ namespace ShadowrunCombatHelper.Models
 
         public Brush BackgroundColorBrush
         {
-            get { return new SolidColorBrush(Color.FromArgb(255, (byte)_backgroundColor[0], (byte)_backgroundColor[1], (byte)_backgroundColor[2])); }
+            get { return new SolidColorBrush(Color.FromArgb(128, (byte)_backgroundColor[0], (byte)_backgroundColor[1], (byte)_backgroundColor[2])); }
 
         }
 

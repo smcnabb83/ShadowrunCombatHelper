@@ -28,6 +28,17 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
+        private bool _windowVisible;
+
+        public bool WindowVisible
+        {
+            get { return _windowVisible; }
+            set { _windowVisible = value;
+                NotifyPropertyChanged("WindowVisible");
+            }
+        }
+
+
         private Character CustomAggregator(Character x1, Character x2)
         {
             if(x1.Initiative > x2.Initiative)
@@ -83,19 +94,28 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public InitiativeTracker_ViewModel()
         {
-            CurrentRound = 1;           
+            CurrentRound = 1;
+            WindowVisible = true;
         }
 
         public void AddCombatants(List<Character> combatants)
         {
+            WindowVisible = false;
+            NotifyPropertyChanged("WindowVisible");
             foreach(Character c in combatants)
             {
-
+                if (!c.Settings.PreserveDamageAcrossEncounters)
+                {
+                    c.CurrentPhysicalDamage = 0;
+                    c.CurrentStunDamage = 0;
+                }
                 RollInitiative(c);
                 c.StartRound();
                 c.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(c);
             }
+            WindowVisible = true;
+            NotifyPropertyChanged("WindowVisible");
             NotifyPropertyChanged("CurrentCharacter");
         }
 
@@ -133,6 +153,8 @@ namespace ShadowrunCombatHelper.ViewModels
         private void MoveToNextRound()
         {
             CurrentRound++;
+            WindowVisible = false;
+            NotifyPropertyChanged("WindowVisible");
             List<Character> tempQueue = new List<Character>(CombatQueue);
             CombatQueue.Clear();
             foreach (var i in tempQueue)
@@ -143,6 +165,8 @@ namespace ShadowrunCombatHelper.ViewModels
                 i.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(i);
             }
+            WindowVisible = true;
+            NotifyPropertyChanged("WindowVisible");
             NotifyPropertyChanged("CurrentCharacter");
         }
 

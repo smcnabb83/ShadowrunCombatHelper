@@ -21,9 +21,15 @@
                 <scm:SortDescription PropertyName="CharacterName" Direction="Descending"/>
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+        <CollectionViewSource x:Key="CombatantSkills" Source="{Binding CurrentCharacter.Skills}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="SkillType"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
         <GridLength x:Key="CurrentCharViewColumnWidth">130</GridLength>
+        <BooleanToVisibilityConverter x:Key="BoolToVisConverter"/>
     </Page.Resources>
-    <Grid>
+    <Grid Visibility="{Binding Path=WindowVisible, Converter={StaticResource BoolToVisConverter}}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
@@ -31,11 +37,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition/>
         </Grid.RowDefinitions>
         <!--Main Grid Row 0-->
 
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center">
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center" Background="{Binding CurrentCharacter.Affiliation.BackgroundColorBrush}">
             <Run  Text="{Binding Path=CurrentRound, StringFormat='Round {0}'}"/>  
             <Run Text="{Binding Path=CurrentCharacter.Affiliation, StringFormat='  -  {0}'}"/>
             <Run Text="{Binding Path=CurrentCharacter.CharacterName, StringFormat=' {0} turn'}"/>
@@ -89,6 +94,39 @@
                     <TextBlock Text="Current Combat State" Grid.Column="0"/>
                     <ComboBox Grid.Column="1" Name="CombatStates" SelectedItem="{Binding CurrentCharacter.CharCombatState}"/>
                 </Grid>
+                <ScrollViewer>
+                    <DataGrid Name="SkillsPanelAlt" ItemsSource="{Binding Source={StaticResource ResourceKey=CombatantSkills}}"  AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Skill Value" Binding="{Binding TrainingValue, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Attribute Adj." Binding="{Binding AttributeModifier, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Total Die Pool" Binding="{Binding TotalSkillValue, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Limit" Binding="{Binding Limit, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Limited By" Binding="{Binding LimitBy, Mode=OneWay}" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                        <DataGrid.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                    <Expander IsExpanded="False">
+                                                        <Expander.Header>
+                                                            <TextBlock Foreground="black" Text="{Binding Name}"/>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter/>
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </DataGrid.GroupStyle>
+                    </DataGrid>
+                </ScrollViewer>
+
             </StackPanel>
         </Grid>
 

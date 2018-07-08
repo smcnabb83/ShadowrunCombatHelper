@@ -21,7 +21,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!--Row 1-->
-        <ListView Name="AllCharactersList" ItemsSource="{Binding AllCharactersList}" Grid.Column="0" Grid.Row="0">
+        <ListView Name="AllCharactersList" ItemsSource="{Binding AllCharactersList}" Grid.Column="0" Grid.Row="0" KeyDown="AllCharactersList_KeyDown">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -36,7 +36,7 @@
             <Button Name="AddToCombatants" Height="30" RenderTransformOrigin="0.53,-0.975" Margin="0,141,0,228" Click="AddToCombatants_Click">&gt; &gt; &gt;</Button>
             <Button x:Name="RemoveFromCombatants" Content="&lt; &lt; &lt;" Height="30" RenderTransformOrigin="0.603,-0.874" Margin="0,226,0,143" Click="RemoveFromCombatants_Click"/>
         </Grid>
-        <ListView Name="SelectedCombatantsList" ItemsSource="{Binding CombatantsList}" Grid.Column="2" Grid.Row="0">
+        <ListView Name="SelectedCombatantsList" ItemsSource="{Binding CombatantsList}" Grid.Column="2" Grid.Row="0" KeyDown="SelectedCombatantsList_KeyDown">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

@@ -87,6 +87,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("RelatedAttributes");
                 NotifyPropertyChanged("TotalSkillValue");
                 NotifyPropertyChanged("AttributeModifier");
+                NotifyPropertyChanged("AdjustedTotalSkillValue");
             }
         }
 
@@ -108,6 +109,7 @@ namespace ShadowrunCombatHelper.Models
                 _trainingValue = value;
                 NotifyPropertyChanged("TrainingValue");
                 NotifyPropertyChanged("TotalSkillValue");
+                NotifyPropertyChanged("AdjustedTotalSkillValue");
             }
         }
 
@@ -206,7 +208,14 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("TotalSkillValue");
                 NotifyPropertyChanged("AttributeModifier");
                 NotifyPropertyChanged("Limit");
+                NotifyPropertyChanged("AdjustedTotalSkillValue");
             }
+
+            if (e.PropertyName == "CurrentDamagePenalty")
+            {
+                NotifyPropertyChanged("AdjustedTotalSkillValue");
+            }
+
         }
 
         public List<Attributes> AttributeList
@@ -214,6 +223,14 @@ namespace ShadowrunCombatHelper.Models
             get
             {
                 return Enum.GetValues(typeof(Attributes)).Cast<Attributes>().ToList();
+            }
+        }
+
+        public int AdjustedTotalSkillValue
+        {
+            get
+            {
+                return (TotalSkillValue - _assignedCharacter?.CurrentDamagePenalty ?? 0).ClampLower(0);
             }
         }
 
@@ -235,6 +252,7 @@ namespace ShadowrunCombatHelper.Models
         {
             this.RelatedAttributes = updateTo.RelatedAttributes;
             this.LimitBy = updateTo.LimitBy;
+            this.SkillType = updateTo.SkillType;
         }
     }
 }

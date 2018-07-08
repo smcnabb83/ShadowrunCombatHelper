@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.Objects;
 using ShadowrunCombatHelper.Globals;
 
 namespace ShadowrunCombatHelper.ViewModels

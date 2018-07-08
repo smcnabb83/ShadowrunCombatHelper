@@ -100,7 +100,7 @@
                             <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Skill Value" Binding="{Binding TrainingValue, Mode=OneWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Attribute Adj." Binding="{Binding AttributeModifier, Mode=OneWay}" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Total Die Pool" Binding="{Binding TotalSkillValue, Mode=OneWay}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Total Die Pool" Binding="{Binding AdjustedTotalSkillValue, Mode=OneWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Limit" Binding="{Binding Limit, Mode=OneWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Limited By" Binding="{Binding LimitBy, Mode=OneWay}" IsReadOnly="True"/>
                         </DataGrid.Columns>

@@ -58,9 +58,10 @@
     <Compile Include="ExternalData\SkillDataReader.cs" />
     <Compile Include="Globals\AffiliationList.cs" />
     <Compile Include="Globals\CharacterList.cs" />
-    <Compile Include="Globals\ItemChangeObservableCollection.cs" />
+    <Compile Include="Objects\ItemChangeObservableCollection.cs" />
     <Compile Include="Globals\SkillsList.cs" />
     <Compile Include="Globals\TraditionsList.cs" />
+    <Compile Include="Globals\UtilityFunctions.cs" />
     <Compile Include="Interfaces\ICharacterBindable.cs" />
     <Compile Include="Models\Affiliation.cs" />
     <Compile Include="Models\CharacterSettings.cs" />

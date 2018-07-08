@@ -8,7 +8,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Collections;
 
-namespace ShadowrunCombatHelper.Globals
+namespace ShadowrunCombatHelper.Objects
 {
     public class ItemChangeObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
     {

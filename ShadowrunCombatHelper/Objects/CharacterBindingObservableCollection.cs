@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShadowrunCombatHelper.Globals;
+﻿using ShadowrunCombatHelper.Interfaces;
 using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace ShadowrunCombatHelper.Objects
 {
-    public class CharacterBindingObservableCollection<T> :  ItemChangeObservableCollection<T> where T : ICharacterBindable, INotifyPropertyChanged
+    public class CharacterBindingObservableCollection<T> : ItemChangeObservableCollection<T> where T : ICharacterBindable, INotifyPropertyChanged
     {
         private Character BoundCharacter;
 
@@ -22,7 +17,7 @@ namespace ShadowrunCombatHelper.Objects
         public CharacterBindingObservableCollection(Character c, List<T> inputList)
         {
             BoundCharacter = c;
-            foreach(var item in inputList)
+            foreach (var item in inputList)
             {
                 BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
                 Add(item);

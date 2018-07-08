@@ -36,6 +36,19 @@ namespace ShadowrunCombatHelper.Models
             SkillName = "New Skill";
         }
 
+        private bool _defaultable;
+
+        public bool Defaultable
+        {
+            get { return _defaultable; }
+            set { _defaultable = value;
+                NotifyPropertyChanged("Defaultable");
+                NotifyPropertyChanged("TotalSkillValue");
+                NotifyPropertyChanged("AdjustedTotalSkillValue");
+            }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public enum Attributes { AGI, BOD, CHA, EDGE, INT, LOG, REA, STR, WIL, MAG, ESS }
@@ -145,7 +158,7 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
-                return TrainingValue + AttributeModifier;
+                return (Defaultable || TrainingValue > 0) ? TrainingValue + AttributeModifier : 0;
             }
         }
 
@@ -211,7 +224,20 @@ namespace ShadowrunCombatHelper.Models
             this.RelatedAttributes = updateTo.RelatedAttributes;
             this.LimitBy = updateTo.LimitBy;
             this.SkillType = updateTo.SkillType;
+            this.Defaultable = updateTo.Defaultable;
+            this.Description = updateTo.Description;
         }
+
+        private string _description;
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value;
+                NotifyPropertyChanged("Description");
+            }
+        }
+
 
         private int GetCharacterAttribute(Attributes a)
         {

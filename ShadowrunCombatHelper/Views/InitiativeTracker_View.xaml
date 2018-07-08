@@ -104,6 +104,16 @@
                             <DataGridTextColumn Header="Limit" Binding="{Binding Limit, Mode=OneWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Limited By" Binding="{Binding LimitBy, Mode=OneWay}" IsReadOnly="True"/>
                         </DataGrid.Columns>
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <DockPanel MaxWidth="{Binding ElementName=SkillsPanelAlt, Path=ActualWidth}">
+                                        <TextBlock DockPanel.Dock="Left" Text="Description: "/>
+                                        <TextBlock TextWrapping="Wrap" Text="{Binding Description, Mode=OneWay}"/>
+                                    </DockPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
                         <DataGrid.GroupStyle>
                             <GroupStyle>
                                 <GroupStyle.ContainerStyle>

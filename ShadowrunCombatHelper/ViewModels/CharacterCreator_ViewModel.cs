@@ -22,18 +22,18 @@ namespace ShadowrunCombatHelper.ViewModels
                         c.Skills.Add(skill);
                     }
                 }
-                CharacterList.Add(c);
+                Characters.Add(c);
             }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public ItemChangeObservableCollection<Character> CharacterList
+        public ItemChangeObservableCollection<Character> Characters
         {
             get { return _characterList; }
             set
             {
                 _characterList = value;
-                NotifyPropertyChanged("CharacterList");
+                NotifyPropertyChanged("Characters");
             }
         }
         public void CreateNewCharacter()
@@ -44,7 +44,7 @@ namespace ShadowrunCombatHelper.ViewModels
                 newCharacter.Skills.Add(skill);
             }
             newCharacter.CharacterName = "New Character";
-            CharacterList.Add(newCharacter);
+            Characters.Add(newCharacter);
         }
 
         public void NotifyPropertyChanged(string property)
@@ -57,13 +57,13 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void RemoveCharacterFromList(Character C)
         {
-            CharacterList.Remove(C);
+            Characters.Remove(C);
         }
 
         public void SaveCharactersToCharacterList()
         {
             CharacterList clist = Globals.CharacterList.Instance;
-            clist.OverwriteCharacterList(CharacterList.ToList());
+            clist.OverwriteCharacterList(Characters.ToList());
         }
     }
 }

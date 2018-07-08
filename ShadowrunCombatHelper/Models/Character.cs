@@ -31,7 +31,6 @@ namespace ShadowrunCombatHelper.Models
         private int _intu;
         private int _log;
         private int _magres;
-        private bool _manuallyRollInitiative;
         private string _name;
         private string _player;
         private int _rea;
@@ -447,16 +446,6 @@ namespace ShadowrunCombatHelper.Models
                 _magres = value;
                 NotifyPropertyChanged("MAGRES");
                 NotifyPropertyChanged("Skills");
-            }
-        }
-
-        public bool ManuallyRollInitiative
-        {
-            get { return _manuallyRollInitiative; }
-            set
-            {
-                _manuallyRollInitiative = value;
-                NotifyPropertyChanged("ManuallyRollInitiative");
             }
         }
 

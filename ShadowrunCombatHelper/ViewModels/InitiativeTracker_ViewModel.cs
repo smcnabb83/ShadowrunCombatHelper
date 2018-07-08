@@ -107,7 +107,7 @@ namespace ShadowrunCombatHelper.ViewModels
         {
             if (i.CharStatus == Character.Status.CONSCIOUS)
             {
-                if (i.ManuallyRollInitiative)
+                if (i.Settings.ManuallyRollInitiative)
                 {
                     try
                     {

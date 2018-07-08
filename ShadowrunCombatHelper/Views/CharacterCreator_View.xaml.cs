@@ -64,13 +64,9 @@ namespace ShadowrunCombatHelper.Views
             
         }
 
-        private void FilterSkillsBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CharAttributes_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-        }
-
-        private void CollectionViewSource_Filter(object sender, FilterEventArgs e)
-        {
-
+            SkillsPanelAlt.Height = CharAttributes.ActualHeight;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace ShadowrunCombatHelper.Models
 {
@@ -12,11 +13,11 @@ namespace ShadowrunCombatHelper.Models
     {
         private Character _assignedCharacter;
 
+        private bool _defaultable;
+        private string _description;
         private Attributes _limitBy;
         private ObservableCollection<Attributes> _relatedAttributes = new ObservableCollection<Attributes>();
-
         private string _skillName;
-
         private String _skillType;
         private int _trainingValue;
 
@@ -31,24 +32,11 @@ namespace ShadowrunCombatHelper.Models
             LimitBy = limit;
             SkillType = SkillType;
         }
+
         public Skill()
         {
             SkillName = "New Skill";
         }
-
-        private bool _defaultable;
-
-        public bool Defaultable
-        {
-            get { return _defaultable; }
-            set { _defaultable = value;
-                NotifyPropertyChanged("Defaultable");
-                NotifyPropertyChanged("TotalSkillValue");
-                NotifyPropertyChanged("AdjustedTotalSkillValue");
-            }
-        }
-
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public enum Attributes { AGI, BOD, CHA, EDGE, INT, LOG, REA, STR, WIL, MAG, ESS }
@@ -90,6 +78,25 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public bool Defaultable
+        {
+            get { return _defaultable; }
+            set { _defaultable = value;
+                NotifyPropertyChanged("Defaultable");
+                NotifyPropertyChanged("TotalSkillValue");
+                NotifyPropertyChanged("AdjustedTotalSkillValue");
+            }
+        }
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                _description = value;
+                NotifyPropertyChanged("Description");
+            }
+        }
+
         public string GetRelatedAttributeString
         {
             get
@@ -122,6 +129,8 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("Limit");
             }
         }
+
+        [XmlIgnore]
         public ObservableCollection<Attributes> RelatedAttributes
         {
             get { return _relatedAttributes; }
@@ -227,18 +236,6 @@ namespace ShadowrunCombatHelper.Models
             this.Defaultable = updateTo.Defaultable;
             this.Description = updateTo.Description;
         }
-
-        private string _description;
-
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value;
-                NotifyPropertyChanged("Description");
-            }
-        }
-
-
         private int GetCharacterAttribute(Attributes a)
         {
             if (_assignedCharacter == null)

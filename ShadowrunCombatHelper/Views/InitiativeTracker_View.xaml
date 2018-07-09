@@ -37,6 +37,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="5px"/>
         </Grid.RowDefinitions>
         <!--Main Grid Row 0-->
 
@@ -68,8 +69,8 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0">Active Player Information</TextBlock>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
-                <Grid>
+            <DockPanel Grid.Column="0" Grid.Row="1">
+                <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
                         <ColumnDefinition/>
@@ -77,8 +78,8 @@
                     <TextBlock Grid.Column="0" Text="Character Name"/>
                     <TextBlock Grid.Column="1" Text="{Binding CurrentCharacter.CharacterName}"/>
                 </Grid>
-                
-                <Grid >
+
+                <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
                         <ColumnDefinition/>
@@ -86,7 +87,7 @@
                     <TextBlock Grid.Column="0" Text="Character Status"/>
                     <TextBlock Grid.Column="1" Text="{Binding CurrentCharacter.CharStatus}"/>                    
                 </Grid>
-                <Grid >
+                <Grid DockPanel.Dock="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
                         <ColumnDefinition/>
@@ -94,8 +95,7 @@
                     <TextBlock Text="Current Combat State" Grid.Column="0"/>
                     <ComboBox Grid.Column="1" Name="CombatStates" SelectedItem="{Binding CurrentCharacter.CharCombatState}"/>
                 </Grid>
-                <ScrollViewer>
-                    <DataGrid Name="SkillsPanelAlt" ItemsSource="{Binding Source={StaticResource ResourceKey=CombatantSkills}}"  AutoGenerateColumns="False">
+                <DataGrid DockPanel.Dock="Top" Name="SkillsPanelAlt" ItemsSource="{Binding Source={StaticResource ResourceKey=CombatantSkills}}"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Skill Value" Binding="{Binding TrainingValue, Mode=OneWay}" IsReadOnly="True"/>
@@ -135,9 +135,8 @@
                             </GroupStyle>
                         </DataGrid.GroupStyle>
                     </DataGrid>
-                </ScrollViewer>
 
-            </StackPanel>
+            </DockPanel>
         </Grid>
 
     </Grid>

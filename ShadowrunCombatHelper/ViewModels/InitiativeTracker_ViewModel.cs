@@ -168,6 +168,11 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
+        public void EndCombat()
+        {
+            
+        }
+
         private bool IsRoundOver()
         {
             return CombatQueue.Where(x => x.Initiative > 0).Count() == 0;

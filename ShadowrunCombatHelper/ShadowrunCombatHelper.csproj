@@ -95,6 +95,9 @@
     <Compile Include="ViewModels\CharacterCreator_ViewModel.cs" />
     <Compile Include="ViewModels\InitiativeTracker_ViewModel.cs" />
     <Compile Include="ViewModels\SkillsEditor_ViewModel.cs" />
+    <Compile Include="Views\BlankPage_View.xaml.cs">
+      <DependentUpon>BlankPage_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CharacterCreator_View.xaml.cs">
       <DependentUpon>CharacterCreator_View.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\LabelTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BlankPage_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -22,14 +22,18 @@ namespace ShadowrunCombatHelper
     /// </summary>
     public partial class MainWindow : Window
     {
+        public enum allowBack { ALLOWBACK, DISALLOWBACK }
+
         public MainWindow()
         {
             InitializeComponent();
             this.WindowState = System.Windows.WindowState.Maximized;
             CharacterList.Instance.ReadCharacterDataFromFile();
+            mainFrame.Navigated += handleNavigatedObject;
+            mainFrame.Navigate(new BlankPage());
         }
 
-                private void btnCharacterCreator_Click(object sender, RoutedEventArgs e)
+        private void btnCharacterCreator_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(new CharacterCreator_View());
         }
@@ -46,7 +50,20 @@ namespace ShadowrunCombatHelper
 
         private void mnuCreateEditSkills_Click(object sender, RoutedEventArgs e)
         {
+           
             mainFrame.Navigate(new SkillsEditor_View());
+        }
+
+        private void handleNavigatedObject(object sender, NavigationEventArgs e)
+        {
+            if((e.ExtraData is allowBack) && ((allowBack)e.ExtraData) == allowBack.DISALLOWBACK){
+                mainFrame.RemoveBackEntry();
+                if (mainFrame.CanGoBack)
+                {
+                    mainFrame.GoBack();
+                    mainFrame.RemoveBackEntry();
+                }
+            }
         }
     }
 }

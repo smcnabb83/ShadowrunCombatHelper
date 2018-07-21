@@ -8,9 +8,20 @@
     <SolidColorBrush x:Key="RegularForeground" Color="White"/>
     <SolidColorBrush x:Key="RegularBackground" Color="Black"/>
     <SolidColorBrush x:Key="ButtonBackground" Color="Black"/>
+    <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
 
 
-    <!--<Style TargetType="Page">
+    <!--<Style TargetType="{x:Type Control}">
+        <Setter Property="Foreground" Value="{StaticResource RegularForeground}"/>
+        <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource RegularForeground}"/>
+        <Setter Property="Background" Value="{StaticResource RegularBackground}"/>        
+    </Style>
+
+    <Style TargetType="{x:Type Page}">
         <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource RegularForeground}"/>
     </Style>
@@ -32,7 +43,7 @@
     </Style>
 
     <Style TargetType="MenuItem">
-        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource RegularForeground}"/>
     </Style>
 
@@ -47,7 +58,7 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
         <Setter Property="Foreground" Value="{StaticResource RegularForeground}"/>
     </Style>
 
@@ -65,7 +76,11 @@
         <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
     </Style>
 
-    <Style TargetType="DockPanel">
+    <Style TargetType="Canvas">
+        <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DockPanel}">
         <Setter Property="Background" Value="{StaticResource RegularBackground}"/>
     </Style>-->
 

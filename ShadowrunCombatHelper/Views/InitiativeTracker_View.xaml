@@ -37,6 +37,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="5px"/>
         </Grid.RowDefinitions>
         <!--Main Grid Row 0-->
@@ -47,6 +48,7 @@
             <Run Text="{Binding Path=CurrentCharacter.CharacterName, StringFormat=' {0} turn'}"/>
         </TextBlock>
 
+        <!--Main Grid Row 1-->
         <ScrollViewer Grid.Column="1" Grid.Row="1">
             <ItemsControl x:Name="CharacterStack" ItemsSource="{Binding Source={StaticResource CombatantSource}}">
                 <ItemsControl.ItemsPanel>
@@ -95,6 +97,39 @@
                     <TextBlock Text="Current Combat State" Grid.Column="0"/>
                     <ComboBox Grid.Column="1" Name="CombatStates" SelectedItem="{Binding CurrentCharacter.CharCombatState}"/>
                 </Grid>
+                <Grid DockPanel.Dock="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CurrentCharViewColumnWidth}"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Select an action" Grid.Column="0"/>
+                    <Button Name="ActionButton" Grid.Column="1" ContextMenuService.IsEnabled="False" Click="ActionButton_Click">
+                        <Button.Content>
+                            <TextBlock>Actions</TextBlock>
+                        </Button.Content>
+                        <Button.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="End Round" Name="mnuEndRound" Click="mnuEndRound_Click"/>
+                                <MenuItem Header="Deal Damage" Name="btnDealDamage" Click="btnDealDamage_Click"/>
+                                <MenuItem Header="Interrupt Actions">
+                                    <MenuItem Header="Full Defense" Name="mnuFullDefense" Click="mnuFullDefense_Click" IsEnabled="{Binding CurrentCharacter.CanFullDefense}"/>
+                                    <MenuItem Header="Block" Name="mnuBlock" Click="mnuBlock_Click" IsEnabled="{Binding CurrentCharacter.CanInterrupt}"/>
+                                    <MenuItem Header="Dodge" Name="mnuDodge" Click="mnuDodge_Click" IsEnabled="{Binding CurrentCharacter.CanInterrupt}"/>
+                                    <MenuItem Header="Hit The Dirt" Name="mnuHitTheDirt" Click="MenuItem_Click" IsEnabled="{Binding CurrentCharacter.CanInterrupt}"/>
+                                    <MenuItem Header="Intercept" Name="mnuIntercept" Click="mnuIntercept_Click" IsEnabled="{Binding CurrentCharacter.CanInterrupt}"/>
+                                    <MenuItem Header="Parry" Name="mnuParry" Click="mnuParry_Click" IsEnabled="{Binding CurrentCharacter.CanInterrupt}"/>
+                                </MenuItem>
+                                <MenuItem IsChecked="{Binding CurrentCharacter.Running, Mode=OneWay}" Header="Running" Name="mnuRunningToggle" Click="mnuRunningToggle_Click"/>
+                                <MenuItem Header="Actions">
+                                    <MenuItem Header="Simple Action" Name="mnuSimpleAction" IsEnabled="{Binding CurrentCharacter.CanSimpleAction}" Click="mnuSimpleAction_Click"/>
+                                    <MenuItem Header="Complex Action" Name="mnuComplexAction" IsEnabled="{Binding CurrentCharacter.CanComplexAction}" Click="mnuComplexAction_Click"/>
+                                    <MenuItem Header="Free Action" Name="mnuFreeAction" IsEnabled="{Binding CurrentCharacter.CanFreeAction}" Click="mnuFreeAction_Click"/>
+                                </MenuItem>
+                                <MenuItem Header="Move" Name="mnuMoveCharacter" Click="mnuMoveCharacter_Click" IsEnabled="{Binding CurrentCharacter.CanMove}"/>
+                            </ContextMenu>
+                        </Button.ContextMenu>
+                    </Button>
+                </Grid>
                 <DataGrid DockPanel.Dock="Top" Name="SkillsPanelAlt" ItemsSource="{Binding Source={StaticResource ResourceKey=CombatantSkills}}"  AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True"/>
@@ -123,7 +158,7 @@
                                                 <ControlTemplate TargetType="{x:Type GroupItem}">
                                                     <Expander IsExpanded="False">
                                                         <Expander.Header>
-                                                            <TextBlock Foreground="black" Text="{Binding Name}"/>
+                                                            <TextBlock Foreground="Black" Text="{Binding Name}"/>
                                                         </Expander.Header>
                                                         <ItemsPresenter/>
                                                     </Expander>
@@ -138,6 +173,7 @@
 
             </DockPanel>
         </Grid>
+        <Button Grid.Row="2" Grid.ColumnSpan="2" Name="EndCombatButton" Click="EndCombatButton_Click">End Combat</Button>
 
     </Grid>
 </Page>

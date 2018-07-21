@@ -28,20 +28,20 @@
             <TextBlock Text="{Binding BoundCharacter.CharacterName}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <TextBlock>Affiliation:</TextBlock>
+            <TextBlock>Affiliation: </TextBlock>
             <TextBlock Text="{Binding BoundCharacter.Affiliation.Name}"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
-            <TextBlock>Status:</TextBlock>
+            <TextBlock>Status: </TextBlock>
             <TextBlock Text="{Binding BoundCharacter.CharStatus}"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Initiative</TextBlock>
+                    <TextBlock>Initiative: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.Initiative}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Movement</TextBlock>
+                    <TextBlock>Movement: </TextBlock>
                     <TextBlock>
                         <Run Text="{Binding BoundCharacter.DistanceMoved}"/>
                         /
@@ -49,27 +49,27 @@
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Actions</TextBlock>
+                    <TextBlock>Actions: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.ActionsRemaining}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Free Actions</TextBlock>
+                    <TextBlock>Free Actions: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.FreeActionsRemaining}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Defense Base</TextBlock>
+                    <TextBlock>Defense Base: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.BaseDefense}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Armor Base</TextBlock>
+                    <TextBlock>Armor Base: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.BaseArmor}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Resist Drain</TextBlock>
+                    <TextBlock>Resist Drain: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.ResistDrain}"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock>Damage Penalty</TextBlock>
+                    <TextBlock>Damage Penalty: </TextBlock>
                     <TextBlock Text="{Binding BoundCharacter.CurrentDamagePenalty}"/>
                 </StackPanel>
             </StackPanel>

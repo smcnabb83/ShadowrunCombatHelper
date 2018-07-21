@@ -1,4 +1,5 @@
-﻿using ShadowrunCombatHelper.Objects;
+﻿using ShadowrunCombatHelper.Interfaces;
+using ShadowrunCombatHelper.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,37 +9,62 @@ namespace ShadowrunCombatHelper.Models
 {
     public class Character : INotifyPropertyChanged
     {
-        public enum CombatState { PHYSICAL, ASTRAL, VRCOLDSIM, VRHOTSIM, AR, }
-        public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
+        protected static IRandomGenerator gen = new RandomGen();
 
-        private static Random gen = new Random();
-        private static Random roller = new Random();
+        protected static IRandomGenerator roller = new RandomGen();
+
         private int _actionsRemaining;
+
         private Affiliation _affiliation;
+
         private int _agi;
+
         private int _armorValue;
+
         private int _bod;
+
         private int _cha;
+
         private CombatState _charCombatState;
+
         private Guid _charId;
+
         private int _currentPhysicalDamage;
+
         private int _currentStunDamage;
+
         private int _distanceMoved;
+
         private int _edge;
+
         private int _ess;
+
         private int _freeActionsRemaining;
+
         private int _initiative;
+
         private int _intu;
+
         private int _log;
+
         private int _magres;
+
         private string _name;
+
         private string _player;
+
         private int _rea;
+
         private bool _running;
+
         private CharacterSettings _settings;
+
         private CharacterBindingObservableCollection<Skill> _skills;
+
         private int _str;
+
         private MagicTradition _tradition;
+
         private int _wil;
 
         public Character()
@@ -52,6 +78,9 @@ namespace ShadowrunCombatHelper.Models
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public enum CombatState { PHYSICAL, ASTRAL, VRCOLDSIM, VRHOTSIM, AR, }
+
+        public enum Status { CONSCIOUS, BLEEDING_OUT, DEAD }
         public int ActionsRemaining
         {
             get { return _actionsRemaining; }

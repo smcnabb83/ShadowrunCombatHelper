@@ -1,5 +1,7 @@
 ﻿using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.UserControls;
+using ShadowrunCombatHelper.Objects;
+using ShadowrunCombatHelper.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +12,7 @@ namespace ShadowrunCombatHelper.ViewModels
 {
     public class InitiativeTracker_ViewModel : INotifyPropertyChanged
     {
-        private static Random roller = new Random();
+        private static IRandomGenerator roller = new RandomGen();
         private ObservableCollection<Character> _combatQueue = new ObservableCollection<Character>();
         private int _currentRound;
         private bool _windowVisible;

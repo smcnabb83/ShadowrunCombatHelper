@@ -5,12 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.ExternalData;
+using ShadowrunCombatHelper.Interfaces;
 
 namespace ShadowrunCombatHelper.Globals
 {
     public sealed class SkillsList
     {
         private List<Skill> _skills = new List<Skill>();
+
+        private IDataReadWriter<Skill> readWriter = new XMLDataReadWriter<Skill>();
 
         public List<Skill> Skills
         {
@@ -26,7 +29,7 @@ namespace ShadowrunCombatHelper.Globals
 
         private SkillsList()
         {
-            Skills = SkillDataReader.ReadSkillDataToSkillList();
+            Skills = readWriter.ReadFileToList(ApplicationXmlFiles.fileType.SKILLDATA);
 
             if (Skills.Count == 0)
             {
@@ -39,7 +42,7 @@ namespace ShadowrunCombatHelper.Globals
         public void OverwriteSkills(List<Skill> newSkills)
         {
             Skills = newSkills;
-            SkillDataReader.WriteSkillListToXMLFile();
+            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.SKILLDATA, Skills); ;
         }
 
         public static SkillsList Instance { get; } = new SkillsList();

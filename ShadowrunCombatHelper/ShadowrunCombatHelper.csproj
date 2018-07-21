@@ -54,10 +54,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ExternalData\CharacterDataReader.cs" />
-    <Compile Include="ExternalData\SkillDataReader.cs" />
+    <Compile Include="ExternalData\XMLDataReadWriter.cs" />
+    <Compile Include="Interfaces\IDataReadWriter.cs" />
     <Compile Include="Globals\AffiliationList.cs" />
+    <Compile Include="Globals\ApplicationXmlFiles.cs" />
     <Compile Include="Globals\CharacterList.cs" />
+    <Compile Include="Interfaces\IRandomGenerator.cs" />
     <Compile Include="Objects\ItemChangeObservableCollection.cs" />
     <Compile Include="Globals\SkillsList.cs" />
     <Compile Include="Globals\TraditionsList.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Models\Skill.cs" />
     <Compile Include="Objects\CharacterBindingObservableCollection.cs" />
     <Compile Include="Objects\CharacterDataExtensions.cs" />
+    <Compile Include="Objects\RandomGen.cs" />
     <Compile Include="UserControls\DealDamageDialog.xaml.cs">
       <DependentUpon>DealDamageDialog.xaml</DependentUpon>
     </Compile>

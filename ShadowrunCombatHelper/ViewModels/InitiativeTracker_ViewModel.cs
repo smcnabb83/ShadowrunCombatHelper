@@ -170,7 +170,13 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void EndCombat()
         {
-            
+            for(int i = 0; i < CombatQueue.Count; i++)
+            {
+                if (CombatQueue[i].Settings.PreserveDamageAcrossEncounters)
+                {
+;                    Globals.CharacterList.Instance.UpdateCharacterPostCombat(CombatQueue[i]);
+                }
+            }
         }
 
         private bool IsRoundOver()

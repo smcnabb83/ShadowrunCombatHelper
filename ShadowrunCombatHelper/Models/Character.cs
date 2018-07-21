@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using ShadowrunCombatHelper.Globals;
 
 namespace ShadowrunCombatHelper.Models
 {
@@ -297,7 +298,7 @@ namespace ShadowrunCombatHelper.Models
             get { return _currentPhysicalDamage; }
             set
             {
-                _currentPhysicalDamage = value;
+                _currentPhysicalDamage = value.Clamp(0,MaxPhysicalHealth + MaxOverFlowHealth + 1);
                 if (CharStatus != Status.CONSCIOUS)
                 {
                     Initiative = 0;
@@ -321,7 +322,7 @@ namespace ShadowrunCombatHelper.Models
                 }
                 else
                 {
-                    _currentStunDamage = value;
+                    _currentStunDamage = value.Clamp(0, MaxStunHealth);
                 }
                 NotifyPropertyChanged("CurrentStunDamage");
                 NotifyPropertyChanged("CurrentDamagePenalty");
@@ -813,6 +814,29 @@ namespace ShadowrunCombatHelper.Models
                 default:
                     return 0;
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if(obj.GetType() != typeof(Character))
+            {
+                return false;
+            }
+
+            Character comparer = (Character)obj;
+            return (this.CharacterName == comparer.CharacterName &&
+                    this.Player == comparer.Player &&
+                    this.Affiliation == comparer.Affiliation);
+
+        }
+
+        public override int GetHashCode()
+        {
+            int hashbase = 47;
+            hashbase = hashbase * 47 + this.CharacterName.GetHashCode();
+            hashbase = hashbase * 47 + this.Player?.GetHashCode()??0;
+            hashbase = hashbase * 47 + this.Affiliation?.GetHashCode()??0;
+            return hashbase;
         }
     }
 }

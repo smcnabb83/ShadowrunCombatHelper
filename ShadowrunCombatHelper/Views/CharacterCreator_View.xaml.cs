@@ -1,5 +1,6 @@
 ﻿using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.ViewModels;
+using ShadowrunCombatHelper.UserControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -53,6 +54,20 @@ namespace ShadowrunCombatHelper.Views
         private void CharAttributes_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             SkillsPanelAlt.Height = CharAttributes.ActualHeight;
+        }
+
+        private void HealPhysicalDamage_Click(object sender, RoutedEventArgs e)
+        {
+            int getHealing = GetInputDialog<int>.Show("Enter physical damage to be healed", "Enter Damage Healed");
+            Character selectedCharacter = (Character)CharSelectionList.SelectedItem;
+            selectedCharacter.CurrentPhysicalDamage -= getHealing;
+        }
+
+        private void HealStunDamage_Click(object sender, RoutedEventArgs e)
+        {
+            int getHealing = GetInputDialog<int>.Show("Enter stun damage to be healed", "Enter Damage Healed");
+            Character selectedCharacter = (Character)CharSelectionList.SelectedItem;
+            selectedCharacter.CurrentStunDamage -= getHealing;
         }
     }
 }

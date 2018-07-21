@@ -37,6 +37,7 @@ namespace ShadowrunCombatHelper.Models
         {
             SkillName = "New Skill";
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public enum Attributes { AGI, BOD, CHA, EDGE, INT, LOG, REA, STR, WIL, MAG, ESS }
@@ -81,12 +82,15 @@ namespace ShadowrunCombatHelper.Models
         public bool Defaultable
         {
             get { return _defaultable; }
-            set { _defaultable = value;
+            set
+            {
+                _defaultable = value;
                 NotifyPropertyChanged("Defaultable");
                 NotifyPropertyChanged("TotalSkillValue");
                 NotifyPropertyChanged("AdjustedTotalSkillValue");
             }
         }
+
         public string Description
         {
             get { return _description; }
@@ -163,6 +167,7 @@ namespace ShadowrunCombatHelper.Models
                 NotifyPropertyChanged("SkillType");
             }
         }
+
         public int TotalSkillValue
         {
             get
@@ -228,6 +233,7 @@ namespace ShadowrunCombatHelper.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
         public void UpdateProperties(Skill updateTo)
         {
             this.RelatedAttributes = updateTo.RelatedAttributes;
@@ -236,6 +242,7 @@ namespace ShadowrunCombatHelper.Models
             this.Defaultable = updateTo.Defaultable;
             this.Description = updateTo.Description;
         }
+
         private int GetCharacterAttribute(Attributes a)
         {
             if (_assignedCharacter == null)

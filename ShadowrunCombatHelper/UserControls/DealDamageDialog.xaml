@@ -8,16 +8,16 @@
         Title="Input Damage to be dealt to" Height="88.356" Width="636.479">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Damage Amount" Grid.Column="0" Grid.Row="0"/>
-        <TextBox Name="TxtDamage" Grid.Column="1" Grid.Row="0" KeyDown="TxtDamage_KeyDown"/>
+        <TextBlock Text="Damage Amount" Grid.Column="0" Grid.Row="0" />
+        <TextBox Name="TxtDamage" Grid.Column="1" Grid.Row="0" KeyDown="TxtDamage_KeyDown" />
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0">
             <TextBlock TextAlignment="Center">Select Damage Type</TextBlock>
             <UniformGrid Rows="1" Columns="2">
@@ -30,6 +30,5 @@
         </StackPanel>
         <Button Name="btnOK" Grid.Row="1" Grid.Column="1" Click="btnOK_Click">OK</Button>
         <Button Name="btnCancel" Grid.Row="1" Grid.Column="2" Click="btnCancel_Click">Cancel</Button>
-
     </Grid>
 </Window>

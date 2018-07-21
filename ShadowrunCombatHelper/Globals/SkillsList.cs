@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.ExternalData;
+﻿using ShadowrunCombatHelper.ExternalData;
 using ShadowrunCombatHelper.Interfaces;
+using ShadowrunCombatHelper.Models;
+using System.Collections.Generic;
 
 namespace ShadowrunCombatHelper.Globals
 {
@@ -21,10 +17,8 @@ namespace ShadowrunCombatHelper.Globals
             set { _skills = value; }
         }
 
-
         static SkillsList()
         {
-
         }
 
         private SkillsList()

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ShadowrunCombatHelper.Models;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ShadowrunCombatHelper.Models;
 
 namespace ShadowrunCombatHelper.UserControls
 {
@@ -33,7 +24,6 @@ namespace ShadowrunCombatHelper.UserControls
         {
             get { return physicalDamage; }
         }
-
 
         public DealDamageDialog(Character c)
         {
@@ -82,17 +72,17 @@ namespace ShadowrunCombatHelper.UserControls
             await Task.Delay(200);
             this.Background = bgBrush;
             await Task.Delay(800);
-            this.Title = originalTitle;            
+            this.Title = originalTitle;
         }
 
         private void TxtDamage_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 Submit();
                 e.Handled = true;
             }
-            else if(e.Key == Key.P)
+            else if (e.Key == Key.P)
             {
                 PhysDamageOption.IsChecked = true;
                 e.Handled = true;

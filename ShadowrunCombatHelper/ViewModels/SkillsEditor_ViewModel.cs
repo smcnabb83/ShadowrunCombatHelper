@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.Objects;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShadowrunCombatHelper.Globals;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.Objects;
 
 namespace ShadowrunCombatHelper.ViewModels
 {
@@ -19,11 +14,12 @@ namespace ShadowrunCombatHelper.ViewModels
         public ItemChangeObservableCollection<Skill> SkillListToEdit
         {
             get { return _skillListToEdit; }
-            set { _skillListToEdit = value;
+            set
+            {
+                _skillListToEdit = value;
                 NotifyPropertyChanged("SkillListToEdit");
             }
         }
-
 
         public void NotifyPropertyChanged(string property)
         {
@@ -44,9 +40,9 @@ namespace ShadowrunCombatHelper.ViewModels
         public void WriteToGlobalSkillsList()
         {
             Globals.SkillsList.Instance.OverwriteSkills(SkillListToEdit.ToList());
-            foreach(var c in Globals.CharacterList.Instance.GetCharacterList())
+            foreach (var c in Globals.CharacterList.Instance.GetCharacterList())
             {
-                foreach(var d in Globals.SkillsList.Instance.Skills)
+                foreach (var d in Globals.SkillsList.Instance.Skills)
                 {
                     int index = c.Skills.IndexOf(d);
                     if (index >= 0)

@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using ShadowrunCombatHelper.Globals;
 using ShadowrunCombatHelper.Views;
-using ShadowrunCombatHelper.Globals;
+using System.Windows;
+using System.Windows.Navigation;
 
 namespace ShadowrunCombatHelper
 {
@@ -50,13 +38,13 @@ namespace ShadowrunCombatHelper
 
         private void mnuCreateEditSkills_Click(object sender, RoutedEventArgs e)
         {
-           
             mainFrame.Navigate(new SkillsEditor_View());
         }
 
         private void handleNavigatedObject(object sender, NavigationEventArgs e)
         {
-            if((e.ExtraData is allowBack) && ((allowBack)e.ExtraData) == allowBack.DISALLOWBACK){
+            if ((e.ExtraData is allowBack) && ((allowBack)e.ExtraData) == allowBack.DISALLOWBACK)
+            {
                 mainFrame.RemoveBackEntry();
                 if (mainFrame.CanGoBack)
                 {

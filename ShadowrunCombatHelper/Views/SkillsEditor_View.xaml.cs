@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.ViewModels;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.ViewModels;
 
 namespace ShadowrunCombatHelper.Views
 {
@@ -33,7 +23,7 @@ namespace ShadowrunCombatHelper.Views
         {
             ListBox me = (ListBox)sender;
             var itemsToSelect = me.BindingGroup.Items.OfType<Skill>().ToList()[0].RelatedAttributes;
-            foreach(var item in itemsToSelect)
+            foreach (var item in itemsToSelect)
             {
                 me.SelectedItems.Add(item);
             }
@@ -45,16 +35,16 @@ namespace ShadowrunCombatHelper.Views
             if (e.AddedItems != null)
             {
                 var SelectedItems = me.BindingGroup.Items.OfType<Skill>().ToList()[0].RelatedAttributes;
-                foreach(var a in e.AddedItems)
+                foreach (var a in e.AddedItems)
                 {
-                    if (a.GetType() == typeof(Skill.Attributes) && !SelectedItems.Contains((Skill.Attributes)a)) 
+                    if (a.GetType() == typeof(Skill.Attributes) && !SelectedItems.Contains((Skill.Attributes)a))
                     {
                         SelectedItems.Add((Skill.Attributes)a);
                     }
                 }
             }
 
-            if(e.RemovedItems != null && allowDelete)
+            if (e.RemovedItems != null && allowDelete)
             {
                 var SelectedItems = me.BindingGroup.Items.OfType<Skill>().ToList()[0].RelatedAttributes;
                 foreach (var a in e.RemovedItems)
@@ -82,7 +72,6 @@ namespace ShadowrunCombatHelper.Views
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
         }
     }
 }

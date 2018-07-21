@@ -1,16 +1,10 @@
-﻿using System;
+﻿using ShadowrunCombatHelper.Globals;
+using ShadowrunCombatHelper.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
-using System.IO;
-using System.Reflection;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.Globals;
-using ShadowrunCombatHelper.Interfaces;
-using System.Windows;
 
 namespace ShadowrunCombatHelper.ExternalData
 {
@@ -21,7 +15,6 @@ namespace ShadowrunCombatHelper.ExternalData
             string filepath = ApplicationXmlFiles.GetFilePath(fileType);
             if (File.Exists(filepath))
             {
-
                 List<T> readTo = new List<T>();
 
                 using (var reader = new StreamReader(filepath))
@@ -45,10 +38,8 @@ namespace ShadowrunCombatHelper.ExternalData
             }
         }
 
-
         public void WriteListToFile(ApplicationXmlFiles.fileType fileType, List<T> ListToWrite)
         {
-
             string filepath = ApplicationXmlFiles.GetFilePath(fileType);
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
             CharacterList clist = CharacterList.Instance;
@@ -63,6 +54,4 @@ namespace ShadowrunCombatHelper.ExternalData
             }
         }
     }
-
-
 }

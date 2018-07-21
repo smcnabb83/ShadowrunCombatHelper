@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShadowrunCombatHelper.Globals
 {
@@ -18,7 +14,7 @@ namespace ShadowrunCombatHelper.Globals
             return val.CompareTo(max) > 0 ? max : val;
         }
 
-        public static T Clamp<T>(this T val, T min, T max) where T: IComparable<T>
+        public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
         {
             return val.ClampLower(min).ClampUpper(max);
         }

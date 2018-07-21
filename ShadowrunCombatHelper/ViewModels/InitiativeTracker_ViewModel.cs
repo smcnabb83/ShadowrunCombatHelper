@@ -1,8 +1,7 @@
-﻿using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.UserControls;
+﻿using ShadowrunCombatHelper.Interfaces;
+using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.Objects;
-using ShadowrunCombatHelper.Interfaces;
-using System;
+using ShadowrunCombatHelper.UserControls;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -35,6 +34,7 @@ namespace ShadowrunCombatHelper.ViewModels
                 NotifyPropertyChanged("CurrentCharacter");
             }
         }
+
         public Character CurrentCharacter
         {
             get { return CombatQueue.Aggregate(CustomAggregator); }
@@ -170,11 +170,11 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void EndCombat()
         {
-            for(int i = 0; i < CombatQueue.Count; i++)
+            for (int i = 0; i < CombatQueue.Count; i++)
             {
                 if (CombatQueue[i].Settings.PreserveDamageAcrossEncounters)
                 {
-;                    Globals.CharacterList.Instance.UpdateCharacterPostCombat(CombatQueue[i]);
+                    ; Globals.CharacterList.Instance.UpdateCharacterPostCombat(CombatQueue[i]);
                 }
             }
         }

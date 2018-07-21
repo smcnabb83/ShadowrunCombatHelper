@@ -51,6 +51,7 @@ namespace ShadowrunCombatHelper.ViewModels
                 return Enum.GetValues(typeof(Character.CombatState)).Cast<Character.CombatState>().ToList();
             }
         }
+
         public void AddCharacterToCombatantsList(Character c)
         {
             AllCharactersList.Remove(c);

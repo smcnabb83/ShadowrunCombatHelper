@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using ShadowrunCombatHelper.ViewModels;
 using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.UserControls;
+
 namespace ShadowrunCombatHelper.Views
 {
     /// <summary>
@@ -45,17 +46,14 @@ namespace ShadowrunCombatHelper.Views
             BoundCharacter.EndTurn();
         }
 
-
         private void btnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
         {
-
             Character BoundCharacter = ((this.DataContext) as InitiativeTracker_ViewModel).CurrentCharacter;
             BoundCharacter.CurrentPhysicalDamage++;
         }
 
         private void btnDealDamage_Click(object sender, RoutedEventArgs e)
         {
-
             Character BoundCharacter = ((this.DataContext) as InitiativeTracker_ViewModel).CurrentCharacter;
             DealDamageDialog dealDamage = new DealDamageDialog(BoundCharacter);
             bool? result = dealDamage.ShowDialog();

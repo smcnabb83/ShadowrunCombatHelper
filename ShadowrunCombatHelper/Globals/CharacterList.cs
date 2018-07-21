@@ -1,12 +1,9 @@
-﻿using System;
+﻿using ShadowrunCombatHelper.ExternalData;
+using ShadowrunCombatHelper.Interfaces;
+using ShadowrunCombatHelper.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.ExternalData;
-using ShadowrunCombatHelper.Interfaces;
-using ShadowrunCombatHelper.Globals;
 
 namespace ShadowrunCombatHelper.Globals
 {
@@ -36,7 +33,7 @@ namespace ShadowrunCombatHelper.Globals
             CharList.Remove(c);
             readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
         }
-        
+
         public void OverwriteCharacterList(List<Character> clist)
         {
             CharList = clist;
@@ -46,7 +43,7 @@ namespace ShadowrunCombatHelper.Globals
         public void UpdateCharacterPostCombat(Character c)
         {
             Character toUpdate = CharList.Where(x => x == c).First();
-            if(toUpdate != null)
+            if (toUpdate != null)
             {
                 toUpdate.CurrentPhysicalDamage = c.CurrentPhysicalDamage;
                 toUpdate.CurrentStunDamage = c.CurrentStunDamage;
@@ -55,14 +52,14 @@ namespace ShadowrunCombatHelper.Globals
 
         public void RemoveCharacterAtIndex(int i)
         {
-            if(i >= 0 && i < CharList.Count)
+            if (i >= 0 && i < CharList.Count)
             {
                 CharList.RemoveAt(i);
             }
             else
             {
                 throw new IndexOutOfRangeException();
-            }            
+            }
         }
 
         public void ReadCharacterDataFromFile()
@@ -72,9 +69,6 @@ namespace ShadowrunCombatHelper.Globals
 
         private CharacterList()
         {
-           
         }
-
-       
     }
 }

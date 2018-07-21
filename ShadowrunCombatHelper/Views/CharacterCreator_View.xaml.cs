@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ShadowrunCombatHelper.ViewModels;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.Objects;
 
 namespace ShadowrunCombatHelper.Views
 {
@@ -31,7 +19,6 @@ namespace ShadowrunCombatHelper.Views
 
             cboMagicalTradition.ItemsSource = ShadowrunCombatHelper.Globals.TraditionsList.Instance.TraditionList;
             cboMagicalTradition.DisplayMemberPath = "TraditionName";
-
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)
@@ -61,7 +48,6 @@ namespace ShadowrunCombatHelper.Views
             myCvs.Source = selectedCharacter.Skills;
             myCvs.GroupDescriptions.Clear();
             myCvs.GroupDescriptions.Add(new PropertyGroupDescription("SkillType"));
-            
         }
 
         private void CharAttributes_SizeChanged(object sender, SizeChangedEventArgs e)

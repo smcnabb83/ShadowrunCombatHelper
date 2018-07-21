@@ -30,12 +30,10 @@ namespace ShadowrunCombatHelper.Models
             }
             set
             {
-                
                 _backgroundColor = ValidateColorValueArray(value, "BackgroundColor");
                 NotifyPropertyChanged("BackgroundColor");
             }
         }
-
 
         public int[] ForegroundColor
         {
@@ -44,7 +42,7 @@ namespace ShadowrunCombatHelper.Models
                 return _foregroundColor;
             }
             set
-            {                
+            {
                 _foregroundColor = ValidateColorValueArray(value, "ForegroundColor");
                 NotifyPropertyChanged("ForegroundColor");
             }
@@ -110,6 +108,7 @@ namespace ShadowrunCombatHelper.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(propName));
             }
         }
+
         public override string ToString()
         {
             return Name;

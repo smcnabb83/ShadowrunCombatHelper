@@ -1,18 +1,9 @@
-﻿using System;
+﻿using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ShadowrunCombatHelper.ViewModels;
-using ShadowrunCombatHelper.Models;
 
 namespace ShadowrunCombatHelper.Views
 {
@@ -24,7 +15,6 @@ namespace ShadowrunCombatHelper.Views
         public CharacterSelectionDialog_View()
         {
             InitializeComponent();
-            
         }
 
         private List<Character> _returnedCombatants = new List<Character>();
@@ -91,7 +81,7 @@ namespace ShadowrunCombatHelper.Views
 
         private void AllCharactersList_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Right)
+            if (e.Key == Key.Right)
             {
                 AddCharacterToCombatants();
                 e.Handled = true;
@@ -100,7 +90,7 @@ namespace ShadowrunCombatHelper.Views
 
         private void SelectedCombatantsList_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Left)
+            if (e.Key == Key.Left)
             {
                 RemoveCharacterFromCombatants();
                 e.Handled = true;

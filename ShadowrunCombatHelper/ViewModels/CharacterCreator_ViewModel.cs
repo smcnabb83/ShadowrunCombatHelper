@@ -27,6 +27,7 @@ namespace ShadowrunCombatHelper.ViewModels
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public ItemChangeObservableCollection<Character> Characters
         {
             get { return _characterList; }
@@ -36,6 +37,7 @@ namespace ShadowrunCombatHelper.ViewModels
                 NotifyPropertyChanged("Characters");
             }
         }
+
         public void CreateNewCharacter()
         {
             Character newCharacter = new Character();

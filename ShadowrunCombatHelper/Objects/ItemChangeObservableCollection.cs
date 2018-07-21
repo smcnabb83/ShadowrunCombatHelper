@@ -47,6 +47,7 @@ namespace ShadowrunCombatHelper.Objects
                 }
             }
         }
+
         private void UnRegisterPropertyChanged(IList items)
         {
             foreach (INotifyPropertyChanged item in items)

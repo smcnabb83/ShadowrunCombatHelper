@@ -34,11 +34,15 @@ namespace ShadowrunCombatHelper.Views
             if(value.GetType() == typeof(SolidColorBrush))
             {
                 SolidColorBrush color = (SolidColorBrush)value;
-                return new int[] { color.Color.R, color.Color.G, color.Color.B };
+                return new int[] {color.Color.A, color.Color.R, color.Color.G, color.Color.B };
             } else if (value.GetType() == typeof(string) && value.ToString().Length == 9)
             {
                 string ret = value.ToString();
                 return new int[] { System.Convert.ToInt32(ret.Substring(1, 2), 16), System.Convert.ToInt32(ret.Substring(3, 2),16), System.Convert.ToInt32(ret.Substring(5, 2), 16), System.Convert.ToInt32(ret.Substring(7, 2), 16) };
+            } else if (value.GetType() == typeof(Color))
+            {
+                Color col = (Color)value;
+                return new int[] { col.A, col.R, col.G, col.B };
             }
             throw new ArgumentOutOfRangeException("value must be a solidcolorbrush");
         }

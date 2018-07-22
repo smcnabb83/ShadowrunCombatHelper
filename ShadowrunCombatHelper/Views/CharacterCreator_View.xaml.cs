@@ -31,6 +31,8 @@ namespace ShadowrunCombatHelper.Views
         private void btnDeleteSelected_Click(object sender, RoutedEventArgs e)
         {
             Character remove = (Character)CharSelectionList.SelectedItem;
+            int indexToRemove = CharSelectionList.SelectedIndex;
+            CharSelectionList.SelectedIndex = indexToRemove <= 0 ? 1 : indexToRemove - 1;
             CharacterCreator_ViewModel ccvm = (CharacterCreator_ViewModel)DataContext;
             ccvm.RemoveCharacterFromList(remove);
         }

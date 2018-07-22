@@ -36,7 +36,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <ScrollViewer>
-                <ListView Name="CharSelectionList" Grid.Column="0" ItemsSource="{Binding Characters}" SelectionChanged="CharSelectionList_SelectionChanged">
+                <ListView Name="CharSelectionList" Grid.Column="0" ItemsSource="{Binding Characters}" SelectionChanged="CharSelectionList_SelectionChanged" SelectionMode="Single">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

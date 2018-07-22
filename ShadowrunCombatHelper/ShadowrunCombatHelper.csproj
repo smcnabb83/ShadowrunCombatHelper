@@ -48,6 +48,24 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.4.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.4.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -82,6 +100,7 @@
     <Compile Include="UserControls\InitiativeDialog.xaml.cs">
       <DependentUpon>InitiativeDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\AffiliationEditor_ViewModel.cs" />
     <Compile Include="ViewModels\CharacterSelectionDialog_ViewModel.cs" />
     <Compile Include="UserControls\CharacterSummaryDisplay.xaml.cs">
       <DependentUpon>CharacterSummaryDisplay.xaml</DependentUpon>
@@ -95,6 +114,9 @@
     <Compile Include="ViewModels\CharacterCreator_ViewModel.cs" />
     <Compile Include="ViewModels\InitiativeTracker_ViewModel.cs" />
     <Compile Include="ViewModels\SkillsEditor_ViewModel.cs" />
+    <Compile Include="Views\AffiliationEditor_View.xaml.cs">
+      <DependentUpon>AffiliationEditor_View.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BlankPage_View.xaml.cs">
       <DependentUpon>BlankPage_View.xaml</DependentUpon>
     </Compile>
@@ -107,6 +129,7 @@
     <Compile Include="Views\InitiativeTracker_View.xaml.cs">
       <DependentUpon>InitiativeTracker_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IntArrayToColorBrushConverter.cs" />
     <Compile Include="Views\SkillsEditor_View.xaml.cs">
       <DependentUpon>SkillsEditor_View.xaml</DependentUpon>
     </Compile>
@@ -150,6 +173,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AffiliationEditor_View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BlankPage_View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -190,6 +217,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

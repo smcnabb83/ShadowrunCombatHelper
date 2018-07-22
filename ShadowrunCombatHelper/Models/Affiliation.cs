@@ -15,8 +15,8 @@ namespace ShadowrunCombatHelper.Models
 
         public Affiliation()
         {
-            ForegroundColor = new int[] { 255, 255, 255 };
-            BackgroundColor = new int[] { 0, 0, 255 };
+            ForegroundColor = new int[] {255, 255, 255, 255 };
+            BackgroundColor = new int[] {128, 0, 0, 255 };
             Name = "New Affiliation";
         }
 
@@ -32,6 +32,7 @@ namespace ShadowrunCombatHelper.Models
             {
                 _backgroundColor = ValidateColorValueArray(value, "BackgroundColor");
                 NotifyPropertyChanged("BackgroundColor");
+                NotifyPropertyChanged("BackgroundColorBrush");
             }
         }
 
@@ -45,16 +46,22 @@ namespace ShadowrunCombatHelper.Models
             {
                 _foregroundColor = ValidateColorValueArray(value, "ForegroundColor");
                 NotifyPropertyChanged("ForegroundColor");
+                NotifyPropertyChanged("ForegroundColorBrush");
             }
         }
 
         private static int[] ValidateColorValueArray(int[] value, string argumentName)
         {
-            if (value.Length != 3)
+
+            if(value.Length == 3)
             {
-                throw new ArgumentException($"{argumentName} must be a 3 element array");
+                value = new int[] { 255, value[0], value[1], value[2] };
             }
-            if (value[0] < 0 || value[0] > 255 || value[1] < 0 || value[1] > 255 || value[2] < 0 || value[2] > 255)
+            if ( value.Length != 4)
+            {
+                throw new ArgumentException($"{argumentName} must be a 4 element array");
+            }
+            if (value[0] < 0 || value[0] > 255 || value[1] < 0 || value[1] > 255 || value[2] < 0 || value[2] > 255 || value[3] < 0 || value[3] > 255)
             {
                 throw new ArgumentException($"All elements passed to {argumentName} must be between 0 and 255");
             }
@@ -63,12 +70,12 @@ namespace ShadowrunCombatHelper.Models
 
         public Brush ForegroundColorBrush
         {
-            get { return new SolidColorBrush(Color.FromArgb(255, (byte)_foregroundColor[0], (byte)_foregroundColor[1], (byte)_foregroundColor[2])); }
+            get { return new SolidColorBrush(Color.FromArgb((byte)_foregroundColor[0], (byte)_foregroundColor[1], (byte)_foregroundColor[2], (byte)_foregroundColor[3])); }
         }
 
         public Brush BackgroundColorBrush
         {
-            get { return new SolidColorBrush(Color.FromArgb(128, (byte)_backgroundColor[0], (byte)_backgroundColor[1], (byte)_backgroundColor[2])); }
+            get { return new SolidColorBrush(Color.FromArgb((byte)_backgroundColor[0], (byte)_backgroundColor[1], (byte)_backgroundColor[2], (byte)_backgroundColor[3])); }
         }
 
         public string Name
@@ -89,15 +96,13 @@ namespace ShadowrunCombatHelper.Models
             }
 
             Affiliation compObj = (Affiliation)obj;
-            return (compObj.Name == Name && compObj._foregroundColor.SequenceEqual(_foregroundColor) && compObj._backgroundColor.SequenceEqual(_backgroundColor));
+            return (compObj.Name == Name);
         }
 
         public override int GetHashCode()
         {
             int hash = 17;
             hash = hash * 47 + Name.GetHashCode();
-            hash = hash * 47 + _backgroundColor.GetHashCode();
-            hash = hash * 47 + _foregroundColor.GetHashCode();
             return hash;
         }
 

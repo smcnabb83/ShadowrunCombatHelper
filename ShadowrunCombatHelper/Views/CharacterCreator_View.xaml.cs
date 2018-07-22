@@ -15,7 +15,7 @@ namespace ShadowrunCombatHelper.Views
         public CharacterCreator_View()
         {
             InitializeComponent();
-            AffiliationComboBox.ItemsSource = ShadowrunCombatHelper.Globals.AffiliationList.Affiliations;
+            AffiliationComboBox.ItemsSource = ShadowrunCombatHelper.Globals.AffiliationList.Instance.Affiliations;
             AffiliationComboBox.DisplayMemberPath = "Name";
 
             cboMagicalTradition.ItemsSource = ShadowrunCombatHelper.Globals.TraditionsList.Instance.TraditionList;

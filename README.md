@@ -7,6 +7,7 @@ but is not anywhere near feature complete.
 Current Features
 * Can add characters and save changes to disk
 * Can add skills and save changes to disk
+* Can create custom affiliations for characters, with custom color schemes
 * Can run an initiative tracker, which tracks many shadowrun related stats, including
   * Damage
   * Initiative order

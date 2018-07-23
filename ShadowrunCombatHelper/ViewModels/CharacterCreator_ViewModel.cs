@@ -38,14 +38,22 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        public void CreateNewCharacter()
+        public void CreateNewCharacter(string charName)
         {
+            int newCharacterIndexer = 0;
             Character newCharacter = new Character();
             foreach (var skill in Globals.SkillsList.Instance.Skills)
             {
                 newCharacter.Skills.Add(skill);
             }
-            newCharacter.CharacterName = "New Character";
+            newCharacter.CharacterName = charName;
+
+            while (Characters.Contains(newCharacter))
+            {
+                newCharacterIndexer++;
+                newCharacter.CharacterName = $"{charName} {newCharacterIndexer}";
+            }
+
             Characters.Add(newCharacter);
         }
 

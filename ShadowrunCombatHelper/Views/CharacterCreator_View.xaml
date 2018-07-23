@@ -51,6 +51,7 @@
             </ScrollViewer>
             <StackPanel Grid.Row="1">
                 <Button Name="btnAddNew" Click="btnAddNew_Click">Add New Character</Button>
+                <Button Name="btnRename" Click="btnRename_Click">Rename Character</Button>
                 <Button Name="btnDeleteSelected" Click="btnDeleteSelected_Click">Delete Selected Character</Button>
                 <Button Name="btnSaveChanges" Click="btnSaveChanges_Click">Save Changes</Button>
             </StackPanel>
@@ -65,7 +66,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Name="generalInfoPanel">
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Style="{StaticResource Label1}" />
-                <TextBox HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=AffiliationComboBox}"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433" />
+                <TextBox Name="CharNameText" HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=AffiliationComboBox}"  TextWrapping="Wrap" Text="{Binding CharacterName, Mode=OneWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433" IsReadOnly="True" />
                 <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top" Style="{StaticResource Label1}" />
                 <ComboBox HorizontalAlignment="Left" Height="Auto" Name="AffiliationComboBox"  SelectedItem="{Binding Affiliation, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002" />
                 <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Style="{StaticResource Label1}" />

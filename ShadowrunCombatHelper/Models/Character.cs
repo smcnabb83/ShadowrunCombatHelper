@@ -825,17 +825,13 @@ namespace ShadowrunCombatHelper.Models
             }
 
             Character comparer = (Character)obj;
-            return (this.CharacterName == comparer.CharacterName &&
-                    this.Player == comparer.Player &&
-                    this.Affiliation == comparer.Affiliation);
+            return (this.CharacterName == comparer.CharacterName);
         }
 
         public override int GetHashCode()
         {
             int hashbase = 47;
-            hashbase = hashbase * 47 + this.CharacterName.GetHashCode();
-            hashbase = hashbase * 47 + this.Player?.GetHashCode() ?? 0;
-            hashbase = hashbase * 47 + this.Affiliation?.GetHashCode() ?? 0;
+            hashbase = hashbase * 13 + this.CharacterName.GetHashCode();
             return hashbase;
         }
     }

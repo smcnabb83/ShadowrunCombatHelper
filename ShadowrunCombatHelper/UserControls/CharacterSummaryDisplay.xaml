@@ -11,6 +11,11 @@
              Background="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}"
              DataContextChanged="CharacterDisplay_DataContextChanged"
              ToolTip="Right click for actions to perform.">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
+    </UserControl.Resources>
     <Border BorderThickness="1" BorderBrush="{Binding BoundCharacter.Affiliation.BackgroundColorBrush}">
         <Grid DataContext="{Binding BoundCharacter}" Background="Transparent">
         <Grid.ColumnDefinitions>

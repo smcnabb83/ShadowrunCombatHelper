@@ -27,7 +27,7 @@
                 <DataGridTemplateColumn Header="Foreground Color">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Background="{Binding ForegroundColor, Converter={StaticResource colorConverter}}"/>
+                            <TextBlock Margin="0" Background="{Binding ForegroundColor, Converter={StaticResource colorConverter}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
@@ -39,7 +39,7 @@
                 <DataGridTemplateColumn Header="Background Color">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Background="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"/>
+                            <TextBlock Margin="0" Background="{Binding BackgroundColor, Converter={StaticResource colorConverter}}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>

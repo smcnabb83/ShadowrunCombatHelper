@@ -21,7 +21,7 @@ namespace ShadowrunCombatHelper.Globals
         {
             TraditionList.Add(new MagicTradition("Hermetic", new List<Skill.Attributes>() { Skill.Attributes.LOG, Skill.Attributes.WIL }));
             TraditionList.Add(new MagicTradition("Shamanic", new List<Skill.Attributes>() { Skill.Attributes.CHA, Skill.Attributes.WIL }));
-            TraditionList.Add(null);
+            TraditionList.Add(new MagicTradition("NONE", new List<Skill.Attributes>()));
         }
 
         public static TraditionsList Instance { get; } = new TraditionsList();

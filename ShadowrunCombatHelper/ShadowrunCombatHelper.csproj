@@ -126,6 +126,7 @@
     <Compile Include="Views\CharacterSelectionDialog_View.xaml.cs">
       <DependentUpon>CharacterSelectionDialog_View.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DamageToIsDamagedBoolConverter.cs" />
     <Compile Include="Views\InitiativeTracker_View.xaml.cs">
       <DependentUpon>InitiativeTracker_View.xaml</DependentUpon>
     </Compile>

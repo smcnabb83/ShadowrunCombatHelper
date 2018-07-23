@@ -20,6 +20,11 @@ namespace ShadowrunCombatHelper.Views
 
             cboMagicalTradition.ItemsSource = ShadowrunCombatHelper.Globals.TraditionsList.Instance.TraditionList;
             cboMagicalTradition.DisplayMemberPath = "TraditionName";
+
+            if(CharSelectionList.Items.Count > 0)
+            {
+                CharSelectionList.SelectedIndex = 0;
+            }
         }
 
         private void btnAddNew_Click(object sender, RoutedEventArgs e)

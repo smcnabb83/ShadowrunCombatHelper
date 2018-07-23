@@ -23,6 +23,8 @@ namespace ShadowrunCombatHelper.Views
     /// </summary>
     public partial class InitiativeTracker_View : Page
     {
+        bool enteredCombatSuccess = false;
+
         public InitiativeTracker_View()
         {
             InitializeComponent();
@@ -31,12 +33,15 @@ namespace ShadowrunCombatHelper.Views
             bool? result = selectDialog.ShowDialog();
             if(result ?? false)
             {
+                enteredCombatSuccess = true;
                 InitiativeTracker_ViewModel model = new InitiativeTracker_ViewModel();
                 DataContext = model;
                 model.AddCombatants(selectDialog.ReturnedCombatants);
             }
             else
             {
+                this.Visibility = Visibility.Hidden;
+                enteredCombatSuccess = false;
             }
         }
 
@@ -44,6 +49,11 @@ namespace ShadowrunCombatHelper.Views
         {
             Character BoundCharacter = ((this.DataContext) as InitiativeTracker_ViewModel).CurrentCharacter;
             BoundCharacter.EndTurn();
+        }
+
+        private void NavigateBackOnCombatEntryFail()
+        {
+            NavigationService.Navigate(new BlankPage(), MainWindow.allowBack.DISALLOWBACK);
         }
 
         private void btnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
@@ -157,6 +167,14 @@ namespace ShadowrunCombatHelper.Views
         {
             (this.DataContext as InitiativeTracker_ViewModel).EndCombat();
             NavigationService.Navigate(new BlankPage(), MainWindow.allowBack.DISALLOWBACK);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (!enteredCombatSuccess)
+            {
+                NavigationService.Navigate(new BlankPage(), MainWindow.allowBack.DISALLOWBACK);
+            }
         }
     }
 }

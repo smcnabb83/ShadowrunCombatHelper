@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="GetInputDialog_Window" Height="155.915" Width="745.493">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,23,0,0" FontSize="18" TextWrapping="Wrap" Text="Test Layout Text" VerticalAlignment="Top" TextAlignment="Center" Name="MessageLabel" Width="268" Height="31"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,23,0,0" FontSize="18" TextWrapping="Wrap" Text="Test Layout Text" VerticalAlignment="Top" TextAlignment="Center" Name="MessageLabel" Width="268" Height="52"/>
         <TextBox HorizontalAlignment="Left" Height="31" Margin="278,23,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="449" Name="txtInput" FontSize="18" KeyDown="txtInput_KeyDown"/>
         <Button Content="OK" HorizontalAlignment="Left" Margin="161,80,0,0" VerticalAlignment="Top" Width="154" FontSize="18" Name="btnOK" Click="btnOK_Click"/>
         <Button Content="Cancel" HorizontalAlignment="Left" Margin="423,80,0,0" VerticalAlignment="Top" Width="154" FontSize="18" Name="btnCancel" Click="btnCancel_Click"  RenderTransformOrigin="1.81,0.448"/>

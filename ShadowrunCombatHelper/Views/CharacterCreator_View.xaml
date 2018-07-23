@@ -10,7 +10,7 @@
       xmlns:system="clr-namespace:System;assembly=mscorlib"
       xmlns:vm="clr-namespace:ShadowrunCombatHelper.ViewModels"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1200"
       Title="CharacterCreator_View">
     <Page.DataContext>
         <vm:CharacterCreator_ViewModel />
@@ -23,6 +23,7 @@
                 <PropertyGroupDescription PropertyName="SkillType" />
             </CollectionViewSource.GroupDescriptions>
         </CollectionViewSource>
+        <local:DamageToIsDamagedBoolConverter x:Key="IsDamagedConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -60,16 +61,15 @@
                 <RowDefinition Height="9*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Name="generalInfoPanel">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" />
-                <TextBox HorizontalAlignment="Left" Height="23"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433" />
-                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top" />
-                <ComboBox HorizontalAlignment="Left" Height="23" Name="AffiliationComboBox"  SelectedItem="{Binding Affiliation, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002" />
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" />
-                <TextBox HorizontalAlignment="Left" Height="23" Width="120" Text="{Binding Player, Mode=TwoWay}" VerticalAlignment="Top" />
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Style="{StaticResource Label1}" />
+                <TextBox HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=AffiliationComboBox}"  TextWrapping="Wrap" Text="{Binding CharacterName}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.265,0.433" />
+                <TextBlock HorizontalAlignment="Left"  TextWrapping="Wrap" Text="Affiliation" VerticalAlignment="Top" Style="{StaticResource Label1}" />
+                <ComboBox HorizontalAlignment="Left" Height="Auto" Name="AffiliationComboBox"  SelectedItem="{Binding Affiliation, Mode=TwoWay}" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.194,0.002" />
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Player" VerticalAlignment="Top" Style="{StaticResource Label1}" />
+                <TextBox HorizontalAlignment="Left" Height="{Binding ActualHeight, ElementName=AffiliationComboBox}" Width="120" Text="{Binding Player, Mode=TwoWay}" VerticalAlignment="Top" />
                 <StackPanel Orientation="Vertical">
                     <TextBlock HorizontalAlignment="center">Options</TextBlock>
                     <StackPanel Orientation="Horizontal">
@@ -88,10 +88,11 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="2*" />
-                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Name="CharAttributes" Grid.Column="0" Orientation="Vertical" SizeChanged="CharAttributes_SizeChanged">
-                        <TextBlock TextAlignment="Center" >Character Attributes</TextBlock>
+                        <TextBlock TextAlignment="Center" Style="{StaticResource Header1}" >Character Stats</TextBlock>
+                        <TextBlock Style="{StaticResource Header2}">Attributes</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Agi</TextBlock>
                             <TextBox Text="{Binding AGI}" Width="{StaticResource CharCreatorColumn2Width}" />
@@ -145,7 +146,7 @@
                             <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Magic Tradition</TextBlock>
                             <ComboBox Name="cboMagicalTradition" SelectedItem="{Binding Tradition}" Width="{StaticResource CharCreatorColumn2Width}" />
                         </StackPanel>
-                        <TextBlock TextAlignment="Center" >Limits</TextBlock>
+                        <TextBlock TextAlignment="Center" Style="{StaticResource Header2}" >Limits</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right">Physical</TextBlock>
                             <TextBox Text="{Binding PhysicalLimit, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True" />
@@ -159,7 +160,7 @@
                             <TextBox Text="{Binding MentalLimit, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True" />
                         </StackPanel>
 
-                        <TextBlock TextAlignment="Center" >Other Computed Attr</TextBlock>
+                        <TextBlock TextAlignment="Center" Style="{StaticResource Header2}" >Other Computed Attr</TextBlock>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Width="{StaticResource CharCreatorColumn1Width}" TextAlignment="Right" >Judge Intentions</TextBlock>
                             <TextBox Text="{Binding JudgeIntentions, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True" />
@@ -189,53 +190,49 @@
                             <TextBox Text="{Binding BaseArmor, Mode=OneWay}" Width="{StaticResource CharCreatorColumn2Width}" IsReadOnly="True" />
                         </StackPanel>
                     </StackPanel>
-                    <DataGrid Grid.Column="1" Name="SkillsPanelAlt" ItemsSource="{Binding Source={StaticResource ResourceKey=CharacterSkillsViewSource}}"  AutoGenerateColumns="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Skill Value" Binding="{Binding TrainingValue}" />
-                            <DataGridTextColumn Header="Attribute Adj." Binding="{Binding AttributeModifier, Mode=OneWay}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Total Die Pool" Binding="{Binding TotalSkillValue, Mode=OneWay}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Limit" Binding="{Binding Limit, Mode=OneWay}" IsReadOnly="True" />
-                            <DataGridTextColumn Header="Limited By" Binding="{Binding LimitBy, Mode=OneWay}" IsReadOnly="True" />
-                        </DataGrid.Columns>
-                        <DataGrid.GroupStyle>
-                            <GroupStyle>
-                                <GroupStyle.ContainerStyle>
-                                    <Style TargetType="{x:Type GroupItem}">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="{x:Type GroupItem}">
-                                                    <Expander IsExpanded="True">
-                                                        <Expander.Header>
-                                                            <TextBlock Foreground="black" Text="{Binding Name}" />
-                                                        </Expander.Header>
-                                                        <ItemsPresenter />
-                                                    </Expander>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </GroupStyle.ContainerStyle>
-                            </GroupStyle>
-                        </DataGrid.GroupStyle>
-                    </DataGrid>
+                    <DockPanel Grid.Column="1">
+                        <TextBlock DockPanel.Dock="top" Style="{StaticResource Header1}">Skills</TextBlock>
+                        <DataGrid Grid.Column="1" Name="SkillsPanelAlt" ItemsSource="{Binding Source={StaticResource ResourceKey=CharacterSkillsViewSource}}"  AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Skill Name" Binding="{Binding SkillName, Mode=OneWay}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Skill Value" Binding="{Binding TrainingValue}" />
+                                <DataGridTextColumn Header="Attribute Adj." Binding="{Binding AttributeModifier, Mode=OneWay}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Total Die Pool" Binding="{Binding TotalSkillValue, Mode=OneWay}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Limit" Binding="{Binding Limit, Mode=OneWay}" IsReadOnly="True" />
+                                <DataGridTextColumn Header="Limited By" Binding="{Binding LimitBy, Mode=OneWay}" IsReadOnly="True" />
+                            </DataGrid.Columns>
+                            <DataGrid.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.ContainerStyle>
+                                        <Style TargetType="{x:Type GroupItem}">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                        <Expander IsExpanded="True">
+                                                            <Expander.Header>
+                                                                <TextBlock Foreground="black" Text="{Binding Name}" />
+                                                            </Expander.Header>
+                                                            <ItemsPresenter />
+                                                        </Expander>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </GroupStyle.ContainerStyle>
+                                </GroupStyle>
+                            </DataGrid.GroupStyle>
+                        </DataGrid>
+                    </DockPanel>
                     <StackPanel Grid.Column="2" Orientation="Vertical">
+                        <TextBlock Style="{StaticResource Header1}">Character Health</TextBlock>
                         <TextBlock>Physical Damage Guage</TextBlock>
                         <uc:HealthDisplay MaxHealth="{Binding MaxPhysicalHealth}" OverflowHealthLimit="{Binding MaxOverFlowHealth}" CurrentDamage="{Binding CurrentPhysicalDamage}" IsPhysicalDamageGrid="True">
-                            <uc:HealthDisplay.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Click="HealPhysicalDamage_Click">Heal Physical Damage</MenuItem>
-                                </ContextMenu>
-                            </uc:HealthDisplay.ContextMenu> 
                         </uc:HealthDisplay>
+                        <Button Name="HealPhysicalDamage" Click="HealPhysicalDamage_Click" Visibility="{Binding CurrentPhysicalDamage, Converter={StaticResource IsDamagedConverter}, Mode=OneWay}">Heal Physical Damage</Button>
                         <TextBlock>Stun Damage Guage</TextBlock>
                         <uc:HealthDisplay MaxHealth="{Binding MaxStunHealth}" OverflowHealthLimit="0" CurrentDamage="{Binding CurrentStunDamage}" IsPhysicalDamageGrid="false">
-                            <uc:HealthDisplay.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Click="HealStunDamage_Click">Heal Stun Damage</MenuItem>
-                                </ContextMenu>
-                            </uc:HealthDisplay.ContextMenu>
                         </uc:HealthDisplay>
+                        <Button Name="HealStunDamage" Click="HealStunDamage_Click" Visibility="{Binding CurrentStunDamage, Converter={StaticResource IsDamagedConverter}, Mode=OneWay}">Heal Stun Damage</Button>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

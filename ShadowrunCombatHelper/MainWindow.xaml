@@ -24,7 +24,7 @@
                 <MenuItem Header="Start Combat" Click="btnInitiativeTracker_Click" />
             </Menu>
         </DockPanel>
-        <Frame Name="mainFrame" Grid.Row="1">
+        <Frame Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden">
         </Frame>
     </Grid>
 </Window>

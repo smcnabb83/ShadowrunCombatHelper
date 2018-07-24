@@ -13,6 +13,12 @@ namespace ShadowrunCombatHelper.ExternalData
         public List<T> ReadFileToList(ApplicationXmlFiles.fileType fileType)
         {
             string filepath = ApplicationXmlFiles.GetFilePath(fileType);
+
+            if (!Directory.Exists(ApplicationXmlFiles.UserFileDirectory))
+            {
+                     Directory.CreateDirectory(ApplicationXmlFiles.UserFileDirectory);
+            }
+
             if (File.Exists(filepath))
             {
                 List<T> readTo = new List<T>();

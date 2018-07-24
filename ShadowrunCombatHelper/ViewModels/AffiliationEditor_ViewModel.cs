@@ -44,7 +44,7 @@ namespace ShadowrunCombatHelper.ViewModels
             {
                 foreach(var d in AffiliationList.Instance.Affiliations)
                 {
-                    if(c.Affiliation.Equals(d))
+                    if(c?.Affiliation?.Equals(d) ?? false)
                     {
                         c.Affiliation.BackgroundColor = d.BackgroundColor;
                         c.Affiliation.ForegroundColor = d.ForegroundColor;

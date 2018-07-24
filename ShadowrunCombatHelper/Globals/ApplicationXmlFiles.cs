@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 
@@ -10,10 +11,18 @@ namespace ShadowrunCombatHelper.Globals
 
         private static Dictionary<fileType, string> charFiles = new Dictionary<fileType, string>
         {
-            {fileType.CHARACTERDATA, Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "chardata.xml") },
-            {fileType.SKILLDATA, Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "skilldata.xml") },
-            {fileType.AFFILIATIONDATA, Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "affiliationdata.xml")  }
+            {fileType.CHARACTERDATA, Path.Combine(UserFileDirectory, "chardata.xml") },
+            {fileType.SKILLDATA, Path.Combine(UserFileDirectory, "skilldata.xml") },
+            {fileType.AFFILIATIONDATA, Path.Combine(UserFileDirectory, "affiliationdata.xml")  }
         };
+
+        public static string UserFileDirectory
+        {
+            get
+            {
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "ShadowRunCombatHelper");
+            }
+        }
 
         public static string GetFilePath(fileType type)
         {

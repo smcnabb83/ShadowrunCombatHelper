@@ -22,6 +22,7 @@
                     <MenuItem Header="Create/Edit Affiliations" Name="mnuCreateEditAffiliations" Click="mnuCreateEditAffiliations_Click"/>
                 </MenuItem>
                 <MenuItem Header="Start Combat" Click="btnInitiativeTracker_Click" />
+                <MenuItem Header="About" Name="mnuAbout" Click="mnuAbout_Click" />
             </Menu>
         </DockPanel>
         <Frame Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden">

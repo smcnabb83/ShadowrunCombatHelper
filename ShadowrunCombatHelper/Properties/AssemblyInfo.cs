@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("ShadowrunCombatHelper")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("SM McNabb")]
 [assembly: AssemblyProduct("ShadowrunCombatHelper")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

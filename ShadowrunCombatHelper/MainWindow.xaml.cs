@@ -58,5 +58,10 @@ namespace ShadowrunCombatHelper
         {
             mainFrame.Navigate(new AffiliationEditor_View());
         }
+
+        private void mnuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            new About().Show();
+        }
     }
 }

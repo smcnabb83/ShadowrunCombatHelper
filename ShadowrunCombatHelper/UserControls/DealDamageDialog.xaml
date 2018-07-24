@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShadowrunCombatHelper.UserControls"
         mc:Ignorable="d"
-        Title="Input Damage to be dealt to" Height="88.356" Width="636.479">
+        Title="Input Damage to be dealt to" Height="Auto" Width="Auto" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -17,7 +17,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <TextBlock Text="Damage Amount" Grid.Column="0" Grid.Row="0" />
-        <TextBox Name="TxtDamage" Grid.Column="1" Grid.Row="0" KeyDown="TxtDamage_KeyDown" />
+        <TextBox Name="TxtDamage" FontSize="18" Grid.Column="1" Grid.Row="0" KeyDown="TxtDamage_KeyDown" Width="200" />
         <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0">
             <TextBlock TextAlignment="Center">Select Damage Type</TextBlock>
             <UniformGrid Rows="1" Columns="2">

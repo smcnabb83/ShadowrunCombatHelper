@@ -598,6 +598,7 @@ namespace ShadowrunCombatHelper.Models
                 _running = value;
                 NotifyPropertyChanged("Running");
                 NotifyPropertyChanged("MaxMovementThisTurn");
+                NotifyPropertyChanged("CanMove");
             }
         }
 

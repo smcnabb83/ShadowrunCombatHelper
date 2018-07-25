@@ -42,7 +42,7 @@
         </Grid.RowDefinitions>
         <!--Main Grid Row 0-->
 
-        <TextBlock Margin="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center" Background="{Binding CurrentCharacter.Affiliation.BackgroundColorBrush}">
+        <TextBlock Margin="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="24" VerticalAlignment="Center" Foreground="{Binding CurrentCharacter.Affiliation.ForegroundColorBrush}" Background="{Binding CurrentCharacter.Affiliation.BackgroundColorBrush}">
             <Run  Text="{Binding Path=CurrentRound, StringFormat='Round {0}'}" />
             <Run Text="{Binding Path=CurrentCharacter.Affiliation, StringFormat='  -  {0}'}" />
             <Run Text="{Binding Path=CurrentCharacter.CharacterName, StringFormat=' {0} turn'}" />

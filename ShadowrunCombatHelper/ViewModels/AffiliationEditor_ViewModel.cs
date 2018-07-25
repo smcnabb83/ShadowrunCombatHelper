@@ -51,6 +51,7 @@ namespace ShadowrunCombatHelper.ViewModels
                     }
                 }
             }
+            Globals.CharacterList.Instance.ForceCharacterDataSave();
         }
 
         public void NotifyPropertyChanged(string property)

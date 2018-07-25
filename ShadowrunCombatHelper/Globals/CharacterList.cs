@@ -40,16 +40,6 @@ namespace ShadowrunCombatHelper.Globals
             readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
         }
 
-        public void UpdateCharacterPostCombat(Character c)
-        {
-            Character toUpdate = CharList.Where(x => x == c).First();
-            if (toUpdate != null)
-            {
-                toUpdate.CurrentPhysicalDamage = c.CurrentPhysicalDamage;
-                toUpdate.CurrentStunDamage = c.CurrentStunDamage;
-            }
-        }
-
         public void RemoveCharacterAtIndex(int i)
         {
             if (i >= 0 && i < CharList.Count)
@@ -65,6 +55,11 @@ namespace ShadowrunCombatHelper.Globals
         public void ReadCharacterDataFromFile()
         {
             CharList = readWriter.ReadFileToList(ApplicationXmlFiles.fileType.CHARACTERDATA);
+        }
+
+        public void ForceCharacterDataSave()
+        {
+            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
         }
 
         private CharacterList()

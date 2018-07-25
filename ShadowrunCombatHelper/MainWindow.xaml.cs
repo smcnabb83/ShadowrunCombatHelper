@@ -61,7 +61,7 @@ namespace ShadowrunCombatHelper
 
         private void mnuAbout_Click(object sender, RoutedEventArgs e)
         {
-            new About().Show();
+            new AboutApp().Show();
         }
     }
 }

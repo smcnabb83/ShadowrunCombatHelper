@@ -172,9 +172,10 @@ namespace ShadowrunCombatHelper.ViewModels
         {
             for (int i = 0; i < CombatQueue.Count; i++)
             {
-                if (CombatQueue[i].Settings.PreserveDamageAcrossEncounters)
+                if (!CombatQueue[i].Settings.PreserveDamageAcrossEncounters)
                 {
-                    ; Globals.CharacterList.Instance.UpdateCharacterPostCombat(CombatQueue[i]);
+                    CombatQueue[i].CurrentPhysicalDamage = 0;
+                    CombatQueue[i].CurrentStunDamage = 0;
                 }
             }
         }

@@ -51,10 +51,11 @@ namespace ShadowrunCombatHelper.ViewModels
                     }
                     else
                     {
-                        c.Skills.Add(d);
+                        c.Skills.Add(Skill.Clone(d));
                     }
                 }
             }
+            Globals.CharacterList.Instance.ForceCharacterDataSave();
         }
     }
 }

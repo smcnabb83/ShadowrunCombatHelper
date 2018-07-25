@@ -1,4 +1,4 @@
-﻿<Window x:Class="ShadowrunCombatHelper.Views.About"
+﻿<Window x:Class="ShadowrunCombatHelper.Views.AboutApp"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,8 +8,8 @@
         Title="About" Height="450" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <FlowDocumentPageViewer Grid.Row="0">
             <FlowDocument PagePadding="10,0,10,0" ColumnWidth="999999">
@@ -37,7 +37,6 @@
                     The source code for this application is available at
                     <Hyperlink NavigateUri="https://github.com/smcnabb83/ShadowrunCombatHelper" RequestNavigate="Hyperlink_RequestNavigate" >https://github.com/smcnabb83/ShadowrunCombatHelper</Hyperlink>
                 </Paragraph>
-                
             </FlowDocument>
         </FlowDocumentPageViewer>
         <Button Grid.Row="1" Name="btnOK" Click="btnOK_Click">OK</Button>

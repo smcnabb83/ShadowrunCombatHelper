@@ -1,6 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ShadowrunCombatHelper.Models;
+using System.ComponentModel;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace ShadowrunCombatHelperTests
 {
@@ -8,10 +11,13 @@ namespace ShadowrunCombatHelperTests
     public class CharacterTest
     {
         Character testChar = new Character();
+        string prop;
 
+        
         [TestInitialize]
         public void Startup()
         {
+            testChar.PropertyChanged += CapturePropertyChangesFiring;
             testChar.AGI = 5;
             testChar.STR = 5;
             testChar.INTU = 5;
@@ -26,6 +32,14 @@ namespace ShadowrunCombatHelperTests
             testChar.ArmorValue = 3;
             testChar.CurrentPhysicalDamage = 0;
             testChar.CurrentStunDamage = 0;
+            prop = string.Empty;
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            testChar.PropertyChanged -= CapturePropertyChangesFiring;
+            prop = string.Empty;
         }
         
 
@@ -381,6 +395,10 @@ namespace ShadowrunCombatHelperTests
             Assert.AreEqual(expected, testChar.PhysicalLimit);
         }
 
+        [DataTestMethod]
+        [DataRow(1, 1, 1, 2)]
+        [DataRow(2, 2, 2, 3)]
+        [DataRow(3, 3, 3, 4)]
         public void SocialLimit_CalculatesCorrectly(int setCHA, int setWIL, int setESS, int expected)
         {
             testChar.CHA = setCHA;
@@ -491,6 +509,88 @@ namespace ShadowrunCombatHelperTests
             Assert.IsTrue(testChar.Initiative == 5 && testChar.ActionsRemaining == 2 && testChar.FreeActionsRemaining == 1);
         }
 
+        [TestMethod]
+        public void AffiliationChange_FiresPropertyChangedEvent()
+        {
+            testChar.Affiliation = new Affiliation() { Name = "test" };
+            Assert.AreEqual("Affiliation;", prop);
+        }
+
+        [TestMethod]
+        public void CharacterName_FiresPropertyChangedEvent()
+        {
+            testChar.CharacterName = "TestName2";
+            Assert.AreEqual("CharacterName;", prop);
+        }
+
+        [TestMethod]
+        public void CharCombatState_FiresPropertyChangedEvent()
+        {
+            testChar.CharCombatState = Character.CombatState.AR;
+            Assert.AreEqual("CharCombatState;", prop);
+        }
+
+        [TestMethod]
+        public void MAGRES_FiresPropertyChangedEvents()
+        {
+            testChar.MAGRES = 5;
+            Assert.AreEqual("MAGRES;Skills;", prop);
+        }
+
+        [TestMethod]
+        public void Player_FiresPropertyChangedEvents()
+        {
+            testChar.Player = "TEST";
+            Assert.AreEqual("Player;", prop);
+        }
+
+        [TestMethod]
+        public void Tradition_FiresPropertyChangedEvents()
+        {
+            testChar.Tradition = new MagicTradition("TEST", new List<Skill.Attributes>() { Skill.Attributes.AGI });
+            Assert.AreEqual("Tradition;ResistDrain;", prop);
+        }
+
+        [TestMethod]
+        public void Equals_TestIfComparesCorrectly()
+        {
+            Character newChar = new Character();
+            testChar.CharacterName = "Test";
+            newChar.CharacterName = "Test";
+            Assert.IsTrue(testChar.Equals(newChar));
+        }
+
+        [TestMethod]
+        public void EqualSign_TestIfComparesCorrectly()
+        {
+            Character newChar = new Character();
+            testChar.CharacterName = "Test";
+            newChar.CharacterName = "Test";
+            Assert.IsFalse(testChar == newChar);
+        }
+
+        [TestMethod]
+        public void HashCode_SameName_GeneratesSameHashCode()
+        {
+            Character newChar = new Character();
+            testChar.CharacterName = "Test";
+            newChar.CharacterName = "Test";
+            Assert.AreEqual(testChar.GetHashCode(), newChar.GetHashCode());
+        }
+
+        [TestMethod]
+        public void HashCode_DifferentName_GeneratesDifferenthashCode()
+        {
+            Character newChar = new Character();
+            testChar.CharacterName = "Test";
+            newChar.CharacterName = "Jiff";
+            Assert.AreNotEqual(testChar.GetHashCode(), newChar.GetHashCode());
+        }
+
+        private void CapturePropertyChangesFiring(object o, PropertyChangedEventArgs e)
+        {
+            prop += e.PropertyName + ";";
+        }
 
     }
 }

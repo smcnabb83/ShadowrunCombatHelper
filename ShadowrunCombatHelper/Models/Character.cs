@@ -425,7 +425,8 @@ namespace ShadowrunCombatHelper.Models
             get { return _intu; }
             set
             {
-                _intu = value; NotifyPropertyChanged("INTU");
+                _intu = value;
+                NotifyPropertyChanged("INTU");
                 NotifyPropertyChanged("MentalLimit");
                 NotifyPropertyChanged("JudgeIntentions");
                 NotifyPropertyChanged("Skills");

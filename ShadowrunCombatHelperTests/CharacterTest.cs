@@ -246,5 +246,251 @@ namespace ShadowrunCombatHelperTests
             Assert.AreEqual(0, testChar.Initiative);
         }
 
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void JudgeIntentions_CalculatesCorrectlyWhenCHAChanged(int change)
+        {
+            int priorBase = testChar.JudgeIntentions;
+
+            testChar.CHA = testChar.CHA + change;
+
+            Assert.IsTrue(priorBase + change == testChar.JudgeIntentions);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void JudgeIntentions_CalculatesCorrectlyWhenINTUChanged(int change)
+        {
+            int priorBase = testChar.JudgeIntentions;
+
+            testChar.INTU = testChar.INTU + change;
+
+            Assert.IsTrue(priorBase + change == testChar.JudgeIntentions);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void LiftCarry_CalculatesCorrectlyOnBODChange(int change)
+        {
+            int priorBase = testChar.LiftCarry;
+
+            testChar.BOD = testChar.BOD + change;
+
+            Assert.IsTrue(priorBase + change == testChar.LiftCarry);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void LiftCarry_CalculatesCorrectlyOnSTRChange(int change)
+        {
+            int priorBase = testChar.LiftCarry;
+
+            testChar.STR = testChar.STR + change;
+
+            Assert.IsTrue(priorBase + change == testChar.LiftCarry);
+        }
+
+        [DataTestMethod]
+        [DataRow(false, 10)]
+        [DataRow(true, 20)]
+        public void MaxMovementThisTurn_ProcessesRunningCorrectly(bool isRunning, int expectedMovement)
+        {
+            testChar.Running = isRunning;
+            Assert.AreEqual(expectedMovement, testChar.MaxMovementThisTurn);
+        }
+
+        [DataTestMethod]
+        [DataRow(1,9)]
+        [DataRow(2,9)]
+        [DataRow(3,10)]
+        [DataRow(5, 11)]
+        public void MaxPhysicalHealth_CalculatesCorrectly(int setBod, int expectedHealth)
+        {
+            testChar.BOD = setBod;
+            Assert.AreEqual(expectedHealth, testChar.MaxPhysicalHealth);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 9)]
+        [DataRow(2, 9)]
+        [DataRow(3, 10)]
+        [DataRow(5, 11)]
+        public void MaxStunHealth_CalculatesCorrectly(int setWil, int expectedHealth)
+        {
+            testChar.WIL = setWil;
+            Assert.AreEqual(expectedHealth, testChar.MaxStunHealth);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void Memory_CalculatesCorrectlyOnLOGChange(int change)
+        {
+            int priorBase = testChar.Memory;
+
+            testChar.LOG = testChar.LOG + change;
+
+            Assert.IsTrue(priorBase + change == testChar.Memory);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void Memory_CalculatesCorrectlyOnWILChange(int change)
+        {
+            int priorBase = testChar.Memory;
+
+            testChar.WIL = testChar.WIL + change;
+
+            Assert.IsTrue(priorBase + change == testChar.Memory);
+        }
+
+        [DataTestMethod]
+        [DataRow(1,1,1,2)]
+        [DataRow(2,2,2,3)]
+        [DataRow(3,3,3,4)]
+
+        public void MentalLimit_CalculatesCorrectly(int setLOG, int setINTU, int setWIL, int expected)
+        {
+            testChar.LOG = setLOG;
+            testChar.INTU = setINTU;
+            testChar.WIL = setWIL;
+            Assert.AreEqual(expected, testChar.MentalLimit);
+        }
+
+        [DataTestMethod]
+        [DataRow(1, 1, 1, 2)]
+        [DataRow(2, 2, 2, 3)]
+        [DataRow(3, 3, 3, 4)]
+
+        public void PhysicalLimit_CalculatesCorrectly(int setSTR, int setBOD, int setREA, int expected)
+        {
+            testChar.STR = setSTR;
+            testChar.BOD = setBOD;
+            testChar.REA = setREA;
+            Assert.AreEqual(expected, testChar.PhysicalLimit);
+        }
+
+        public void SocialLimit_CalculatesCorrectly(int setCHA, int setWIL, int setESS, int expected)
+        {
+            testChar.CHA = setCHA;
+            testChar.WIL = setWIL;
+            testChar.ESS = setESS;
+            Assert.AreEqual(expected, testChar.SocialLimit);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void RunRate_CalculatesOnAGIChange(int change)
+        {
+            testChar.AGI = change;
+            Assert.AreEqual(change * 4, testChar.RunRate);
+        }
+
+        [DataTestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        public void WalkRate_CalculatesOnAGIChange(int change)
+        {
+            testChar.AGI = change;
+            Assert.AreEqual(change * 2, testChar.WalkRate);
+        }
+
+        [TestMethod]
+        public void Block_ConsumesInitiativeCorrectly()
+        {
+            testChar.Initiative = 5;
+            testChar.Block();
+            Assert.AreEqual(0, testChar.Initiative);
+        }
+
+        [TestMethod]
+        public void Dodge_ConsumesInitiativeCorrectly()
+        {
+            testChar.Initiative = 5;
+            testChar.Dodge();
+            Assert.AreEqual(0, testChar.Initiative);
+        }
+
+        [TestMethod]
+        public void HitTheDirt_ConsumesInitiativeCorrectly()
+        {
+            testChar.Initiative = 5;
+            testChar.HitTheDirt();
+            Assert.AreEqual(0, testChar.Initiative);
+        }
+
+        [TestMethod]
+        public void Intercept_ConsumesInitiativeCorrectly()
+        {
+            testChar.Initiative = 5;
+            testChar.Intercept();
+            Assert.AreEqual(0, testChar.Initiative);
+        }
+
+        [TestMethod]
+        public void Parry_ConsumesInitiativeCorrectly()
+        {
+            testChar.Initiative = 5;
+            testChar.Parry();
+            Assert.AreEqual(0, testChar.Initiative);
+        }
+
+        [TestMethod]
+        public void FullDefense_ConsumesInitiativeCorrectly()
+        {
+            testChar.Initiative = 15;
+            testChar.FullDefense();
+            Assert.AreEqual(5, testChar.Initiative);
+        }
+
+        [TestMethod]
+        public void ConsumeComplexAction_ConsumesActionsCorrectly()
+        {
+            testChar.ActionsRemaining = 2;
+            testChar.ConsumeComplexAction();
+            Assert.AreEqual(0, testChar.ActionsRemaining);
+        }
+
+        [TestMethod]
+        public void ConsumeFreeAction_ConsumesFreeActionsCorrectly()
+        {
+            testChar.FreeActionsRemaining = 1;
+            testChar.ConsumeFreeAction();
+            Assert.AreEqual(0, testChar.FreeActionsRemaining);
+        }
+
+        [TestMethod]
+        public void ConsumeSimpleAction_ConsumesActionsCorrectly()
+        {
+            testChar.ActionsRemaining = 2;
+            testChar.ConsumeSimpleAction();
+            Assert.AreEqual(1, testChar.ActionsRemaining);
+        }
+
+        [TestMethod]
+        public void EndTurn_SetsCharacterUpCorrectly()
+        {
+            testChar.Initiative = 15;
+            testChar.ActionsRemaining = 0;
+            testChar.FreeActionsRemaining = 0;
+            testChar.EndTurn();
+            Assert.IsTrue(testChar.Initiative == 5 && testChar.ActionsRemaining == 2 && testChar.FreeActionsRemaining == 1);
+        }
+
+
     }
 }

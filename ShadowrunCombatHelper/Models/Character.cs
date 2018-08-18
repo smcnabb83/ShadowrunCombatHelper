@@ -335,14 +335,7 @@ namespace ShadowrunCombatHelper.Models
             get { return _distanceMoved; }
             set
             {
-                if (value > MaxMovementThisTurn)
-                {
-                    _distanceMoved = MaxMovementThisTurn;
-                }
-                else
-                {
-                    _distanceMoved = value;
-                }
+                _distanceMoved = value.Clamp<int>(0, MaxMovementThisTurn);
                 NotifyPropertyChanged("DistanceMoved");
                 NotifyPropertyChanged("CanMove");
             }

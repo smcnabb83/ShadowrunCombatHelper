@@ -43,7 +43,7 @@ namespace ShadowrunCombatHelper.Models
                     attributeString += attr.ToString() + " + ";
                 }
 
-                return attributeString.TrimEnd(' ').TrimEnd('+');
+                return attributeString.TrimEnd(' ').TrimEnd('+').TrimEnd();
             }
         }
 

@@ -34,7 +34,7 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _characterList = value;
-                NotifyPropertyChanged("Characters");
+                NotifyPropertyChanged(nameof(Characters));
             }
         }
 

@@ -30,8 +30,8 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _combatQueue = value;
-                NotifyPropertyChanged("CombatQueue");
-                NotifyPropertyChanged("CurrentCharacter");
+                NotifyPropertyChanged(nameof(CombatQueue));
+                NotifyPropertyChanged(nameof(CurrentCharacter));
             }
         }
 
@@ -46,7 +46,7 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _currentRound = value;
-                NotifyPropertyChanged("CurrentRound");
+                NotifyPropertyChanged(nameof(CurrentRound));
             }
         }
 
@@ -56,14 +56,14 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _windowVisible = value;
-                NotifyPropertyChanged("WindowVisible");
+                NotifyPropertyChanged(nameof(WindowVisible));
             }
         }
 
         public void AddCombatants(List<Character> combatants)
         {
             WindowVisible = false;
-            NotifyPropertyChanged("WindowVisible");
+            NotifyPropertyChanged(nameof(WindowVisible));
             foreach (Character c in combatants)
             {
                 if (!c.Settings.PreserveDamageAcrossEncounters)
@@ -77,8 +77,8 @@ namespace ShadowrunCombatHelper.ViewModels
                 CombatQueue.Add(c);
             }
             WindowVisible = true;
-            NotifyPropertyChanged("WindowVisible");
-            NotifyPropertyChanged("CurrentCharacter");
+            NotifyPropertyChanged(nameof(WindowVisible));
+            NotifyPropertyChanged(nameof(CurrentCharacter));
         }
 
         public void NotifyPropertyChanged(string property)
@@ -91,9 +91,10 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void OnInitiativeChanged(object source, PropertyChangedEventArgs e)
         {
+            //TODO: Replace hard-coded Initiative with something a little less brittle
             if (e.PropertyName == "Initiative")
             {
-                NotifyPropertyChanged("CurrentCharacter");
+                NotifyPropertyChanged(nameof(CurrentCharacter));
                 Character c = (Character)source;
                 CombatQueue.Remove(c);
                 CombatQueue.Add(c);
@@ -189,7 +190,7 @@ namespace ShadowrunCombatHelper.ViewModels
         {
             CurrentRound++;
             WindowVisible = false;
-            NotifyPropertyChanged("WindowVisible");
+            NotifyPropertyChanged(nameof(WindowVisible));
             List<Character> tempQueue = new List<Character>(CombatQueue);
             CombatQueue.Clear();
             foreach (var i in tempQueue)
@@ -201,8 +202,8 @@ namespace ShadowrunCombatHelper.ViewModels
                 CombatQueue.Add(i);
             }
             WindowVisible = true;
-            NotifyPropertyChanged("WindowVisible");
-            NotifyPropertyChanged("CurrentCharacter");
+            NotifyPropertyChanged(nameof(WindowVisible));
+            NotifyPropertyChanged(nameof(CurrentCharacter));
         }
     }
 }

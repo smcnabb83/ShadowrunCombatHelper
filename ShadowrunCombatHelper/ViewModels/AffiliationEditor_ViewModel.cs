@@ -25,7 +25,7 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _affiliationListToEdit = value;
-                NotifyPropertyChanged("AffiliationListToEdit");
+                NotifyPropertyChanged(nameof(AffiliationListToEdit));
             }
         }
 

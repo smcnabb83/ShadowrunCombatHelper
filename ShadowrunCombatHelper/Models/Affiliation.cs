@@ -30,9 +30,9 @@ namespace ShadowrunCombatHelper.Models
             }
             set
             {
-                _backgroundColor = ValidateColorValueArray(value, "BackgroundColor");
-                NotifyPropertyChanged("BackgroundColor");
-                NotifyPropertyChanged("BackgroundColorBrush");
+                _backgroundColor = ValidateColorValueArray(value, nameof(BackgroundColor));
+                NotifyPropertyChanged(nameof(BackgroundColor));
+                NotifyPropertyChanged(nameof(BackgroundColorBrush));
             }
         }
 
@@ -44,9 +44,9 @@ namespace ShadowrunCombatHelper.Models
             }
             set
             {
-                _foregroundColor = ValidateColorValueArray(value, "ForegroundColor");
-                NotifyPropertyChanged("ForegroundColor");
-                NotifyPropertyChanged("ForegroundColorBrush");
+                _foregroundColor = ValidateColorValueArray(value, nameof(ForegroundColor));
+                NotifyPropertyChanged(nameof(ForegroundColor));
+                NotifyPropertyChanged(nameof(ForegroundColorBrush));
             }
         }
 
@@ -84,7 +84,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _name = value;
-                NotifyPropertyChanged("Name");
+                NotifyPropertyChanged(nameof(Name));
             }
         }
 

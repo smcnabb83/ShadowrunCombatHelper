@@ -89,9 +89,9 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _actionsRemaining = value;
-                NotifyPropertyChanged("ActionsRemaining");
-                NotifyPropertyChanged("CanSimpleAction");
-                NotifyPropertyChanged("CanComplexAction");
+                NotifyPropertyChanged(nameof(ActionsRemaining));
+                NotifyPropertyChanged(nameof(CanSimpleAction));
+                NotifyPropertyChanged(nameof(CanComplexAction));
             }
         }
 
@@ -101,7 +101,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _affiliation = value;
-                NotifyPropertyChanged("Affiliation");
+                NotifyPropertyChanged(nameof(Affiliation));
             }
         }
 
@@ -110,9 +110,9 @@ namespace ShadowrunCombatHelper.Models
             get { return _agi; }
             set
             {
-                _agi = value; NotifyPropertyChanged("AGI");
-                NotifyPropertyChanged("WalkRate");
-                NotifyPropertyChanged("RunRate");
+                _agi = value; NotifyPropertyChanged(nameof(AGI));
+                NotifyPropertyChanged(nameof(WalkRate));
+                NotifyPropertyChanged(nameof(RunRate));
             }
         }
 
@@ -122,8 +122,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _armorValue = value;
-                NotifyPropertyChanged("ArmorValue");
-                NotifyPropertyChanged("BaseArmor");
+                NotifyPropertyChanged(nameof(ArmorValue));
+                NotifyPropertyChanged(nameof(BaseArmor));
             }
         }
 
@@ -149,13 +149,13 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _bod = value;
-                NotifyPropertyChanged("BOD");
-                NotifyPropertyChanged("MaxPhysicalHealth");
-                NotifyPropertyChanged("MaxOverflowHealth");
-                NotifyPropertyChanged("PhysicalLimit");
-                NotifyPropertyChanged("LiftCarry");
-                NotifyPropertyChanged("Skills");
-                NotifyPropertyChanged("BaseArmor");
+                NotifyPropertyChanged(nameof(BOD));
+                NotifyPropertyChanged(nameof(MaxPhysicalHealth));
+                NotifyPropertyChanged(nameof(MaxOverflowHealth));
+                NotifyPropertyChanged(nameof(PhysicalLimit));
+                NotifyPropertyChanged(nameof(LiftCarry));
+                NotifyPropertyChanged(nameof(Skills));
+                NotifyPropertyChanged(nameof(BaseArmor));
             }
         }
 
@@ -221,11 +221,11 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _cha = value;
-                NotifyPropertyChanged("CHA");
-                NotifyPropertyChanged("SocialLimit");
-                NotifyPropertyChanged("Composure");
-                NotifyPropertyChanged("JudgeIntentions");
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(CHA));
+                NotifyPropertyChanged(nameof(SocialLimit));
+                NotifyPropertyChanged(nameof(Composure));
+                NotifyPropertyChanged(nameof(JudgeIntentions));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -235,7 +235,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _name = value;
-                NotifyPropertyChanged("CharacterName");
+                NotifyPropertyChanged(nameof(CharacterName));
             }
         }
 
@@ -245,7 +245,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _charCombatState = value;
-                NotifyPropertyChanged("CharCombatState");
+                NotifyPropertyChanged(nameof(CharCombatState));
             }
         }
 
@@ -262,7 +262,7 @@ namespace ShadowrunCombatHelper.Models
                 {
                     return Status.CONSCIOUS;
                 }
-                else if (CurrentPhysicalDamage > MaxPhysicalHealth && CurrentPhysicalDamage <= (MaxPhysicalHealth + MaxOverFlowHealth))
+                else if (CurrentPhysicalDamage > MaxPhysicalHealth && CurrentPhysicalDamage <= (MaxPhysicalHealth + MaxOverflowHealth))
                 {
                     return Status.BLEEDING_OUT;
                 }
@@ -299,14 +299,14 @@ namespace ShadowrunCombatHelper.Models
             get { return _currentPhysicalDamage; }
             set
             {
-                _currentPhysicalDamage = value.Clamp(0, MaxPhysicalHealth + MaxOverFlowHealth + 1);
+                _currentPhysicalDamage = value.Clamp(0, MaxPhysicalHealth + MaxOverflowHealth + 1);
                 if (CharStatus != Status.CONSCIOUS)
                 {
                     Initiative = 0;
                 }
-                NotifyPropertyChanged("CurrentPhysicalDamage");
-                NotifyPropertyChanged("CurrentDamagePenalty");
-                NotifyPropertyChanged("CharStatus");
+                NotifyPropertyChanged(nameof(CurrentPhysicalDamage));
+                NotifyPropertyChanged(nameof(CurrentDamagePenalty));
+                NotifyPropertyChanged(nameof(CharStatus));
             }
         }
 
@@ -325,8 +325,8 @@ namespace ShadowrunCombatHelper.Models
                 {
                     _currentStunDamage = value.Clamp(0, MaxStunHealth);
                 }
-                NotifyPropertyChanged("CurrentStunDamage");
-                NotifyPropertyChanged("CurrentDamagePenalty");
+                NotifyPropertyChanged(nameof(CurrentStunDamage));
+                NotifyPropertyChanged(nameof(CurrentDamagePenalty));
             }
         }
 
@@ -336,8 +336,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _distanceMoved = value.Clamp<int>(0, MaxMovementThisTurn);
-                NotifyPropertyChanged("DistanceMoved");
-                NotifyPropertyChanged("CanMove");
+                NotifyPropertyChanged(nameof(DistanceMoved));
+                NotifyPropertyChanged(nameof(CanMove));
             }
         }
 
@@ -346,8 +346,8 @@ namespace ShadowrunCombatHelper.Models
             get { return _edge; }
             set
             {
-                _edge = value; NotifyPropertyChanged("EDGE");
-                NotifyPropertyChanged("Skills");
+                _edge = value; NotifyPropertyChanged(nameof(EDGE));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -357,9 +357,9 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _ess = value;
-                NotifyPropertyChanged("ESS");
-                NotifyPropertyChanged("SocialLimit");
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(ESS));
+                NotifyPropertyChanged(nameof(SocialLimit));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -369,8 +369,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _freeActionsRemaining = value;
-                NotifyPropertyChanged("FreeActionsRemaining");
-                NotifyPropertyChanged("CanFreeAction");
+                NotifyPropertyChanged(nameof(FreeActionsRemaining));
+                NotifyPropertyChanged(nameof(CanFreeAction));
             }
         }
 
@@ -387,9 +387,9 @@ namespace ShadowrunCombatHelper.Models
                 {
                     _initiative = 0;
                 }
-                NotifyPropertyChanged("Initiative");
-                NotifyPropertyChanged("CanInterrupt");
-                NotifyPropertyChanged("CanFullDefense");
+                NotifyPropertyChanged(nameof(Initiative));
+                NotifyPropertyChanged(nameof(CanInterrupt));
+                NotifyPropertyChanged(nameof(CanFullDefense));
             }
         }
 
@@ -426,11 +426,11 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _intu = value;
-                NotifyPropertyChanged("INTU");
-                NotifyPropertyChanged("MentalLimit");
-                NotifyPropertyChanged("JudgeIntentions");
-                NotifyPropertyChanged("Skills");
-                NotifyPropertyChanged("BaseDefense");
+                NotifyPropertyChanged(nameof(INTU));
+                NotifyPropertyChanged(nameof(MentalLimit));
+                NotifyPropertyChanged(nameof(JudgeIntentions));
+                NotifyPropertyChanged(nameof(Skills));
+                NotifyPropertyChanged(nameof(BaseDefense));
             }
         }
 
@@ -456,10 +456,10 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _log = value;
-                NotifyPropertyChanged("LOG");
-                NotifyPropertyChanged("MentalLimit");
-                NotifyPropertyChanged("Memory");
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(LOG));
+                NotifyPropertyChanged(nameof(MentalLimit));
+                NotifyPropertyChanged(nameof(Memory));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -469,8 +469,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _magres = value;
-                NotifyPropertyChanged("MAGRES");
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(MAGRES));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -482,7 +482,7 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public int MaxOverFlowHealth => BOD;
+        public int MaxOverflowHealth => BOD;
 
         public int MaxPhysicalHealth => (int)Math.Ceiling((decimal)BOD / 2) + 8;
 
@@ -520,7 +520,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _player = value;
-                NotifyPropertyChanged("Player");
+                NotifyPropertyChanged(nameof(Player));
             }
         }
 
@@ -530,10 +530,10 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _rea = value;
-                NotifyPropertyChanged("REA");
-                NotifyPropertyChanged("PhysicalLimit");
-                NotifyPropertyChanged("Skills");
-                NotifyPropertyChanged("BaseDefense");
+                NotifyPropertyChanged(nameof(REA));
+                NotifyPropertyChanged(nameof(PhysicalLimit));
+                NotifyPropertyChanged(nameof(Skills));
+                NotifyPropertyChanged(nameof(BaseDefense));
             }
         }
 
@@ -590,9 +590,9 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _running = value;
-                NotifyPropertyChanged("Running");
-                NotifyPropertyChanged("MaxMovementThisTurn");
-                NotifyPropertyChanged("CanMove");
+                NotifyPropertyChanged(nameof(Running));
+                NotifyPropertyChanged(nameof(MaxMovementThisTurn));
+                NotifyPropertyChanged(nameof(CanMove));
             }
         }
 
@@ -610,7 +610,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _settings = value;
-                NotifyPropertyChanged("Settings");
+                NotifyPropertyChanged(nameof(Settings));
             }
         }
 
@@ -620,7 +620,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _skills = value;
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -639,10 +639,10 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _str = value;
-                NotifyPropertyChanged("STR");
-                NotifyPropertyChanged("PhysicalLimit");
-                NotifyPropertyChanged("LiftCarry");
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(STR));
+                NotifyPropertyChanged(nameof(PhysicalLimit));
+                NotifyPropertyChanged(nameof(LiftCarry));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 
@@ -652,8 +652,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _tradition = value;
-                NotifyPropertyChanged("Tradition");
-                NotifyPropertyChanged("ResistDrain");
+                NotifyPropertyChanged(nameof(Tradition));
+                NotifyPropertyChanged(nameof(ResistDrain));
             }
         }
 
@@ -671,13 +671,13 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _wil = value;
-                NotifyPropertyChanged("WIL");
-                NotifyPropertyChanged("MaxStunHealth");
-                NotifyPropertyChanged("MentalLimit");
-                NotifyPropertyChanged("SocialLimit");
-                NotifyPropertyChanged("Composure");
-                NotifyPropertyChanged("Memory");
-                NotifyPropertyChanged("Skills");
+                NotifyPropertyChanged(nameof(WIL));
+                NotifyPropertyChanged(nameof(MaxStunHealth));
+                NotifyPropertyChanged(nameof(MentalLimit));
+                NotifyPropertyChanged(nameof(SocialLimit));
+                NotifyPropertyChanged(nameof(Composure));
+                NotifyPropertyChanged(nameof(Memory));
+                NotifyPropertyChanged(nameof(Skills));
             }
         }
 

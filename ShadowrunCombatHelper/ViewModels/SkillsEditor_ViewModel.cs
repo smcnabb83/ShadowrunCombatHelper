@@ -17,7 +17,7 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _skillListToEdit = value;
-                NotifyPropertyChanged("SkillListToEdit");
+                NotifyPropertyChanged(nameof(SkillListToEdit));
             }
         }
 

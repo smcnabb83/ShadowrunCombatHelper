@@ -30,7 +30,7 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _allCharactersList = value;
-                NotifyPropertyChanged("AllCharactersList");
+                NotifyPropertyChanged(nameof(AllCharactersList));
             }
         }
 
@@ -40,7 +40,7 @@ namespace ShadowrunCombatHelper.ViewModels
             set
             {
                 _combatantsList = value;
-                NotifyPropertyChanged("CombatantsList");
+                NotifyPropertyChanged(nameof(CombatantsList));
             }
         }
 

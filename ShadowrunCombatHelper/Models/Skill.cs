@@ -93,9 +93,9 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _defaultable = value;
-                NotifyPropertyChanged("Defaultable");
-                NotifyPropertyChanged("TotalSkillValue");
-                NotifyPropertyChanged("AdjustedTotalSkillValue");
+                NotifyPropertyChanged(nameof(Defaultable));
+                NotifyPropertyChanged(nameof(TotalSkillValue));
+                NotifyPropertyChanged(nameof(AdjustedTotalSkillValue));
             }
         }
 
@@ -105,7 +105,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _description = value;
-                NotifyPropertyChanged("Description");
+                NotifyPropertyChanged(nameof(Description));
             }
         }
 
@@ -137,8 +137,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _limitBy = value;
-                NotifyPropertyChanged("LimitBy");
-                NotifyPropertyChanged("Limit");
+                NotifyPropertyChanged(nameof(LimitBy));
+                NotifyPropertyChanged(nameof(Limit));
             }
         }
 
@@ -148,10 +148,10 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _relatedAttributes = value;
-                NotifyPropertyChanged("RelatedAttributes");
-                NotifyPropertyChanged("TotalSkillValue");
-                NotifyPropertyChanged("AttributeModifier");
-                NotifyPropertyChanged("AdjustedTotalSkillValue");
+                NotifyPropertyChanged(nameof(RelatedAttributes));
+                NotifyPropertyChanged(nameof(TotalSkillValue));
+                NotifyPropertyChanged(nameof(AttributeModifier));
+                NotifyPropertyChanged(nameof(AdjustedTotalSkillValue));
             }
         }
 
@@ -161,7 +161,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _skillName = value;
-                NotifyPropertyChanged("SkillName");
+                NotifyPropertyChanged(nameof(SkillName));
             }
         }
 
@@ -171,7 +171,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _skillType = value;
-                NotifyPropertyChanged("SkillType");
+                NotifyPropertyChanged(nameof(SkillType));
             }
         }
 
@@ -189,9 +189,9 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _trainingValue = value;
-                NotifyPropertyChanged("TrainingValue");
-                NotifyPropertyChanged("TotalSkillValue");
-                NotifyPropertyChanged("AdjustedTotalSkillValue");
+                NotifyPropertyChanged(nameof(TrainingValue));
+                NotifyPropertyChanged(nameof(TotalSkillValue));
+                NotifyPropertyChanged(nameof(AdjustedTotalSkillValue));
             }
         }
 
@@ -204,15 +204,16 @@ namespace ShadowrunCombatHelper.Models
         {
             if (Enum.GetNames(typeof(Attributes)).Contains(e.PropertyName))
             {
-                NotifyPropertyChanged("TotalSkillValue");
-                NotifyPropertyChanged("AttributeModifier");
-                NotifyPropertyChanged("Limit");
-                NotifyPropertyChanged("AdjustedTotalSkillValue");
+                NotifyPropertyChanged(nameof(TotalSkillValue));
+                NotifyPropertyChanged(nameof(AttributeModifier));
+                NotifyPropertyChanged(nameof(Limit));
+                NotifyPropertyChanged(nameof(AdjustedTotalSkillValue));
             }
 
+            //TODO:Change this hard-coded value to something less brittle
             if (e.PropertyName == "CurrentDamagePenalty")
             {
-                NotifyPropertyChanged("AdjustedTotalSkillValue");
+                NotifyPropertyChanged(nameof(AdjustedTotalSkillValue));
             }
         }
 

@@ -28,8 +28,8 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _resistDrainAttributes = value;
-                NotifyPropertyChanged("ResistDrainAttributes");
-                NotifyPropertyChanged("ResistDrainAttributesString");
+                NotifyPropertyChanged(nameof(ResistDrainAttributes));
+                NotifyPropertyChanged(nameof(ResistDrainAttributesString));
             }
         }
 
@@ -53,7 +53,7 @@ namespace ShadowrunCombatHelper.Models
             set
             {
                 _traditionName = value;
-                NotifyPropertyChanged("TraditionName");
+                NotifyPropertyChanged(nameof(TraditionName));
             }
         }
 

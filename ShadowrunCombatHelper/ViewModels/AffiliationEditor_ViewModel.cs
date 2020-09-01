@@ -1,27 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShadowrunCombatHelper.Objects;
-using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.Globals;
+using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.Objects;
 
 namespace ShadowrunCombatHelper.ViewModels
 {
-    class AffiliationEditor_ViewModel : INotifyPropertyChanged
+    internal class AffiliationEditor_ViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        private ItemChangeObservableCollection<Affiliation> _affiliationListToEdit =
+            new ItemChangeObservableCollection<Affiliation>();
 
-        private ItemChangeObservableCollection<Affiliation> _affiliationListToEdit = new ItemChangeObservableCollection<Affiliation>();
+        public AffiliationEditor_ViewModel()
+        {
+            foreach (Affiliation affiliation in AffiliationList.Instance.Affiliations)
+            {
+                AffiliationListToEdit.Add(affiliation);
+            }
+        }
 
         public ItemChangeObservableCollection<Affiliation> AffiliationListToEdit
         {
-            get
-            {
-                return _affiliationListToEdit;
-            }
+            get => _affiliationListToEdit;
             set
             {
                 _affiliationListToEdit = value;
@@ -29,37 +29,29 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        public AffiliationEditor_ViewModel()
-        {
-            foreach(var affiliation in AffiliationList.Instance.Affiliations)
-            {
-                AffiliationListToEdit.Add(affiliation);
-            }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void WriteToGlobalAffiliationList()
         {
             AffiliationList.Instance.OverWriteAffiliations(AffiliationListToEdit.ToList());
-            foreach(var c in CharacterList.Instance.GetCharacterList())
+            foreach (Character c in CharacterList.Instance.GetCharacterList())
             {
-                foreach(var d in AffiliationList.Instance.Affiliations)
+                foreach (Affiliation d in AffiliationList.Instance.Affiliations)
                 {
-                    if(c?.Affiliation?.Equals(d) ?? false)
+                    if (c?.Affiliation?.Equals(d) ?? false)
                     {
                         c.Affiliation.BackgroundColor = d.BackgroundColor;
                         c.Affiliation.ForegroundColor = d.ForegroundColor;
                     }
                 }
             }
-            Globals.CharacterList.Instance.ForceCharacterDataSave();
+
+            CharacterList.Instance.ForceCharacterDataSave();
         }
 
         public void NotifyPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
     }
 }

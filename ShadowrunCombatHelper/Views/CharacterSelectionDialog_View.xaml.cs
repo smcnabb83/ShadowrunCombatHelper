@@ -1,14 +1,14 @@
-﻿using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.ViewModels;
 
 namespace ShadowrunCombatHelper.Views
 {
     /// <summary>
-    /// Interaction logic for CharacterSelectionDialog_View.xaml
+    ///     Interaction logic for CharacterSelectionDialog_View.xaml
     /// </summary>
     public partial class CharacterSelectionDialog_View : Window
     {
@@ -17,15 +17,7 @@ namespace ShadowrunCombatHelper.Views
             InitializeComponent();
         }
 
-        private List<Character> _returnedCombatants = new List<Character>();
-
-        public List<Character> ReturnedCombatants
-        {
-            get
-            {
-                return _returnedCombatants;
-            }
-        }
+        public List<Character> ReturnedCombatants { get; private set; } = new List<Character>();
 
         private void AddToCombatants_Click(object sender, RoutedEventArgs e)
         {
@@ -34,12 +26,13 @@ namespace ShadowrunCombatHelper.Views
 
         private void AddCharacterToCombatants()
         {
-            CharacterSelectionDialog_ViewModel this_model = (CharacterSelectionDialog_ViewModel)DataContext;
-            Character combatant = (Character)AllCharactersList.SelectedItem;
+            var this_model = (CharacterSelectionDialog_ViewModel) DataContext;
+            var combatant = (Character) AllCharactersList.SelectedItem;
             if (combatant != null)
             {
                 this_model.AddCharacterToCombatantsList(combatant);
             }
+
             AllCharactersList.Focus();
             if (AllCharactersList.Items.Count > 0)
             {
@@ -54,12 +47,13 @@ namespace ShadowrunCombatHelper.Views
 
         private void RemoveCharacterFromCombatants()
         {
-            CharacterSelectionDialog_ViewModel this_model = (CharacterSelectionDialog_ViewModel)DataContext;
-            Character combatant = (Character)SelectedCombatantsList.SelectedItem;
+            var this_model = (CharacterSelectionDialog_ViewModel) DataContext;
+            var combatant = (Character) SelectedCombatantsList.SelectedItem;
             if (combatant != null)
             {
                 this_model.RemoveCharacterFromCombatantsList(combatant);
             }
+
             AllCharactersList.Focus();
             if (AllCharactersList.Items.Count > 0)
             {
@@ -69,14 +63,14 @@ namespace ShadowrunCombatHelper.Views
 
         private void ContinueToCombat_Click(object sender, RoutedEventArgs e)
         {
-            CharacterSelectionDialog_ViewModel this_model = (CharacterSelectionDialog_ViewModel)DataContext;
-            _returnedCombatants = this_model.CombatantsList.ToList();
-            this.DialogResult = true;
+            var this_model = (CharacterSelectionDialog_ViewModel) DataContext;
+            ReturnedCombatants = this_model.CombatantsList.ToList();
+            DialogResult = true;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = false;
+            DialogResult = false;
         }
 
         private void AllCharactersList_KeyDown(object sender, KeyEventArgs e)

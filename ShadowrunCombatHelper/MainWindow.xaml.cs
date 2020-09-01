@@ -10,12 +10,12 @@ namespace ShadowrunCombatHelper
     /// </summary>
     public partial class MainWindow : Window
     {
-        public enum allowBack { ALLOWBACK, DISALLOWBACK }
+        public enum GoBack { Allow, Disallow }
 
         public MainWindow()
         {
             InitializeComponent();
-            this.WindowState = System.Windows.WindowState.Maximized;
+            this.WindowState = WindowState.Maximized;
             CharacterList.Instance.ReadCharacterDataFromFile();
             mainFrame.Navigated += handleNavigatedObject;
             mainFrame.Navigate(new BlankPage());
@@ -43,7 +43,7 @@ namespace ShadowrunCombatHelper
 
         private void handleNavigatedObject(object sender, NavigationEventArgs e)
         {
-            if ((e.ExtraData is allowBack) && ((allowBack)e.ExtraData) == allowBack.DISALLOWBACK)
+            if ((e.ExtraData is GoBack canGoBack) && canGoBack == GoBack.Disallow)
             {
                 mainFrame.RemoveBackEntry();
                 if (mainFrame.CanGoBack)

@@ -28,8 +28,8 @@ namespace ShadowrunCombatHelper.Views
 
         private void SaveAffiliationChanges_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as AffiliationEditor_ViewModel).WriteToGlobalAffiliationList();
-            NavigationService.GoBack();
+            (DataContext as AffiliationEditor_ViewModel)?.WriteToGlobalAffiliationList();
+            NavigationService?.GoBack();
         }
     }
 }

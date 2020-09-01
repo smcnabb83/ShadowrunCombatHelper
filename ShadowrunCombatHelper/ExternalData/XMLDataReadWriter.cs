@@ -10,7 +10,7 @@ namespace ShadowrunCombatHelper.ExternalData
 {
     public class XMLDataReadWriter<T> : IDataReadWriter<T>
     {
-        public List<T> ReadFileToList(ApplicationXmlFiles.fileType fileType)
+        public List<T> ReadFileToList(ApplicationXmlFiles.FileType fileType)
         {
             string filepath = ApplicationXmlFiles.GetFilePath(fileType);
 
@@ -44,7 +44,7 @@ namespace ShadowrunCombatHelper.ExternalData
             }
         }
 
-        public void WriteListToFile(ApplicationXmlFiles.fileType fileType, List<T> ListToWrite)
+        public void WriteListToFile(ApplicationXmlFiles.FileType fileType, List<T> ListToWrite)
         {
             string filepath = ApplicationXmlFiles.GetFilePath(fileType);
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));

@@ -1,40 +1,44 @@
-﻿using ShadowrunCombatHelper.Interfaces;
-using ShadowrunCombatHelper.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using ShadowrunCombatHelper.Interfaces;
+using ShadowrunCombatHelper.Models;
 
 namespace ShadowrunCombatHelper.Objects
 {
-    public class CharacterBindingObservableCollection<T> : ItemChangeObservableCollection<T> where T : ICharacterBindable, INotifyPropertyChanged
+    public class CharacterBindingObservableCollection<T> : ItemChangeObservableCollection<T>
+        where T : ICharacterBindable, INotifyPropertyChanged
     {
-        private Character BoundCharacter;
+        private readonly Character _boundCharacter;
 
         public CharacterBindingObservableCollection(Character c)
         {
-            BoundCharacter = c;
+            _boundCharacter = c;
         }
 
-        public CharacterBindingObservableCollection(Character c, List<T> inputList)
+        public CharacterBindingObservableCollection(Character c, IEnumerable<T> inputList)
         {
-            BoundCharacter = c;
-            foreach (var item in inputList)
+            _boundCharacter = c;
+            foreach (T item in inputList)
             {
-                BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
+                _boundCharacter.PropertyChanged += item.CharacterPropertyChangedEventHandler;
                 Add(item);
             }
         }
 
         protected override void InsertItem(int index, T item)
         {
-            item.BindToCharacter(BoundCharacter);
-            BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
+            Debug.Assert(item != null, nameof(item) + " != null");
+            item.BindToCharacter(_boundCharacter);
+            _boundCharacter.PropertyChanged += item.CharacterPropertyChangedEventHandler;
             base.InsertItem(index, item);
         }
 
         protected override void SetItem(int index, T item)
         {
-            item.BindToCharacter(BoundCharacter);
-            BoundCharacter.PropertyChanged += new PropertyChangedEventHandler(item.CharacterPropertyChangedEventHandler);
+            Debug.Assert(item != null, nameof(item) + " != null");
+            item.BindToCharacter(_boundCharacter);
+            _boundCharacter.PropertyChanged += item.CharacterPropertyChangedEventHandler;
             base.SetItem(index, item);
         }
     }

@@ -1,9 +1,8 @@
-﻿using ShadowrunCombatHelper.ExternalData;
+﻿using System;
+using System.Collections.Generic;
+using ShadowrunCombatHelper.ExternalData;
 using ShadowrunCombatHelper.Interfaces;
 using ShadowrunCombatHelper.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ShadowrunCombatHelper.Globals
 {
@@ -11,11 +10,15 @@ namespace ShadowrunCombatHelper.Globals
     {
         private static readonly Lazy<CharacterList> lazy = new Lazy<CharacterList>(() => new CharacterList());
 
-        public static CharacterList Instance { get { return lazy.Value; } }
-
-        private IDataReadWriter<Character> readWriter = new XMLDataReadWriter<Character>();
-
         private List<Character> CharList = new List<Character>();
+
+        private readonly IDataReadWriter<Character> readWriter = new XMLDataReadWriter<Character>();
+
+        private CharacterList()
+        {
+        }
+
+        public static CharacterList Instance => lazy.Value;
 
         public List<Character> GetCharacterList()
         {
@@ -25,19 +28,19 @@ namespace ShadowrunCombatHelper.Globals
         public void AddCharacter(Character c)
         {
             CharList.Add(c);
-            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
+            readWriter.WriteListToFile(ApplicationXmlFiles.FileType.CharacterData, CharList);
         }
 
         public void RemoveCharacter(Character c)
         {
             CharList.Remove(c);
-            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
+            readWriter.WriteListToFile(ApplicationXmlFiles.FileType.CharacterData, CharList);
         }
 
         public void OverwriteCharacterList(List<Character> clist)
         {
             CharList = clist;
-            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
+            readWriter.WriteListToFile(ApplicationXmlFiles.FileType.CharacterData, CharList);
         }
 
         public void RemoveCharacterAtIndex(int i)
@@ -54,16 +57,12 @@ namespace ShadowrunCombatHelper.Globals
 
         public void ReadCharacterDataFromFile()
         {
-            CharList = readWriter.ReadFileToList(ApplicationXmlFiles.fileType.CHARACTERDATA);
+            CharList = readWriter.ReadFileToList(ApplicationXmlFiles.FileType.CharacterData);
         }
 
         public void ForceCharacterDataSave()
         {
-            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.CHARACTERDATA, CharList);
-        }
-
-        private CharacterList()
-        {
+            readWriter.WriteListToFile(ApplicationXmlFiles.FileType.CharacterData, CharList);
         }
     }
 }

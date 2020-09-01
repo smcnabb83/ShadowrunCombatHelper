@@ -1,17 +1,16 @@
-﻿using ShadowrunCombatHelper.Interfaces;
-using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.Objects;
-using ShadowrunCombatHelper.UserControls;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using ShadowrunCombatHelper.Interfaces;
+using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.Objects;
+using ShadowrunCombatHelper.UserControls;
 
 namespace ShadowrunCombatHelper.ViewModels
 {
     public class InitiativeTracker_ViewModel : INotifyPropertyChanged
     {
-        private static IRandomGenerator roller = new RandomGen();
         private ObservableCollection<Character> _combatQueue = new ObservableCollection<Character>();
         private int _currentRound;
         private bool _windowVisible;
@@ -22,11 +21,9 @@ namespace ShadowrunCombatHelper.ViewModels
             WindowVisible = true;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ObservableCollection<Character> CombatQueue
         {
-            get { return _combatQueue; }
+            get => _combatQueue;
             set
             {
                 _combatQueue = value;
@@ -35,14 +32,11 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        public Character CurrentCharacter
-        {
-            get { return CombatQueue.Aggregate(CustomAggregator); }
-        }
+        public Character CurrentCharacter => CombatQueue.Aggregate(CustomAggregator);
 
         public int CurrentRound
         {
-            get { return _currentRound; }
+            get => _currentRound;
             set
             {
                 _currentRound = value;
@@ -52,13 +46,15 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public bool WindowVisible
         {
-            get { return _windowVisible; }
+            get => _windowVisible;
             set
             {
                 _windowVisible = value;
                 NotifyPropertyChanged(nameof(WindowVisible));
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void AddCombatants(List<Character> combatants)
         {
@@ -71,11 +67,13 @@ namespace ShadowrunCombatHelper.ViewModels
                     c.CurrentPhysicalDamage = 0;
                     c.CurrentStunDamage = 0;
                 }
+
                 RollInitiative(c);
                 c.StartRound();
                 c.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(c);
             }
+
             WindowVisible = true;
             NotifyPropertyChanged(nameof(WindowVisible));
             NotifyPropertyChanged(nameof(CurrentCharacter));
@@ -83,10 +81,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void NotifyPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         public void OnInitiativeChanged(object source, PropertyChangedEventArgs e)
@@ -95,7 +90,7 @@ namespace ShadowrunCombatHelper.ViewModels
             if (e.PropertyName == "Initiative")
             {
                 NotifyPropertyChanged(nameof(CurrentCharacter));
-                Character c = (Character)source;
+                var c = (Character) source;
                 CombatQueue.Remove(c);
                 CombatQueue.Add(c);
 
@@ -114,7 +109,7 @@ namespace ShadowrunCombatHelper.ViewModels
                 {
                     try
                     {
-                        InitiativeDialog getInitiative = new InitiativeDialog(i);
+                        var getInitiative = new InitiativeDialog(i);
                         bool? result = false;
                         while ((result ?? false) == false)
                         {
@@ -135,43 +130,39 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        private Character CustomAggregator(Character x1, Character x2)
+        private static Character CustomAggregator(Character x1, Character x2)
         {
             if (x1.Initiative > x2.Initiative)
             {
                 return x1;
             }
-            else if (x1.Initiative < x2.Initiative)
+
+            if (x1.Initiative < x2.Initiative)
             {
                 return x2;
             }
-            else
+
+            if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) > 0)
             {
-                if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) > 0)
-                {
-                    return x1;
-                }
-                else if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) < 0)
-                {
-                    return x2;
-                }
-                else
-                {
-                    if (string.Compare(x1.CharacterName, x2.CharacterName) > 0)
-                    {
-                        return x1;
-                    }
-                    else
-                    {
-                        return x2;
-                    }
-                }
+                return x1;
             }
+
+            if (string.Compare(x1.Affiliation.Name, x2.Affiliation.Name) < 0)
+            {
+                return x2;
+            }
+
+            if (string.Compare(x1.CharacterName, x2.CharacterName) > 0)
+            {
+                return x1;
+            }
+
+            return x2;
         }
 
         public void EndCombat()
         {
-            for (int i = 0; i < CombatQueue.Count; i++)
+            for (var i = 0; i < CombatQueue.Count; i++)
             {
                 if (!CombatQueue[i].Settings.PreserveDamageAcrossEncounters)
                 {
@@ -183,7 +174,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         private bool IsRoundOver()
         {
-            return CombatQueue.Where(x => x.Initiative > 0).Count() == 0;
+            return !CombatQueue.Any(x => x.Initiative > 0);
         }
 
         private void MoveToNextRound()
@@ -191,9 +182,9 @@ namespace ShadowrunCombatHelper.ViewModels
             CurrentRound++;
             WindowVisible = false;
             NotifyPropertyChanged(nameof(WindowVisible));
-            List<Character> tempQueue = new List<Character>(CombatQueue);
+            var tempQueue = new List<Character>(CombatQueue);
             CombatQueue.Clear();
-            foreach (var i in tempQueue)
+            foreach (Character i in tempQueue)
             {
                 i.PropertyChanged -= OnInitiativeChanged;
                 RollInitiative(i);
@@ -201,6 +192,7 @@ namespace ShadowrunCombatHelper.ViewModels
                 i.PropertyChanged += OnInitiativeChanged;
                 CombatQueue.Add(i);
             }
+
             WindowVisible = true;
             NotifyPropertyChanged(nameof(WindowVisible));
             NotifyPropertyChanged(nameof(CurrentCharacter));

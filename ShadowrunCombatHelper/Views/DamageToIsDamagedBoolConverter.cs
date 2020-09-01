@@ -13,17 +13,9 @@ namespace ShadowrunCombatHelper.Views
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is int)
+            if(value is int damageTaken)
             {
-                bool isDamaged = (int)value > 0;
-                if (isDamaged)
-                {
-                    return Visibility.Visible;
-                }
-                else
-                {
-                    return Visibility.Hidden;
-                }
+                return damageTaken > 0 ? Visibility.Visible : Visibility.Hidden;
             }
             return Visibility.Hidden;
         }

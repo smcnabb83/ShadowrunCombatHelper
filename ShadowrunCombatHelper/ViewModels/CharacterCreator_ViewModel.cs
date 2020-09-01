@@ -1,36 +1,36 @@
-﻿using ShadowrunCombatHelper.Globals;
+﻿using System.ComponentModel;
+using System.Linq;
+using ShadowrunCombatHelper.Globals;
 using ShadowrunCombatHelper.Models;
 using ShadowrunCombatHelper.Objects;
-using System.ComponentModel;
-using System.Linq;
 
 namespace ShadowrunCombatHelper.ViewModels
 {
     public class CharacterCreator_ViewModel : INotifyPropertyChanged
     {
-        private ItemChangeObservableCollection<Character> _characterList = new ItemChangeObservableCollection<Character>();
+        private ItemChangeObservableCollection<Character> _characterList =
+            new ItemChangeObservableCollection<Character>();
 
         public CharacterCreator_ViewModel()
         {
-            CharacterList clist = Globals.CharacterList.Instance;
+            var clist = CharacterList.Instance;
             foreach (Character c in clist.GetCharacterList())
             {
-                foreach (var skill in Globals.SkillsList.Instance.Skills)
+                foreach (Skill skill in SkillsList.Instance.Skills)
                 {
                     if (!c.Skills.Contains(skill))
                     {
                         c.Skills.Add(skill);
                     }
                 }
+
                 Characters.Add(c);
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ItemChangeObservableCollection<Character> Characters
         {
-            get { return _characterList; }
+            get => _characterList;
             set
             {
                 _characterList = value;
@@ -38,14 +38,17 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public void CreateNewCharacter(string charName)
         {
-            int newCharacterIndexer = 0;
-            Character newCharacter = new Character();
-            foreach (var skill in Globals.SkillsList.Instance.Skills)
+            var newCharacterIndexer = 0;
+            var newCharacter = new Character();
+            foreach (Skill skill in SkillsList.Instance.Skills)
             {
                 newCharacter.Skills.Add(skill);
             }
+
             newCharacter.CharacterName = charName;
 
             while (Characters.Contains(newCharacter))
@@ -59,10 +62,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void NotifyPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         public void RemoveCharacterFromList(Character C)
@@ -72,7 +72,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void SaveCharactersToCharacterList()
         {
-            CharacterList clist = Globals.CharacterList.Instance;
+            var clist = CharacterList.Instance;
             clist.OverwriteCharacterList(Characters.ToList());
         }
     }

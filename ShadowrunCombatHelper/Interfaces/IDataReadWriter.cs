@@ -5,8 +5,8 @@ namespace ShadowrunCombatHelper.Interfaces
 {
     public interface IDataReadWriter<T>
     {
-        List<T> ReadFileToList(ApplicationXmlFiles.fileType fileType);
+        List<T> ReadFileToList(ApplicationXmlFiles.FileType fileType);
 
-        void WriteListToFile(ApplicationXmlFiles.fileType fileType, List<T> ListToWrite);
+        void WriteListToFile(ApplicationXmlFiles.FileType fileType, List<T> listToWrite);
     }
 }

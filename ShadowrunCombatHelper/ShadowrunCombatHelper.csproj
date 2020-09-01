@@ -102,6 +102,7 @@
     <Compile Include="Globals\ApplicationXmlFiles.cs" />
     <Compile Include="Globals\CharacterList.cs" />
     <Compile Include="Interfaces\IRandomGenerator.cs" />
+    <Compile Include="Models\Action.cs" />
     <Compile Include="Objects\ItemChangeObservableCollection.cs" />
     <Compile Include="Globals\SkillsList.cs" />
     <Compile Include="Globals\TraditionsList.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Objects\CharacterBindingObservableCollection.cs" />
     <Compile Include="Objects\CharacterDataExtensions.cs" />
     <Compile Include="Objects\RandomGen.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="UserControls\DealDamageDialog.xaml.cs">
       <DependentUpon>DealDamageDialog.xaml</DependentUpon>
     </Compile>

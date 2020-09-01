@@ -7,7 +7,7 @@ namespace ShadowrunCombatHelper.UserControls
     {
         public static T Show(string inputMessage, string Title)
         {
-            GetInputDialog_Window dialog = new GetInputDialog_Window(inputMessage, Title);
+            var dialog = new GetInputDialog_Window(inputMessage, Title);
             bool? result = dialog.ShowDialog();
             if (result ?? false)
             {

@@ -8,6 +8,6 @@ namespace ShadowrunCombatHelper.Interfaces
     {
         void BindToCharacter(Character c);
 
-        void CharacterPropertyChangedEventHandler(Object c, PropertyChangedEventArgs e);
+        void CharacterPropertyChangedEventHandler(object c, PropertyChangedEventArgs e);
     }
 }

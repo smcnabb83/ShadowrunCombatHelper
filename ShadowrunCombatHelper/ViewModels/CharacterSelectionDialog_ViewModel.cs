@@ -1,32 +1,33 @@
-﻿using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using ShadowrunCombatHelper.Globals;
+using ShadowrunCombatHelper.Models;
+using ShadowrunCombatHelper.Objects;
 
 namespace ShadowrunCombatHelper.ViewModels
 {
     public class CharacterSelectionDialog_ViewModel : INotifyPropertyChanged
     {
-        private ItemChangeObservableCollection<Character> _allCharactersList = new ItemChangeObservableCollection<Character>();
+        private ItemChangeObservableCollection<Character> _allCharactersList =
+            new ItemChangeObservableCollection<Character>();
 
-        private ItemChangeObservableCollection<Character> _combatantsList = new ItemChangeObservableCollection<Character>();
+        private ItemChangeObservableCollection<Character> _combatantsList =
+            new ItemChangeObservableCollection<Character>();
 
         public CharacterSelectionDialog_ViewModel()
         {
-            Globals.CharacterList clist = Globals.CharacterList.Instance;
+            var clist = CharacterList.Instance;
             foreach (Character c in clist.GetCharacterList())
             {
                 AllCharactersList.Add(c);
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ItemChangeObservableCollection<Character> AllCharactersList
         {
-            get { return _allCharactersList; }
+            get => _allCharactersList;
             set
             {
                 _allCharactersList = value;
@@ -36,7 +37,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public ItemChangeObservableCollection<Character> CombatantsList
         {
-            get { return _combatantsList; }
+            get => _combatantsList;
             set
             {
                 _combatantsList = value;
@@ -44,13 +45,10 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        public List<Character.CombatState> CombatStates
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Character.CombatState)).Cast<Character.CombatState>().ToList();
-            }
-        }
+        public List<Character.CombatState> CombatStates =>
+            Enum.GetValues(typeof(Character.CombatState)).Cast<Character.CombatState>().ToList();
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void AddCharacterToCombatantsList(Character c)
         {
@@ -60,10 +58,7 @@ namespace ShadowrunCombatHelper.ViewModels
 
         public void NotifyPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
 
         public void RemoveCharacterFromCombatantsList(Character c)

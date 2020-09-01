@@ -1,50 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
 namespace ShadowrunCombatHelper.Views
 {
-    class IntArrayToColorBrushConverter : IValueConverter
+    internal class IntArrayToColorBrushConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if( value.GetType() == typeof(int[]) && (value as int[]).Length == 3)
+            if (value?.GetType() == typeof(int[]) && ((int[]) value).Length == 3)
             {
-                int[] color = (int[])value;
-                return new SolidColorBrush(Color.FromArgb((byte)255, (byte)color[0], (byte)color[1], (byte)color[2]));
+                var color = (int[]) value;
+                return new SolidColorBrush(Color.FromArgb(255, (byte) color[0], (byte) color[1], (byte) color[2]));
             }
-            else if (value.GetType() == typeof(int[]) && (value as int[]).Length == 4)
+
+            if (value?.GetType() == typeof(int[]) && ((int[]) value).Length == 4)
             {
-                int[] color = (int[])value;
-                return new SolidColorBrush(Color.FromArgb((byte)color[0], (byte)color[1], (byte)color[2], (byte)color[3]));
+                var color = (int[]) value;
+                return new SolidColorBrush(Color.FromArgb((byte) color[0], (byte) color[1], (byte) color[2],
+                    (byte) color[3]));
             }
-            else
-            {
-                throw new ArgumentOutOfRangeException("Value must be a byte array of 3 or 4 values");
-            }
+
+            throw new ArgumentOutOfRangeException("Value must be a byte array of 3 or 4 values");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value.GetType() == typeof(SolidColorBrush))
+            if (value?.GetType() == typeof(SolidColorBrush))
             {
-                SolidColorBrush color = (SolidColorBrush)value;
-                return new int[] {color.Color.A, color.Color.R, color.Color.G, color.Color.B };
-            } else if (value.GetType() == typeof(string) && value.ToString().Length == 9)
-            {
-                string ret = value.ToString();
-                return new int[] { System.Convert.ToInt32(ret.Substring(1, 2), 16), System.Convert.ToInt32(ret.Substring(3, 2),16), System.Convert.ToInt32(ret.Substring(5, 2), 16), System.Convert.ToInt32(ret.Substring(7, 2), 16) };
-            } else if (value.GetType() == typeof(Color))
-            {
-                Color col = (Color)value;
-                return new int[] { col.A, col.R, col.G, col.B };
+                var color = (SolidColorBrush) value;
+                return new int[] {color.Color.A, color.Color.R, color.Color.G, color.Color.B};
             }
-            throw new ArgumentOutOfRangeException("value must be a solidcolorbrush");
+
+            switch (value)
+            {
+                case string _ when value.ToString().Length == 9:
+                {
+                    var ret = value.ToString();
+                    return new[]
+                    {
+                        System.Convert.ToInt32(ret.Substring(1, 2), 16), System.Convert.ToInt32(ret.Substring(3, 2), 16),
+                        System.Convert.ToInt32(ret.Substring(5, 2), 16), System.Convert.ToInt32(ret.Substring(7, 2), 16)
+                    };
+                }
+                case Color col:
+                    return new int[] {col.A, col.R, col.G, col.B};
+                default:
+                    throw new ArgumentOutOfRangeException("value must be a solidcolorbrush");
+            }
         }
     }
 }

@@ -1,41 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ShadowrunCombatHelper.Models;
-using ShadowrunCombatHelper.UserControls;
 
 namespace ShadowrunCombatHelper.UserControls
 {
     /// <summary>
-    /// Interaction logic for CharacterSummaryDisplay.xaml
+    ///     Interaction logic for CharacterSummaryDisplay.xaml
     /// </summary>
     public partial class CharacterSummaryDisplay : UserControl
     {
-
-        public static readonly DependencyProperty BoundCharacterProperty = DependencyProperty.Register("BoundCharacter", typeof(Character), typeof(CharacterSummaryDisplay));
-
-        public Character BoundCharacter
-        {
-            get
-            {
-                return (Character)GetValue(BoundCharacterProperty);
-            }
-            set
-            {
-                SetValue(BoundCharacterProperty, value);
-            }
-        }
+        public static readonly DependencyProperty BoundCharacterProperty =
+            DependencyProperty.Register("BoundCharacter", typeof(Character), typeof(CharacterSummaryDisplay));
 
 
         public CharacterSummaryDisplay()
@@ -43,9 +19,14 @@ namespace ShadowrunCombatHelper.UserControls
             InitializeComponent();
         }
 
+        public Character BoundCharacter
+        {
+            get => (Character) GetValue(BoundCharacterProperty);
+            set => SetValue(BoundCharacterProperty, value);
+        }
+
         private void CharacterDisplay_MouseDown(object sender, MouseButtonEventArgs e)
         {
-           
         }
 
         private void mnuEndRound_Click(object sender, RoutedEventArgs e)
@@ -55,9 +36,9 @@ namespace ShadowrunCombatHelper.UserControls
 
         private void CharacterDisplay_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if(DataContext is Character)
+            if (DataContext is Character)
             {
-                BoundCharacter = (DataContext as Character);
+                BoundCharacter = DataContext as Character;
             }
         }
 
@@ -68,9 +49,9 @@ namespace ShadowrunCombatHelper.UserControls
 
         private void btnDealDamage_Click(object sender, RoutedEventArgs e)
         {
-            DealDamageDialog dealDamage = new DealDamageDialog(BoundCharacter);
+            var dealDamage = new DealDamageDialog(BoundCharacter);
             bool? result = dealDamage.ShowDialog();
-            if(result ?? false)
+            if (result ?? false)
             {
                 if (dealDamage.PhysicalDamage)
                 {
@@ -135,7 +116,8 @@ namespace ShadowrunCombatHelper.UserControls
 
         private void mnuMoveCharacter_Click(object sender, RoutedEventArgs e)
         {
-            int amountMoved = GetInputDialog<int>.Show($"Input {BoundCharacter.CharacterName} Movement", "Enter Movement");
+            int amountMoved =
+                GetInputDialog<int>.Show($"Input {BoundCharacter.CharacterName} Movement", "Enter Movement");
             BoundCharacter.DistanceMoved += amountMoved;
         }
     }

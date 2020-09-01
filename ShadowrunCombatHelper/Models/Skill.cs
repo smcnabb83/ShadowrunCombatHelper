@@ -1,16 +1,31 @@
-﻿using ShadowrunCombatHelper.Globals;
-using ShadowrunCombatHelper.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Serialization;
+using ShadowrunCombatHelper.Globals;
+using ShadowrunCombatHelper.Interfaces;
 
 namespace ShadowrunCombatHelper.Models
 {
     public class Skill : INotifyPropertyChanged, ICharacterBindable
     {
+        public enum Attributes
+        {
+            AGI,
+            BOD,
+            CHA,
+            EDGE,
+            INT,
+            LOG,
+            REA,
+            STR,
+            WIL,
+            MAG,
+            ESS
+        }
+
         private Character _assignedCharacter;
 
         private bool _defaultable;
@@ -18,26 +33,21 @@ namespace ShadowrunCombatHelper.Models
         private Attributes _limitBy;
         private ObservableCollection<Attributes> _relatedAttributes = new ObservableCollection<Attributes>();
         private string _skillName;
-        private String _skillType;
+        private string _skillType;
         private int _trainingValue;
 
-        public static Skill Clone(Skill oldSkill)
-        {
-            Skill clone = new Skill(oldSkill.SkillName, 0, null, oldSkill.RelatedAttributes.ToList(), oldSkill.LimitBy, oldSkill.SkillType);
-            clone.Defaultable = oldSkill.Defaultable;
-            return clone;
-        }
-
-        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr, Attributes limit, string skillType = "Generic")
+        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr, Attributes limit,
+            string skillType = "Generic")
         {
             SkillName = skillName;
             _assignedCharacter = assigned;
-            foreach (var a in attr)
+            foreach (Attributes a in attr)
             {
                 RelatedAttributes.Add(a);
             }
+
             LimitBy = limit;
-            this.SkillType = skillType;
+            SkillType = skillType;
         }
 
         public Skill()
@@ -45,51 +55,34 @@ namespace ShadowrunCombatHelper.Models
             SkillName = "New Skill";
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public enum Attributes { AGI, BOD, CHA, EDGE, INT, LOG, REA, STR, WIL, MAG, ESS }
-
-        public int AdjustedTotalSkillValue
-        {
-            get
-            {
-                return (TotalSkillValue - _assignedCharacter?.CurrentDamagePenalty ?? 0).ClampLower(0);
-            }
-        }
+        public int AdjustedTotalSkillValue =>
+            (TotalSkillValue - _assignedCharacter?.CurrentDamagePenalty ?? 0).ClampLower(0);
 
         public Character AssignedCharacter
         {
-            set
-            {
-                _assignedCharacter = value;
-            }
+            set => _assignedCharacter = value;
         }
 
         [XmlIgnore]
-        public List<Attributes> AttributeList
-        {
-            get
-            {
-                return Enum.GetValues(typeof(Attributes)).Cast<Attributes>().ToList();
-            }
-        }
+        public List<Attributes> AttributeList => Enum.GetValues(typeof(Attributes)).Cast<Attributes>().ToList();
 
         public int AttributeModifier
         {
             get
             {
-                int totalValue = 0;
+                var totalValue = 0;
                 foreach (Attributes attr in RelatedAttributes)
                 {
                     totalValue += GetCharacterAttribute(attr);
                 }
+
                 return totalValue;
             }
         }
 
         public bool Defaultable
         {
-            get { return _defaultable; }
+            get => _defaultable;
             set
             {
                 _defaultable = value;
@@ -101,7 +94,7 @@ namespace ShadowrunCombatHelper.Models
 
         public string Description
         {
-            get { return _description; }
+            get => _description;
             set
             {
                 _description = value;
@@ -113,27 +106,22 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
-                string relAttrString = "";
-                foreach (var attribute in RelatedAttributes)
+                var relAttrString = "";
+                foreach (Attributes attribute in RelatedAttributes)
                 {
-                    relAttrString += attribute.ToString() + ";";
+                    relAttrString += attribute + ";";
                 }
+
                 relAttrString = relAttrString.TrimEnd(';');
                 return relAttrString;
             }
         }
 
-        public int Limit
-        {
-            get
-            {
-                return GetCharacterAttribute(LimitBy);
-            }
-        }
+        public int Limit => GetCharacterAttribute(LimitBy);
 
         public Attributes LimitBy
         {
-            get { return _limitBy; }
+            get => _limitBy;
             set
             {
                 _limitBy = value;
@@ -144,7 +132,7 @@ namespace ShadowrunCombatHelper.Models
 
         public ObservableCollection<Attributes> RelatedAttributes
         {
-            get { return _relatedAttributes; }
+            get => _relatedAttributes;
             set
             {
                 _relatedAttributes = value;
@@ -157,7 +145,7 @@ namespace ShadowrunCombatHelper.Models
 
         public string SkillName
         {
-            get { return _skillName; }
+            get => _skillName;
             set
             {
                 _skillName = value;
@@ -165,9 +153,9 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public String SkillType
+        public string SkillType
         {
-            get { return _skillType; }
+            get => _skillType;
             set
             {
                 _skillType = value;
@@ -175,17 +163,11 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
-        public int TotalSkillValue
-        {
-            get
-            {
-                return (Defaultable || TrainingValue > 0) ? TrainingValue + AttributeModifier : 0;
-            }
-        }
+        public int TotalSkillValue => Defaultable || TrainingValue > 0 ? TrainingValue + AttributeModifier : 0;
 
         public int TrainingValue
         {
-            get { return _trainingValue; }
+            get => _trainingValue;
             set
             {
                 _trainingValue = value;
@@ -217,45 +199,56 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public static Skill Clone(Skill oldSkill)
+        {
+            var clone = new Skill(oldSkill.SkillName, 0, null, oldSkill.RelatedAttributes.ToList(), oldSkill.LimitBy,
+                oldSkill.SkillType);
+            clone.Defaultable = oldSkill.Defaultable;
+            return clone;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
-            Skill compObj = (Skill)obj;
+
+            var compObj = (Skill) obj;
             return SkillName == compObj.SkillName;
         }
 
         public override int GetHashCode()
         {
-            int hash = 23;
+            var hash = 23;
             hash = hash * 47 + SkillName.GetHashCode();
             return hash;
         }
 
         public void NotifyPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
 
         public void UpdateProperties(Skill updateTo)
         {
-            this.RelatedAttributes = updateTo.RelatedAttributes;
-            this.LimitBy = updateTo.LimitBy;
-            this.SkillType = updateTo.SkillType;
-            this.Defaultable = updateTo.Defaultable;
-            this.Description = updateTo.Description;
+            RelatedAttributes = updateTo.RelatedAttributes;
+            LimitBy = updateTo.LimitBy;
+            SkillType = updateTo.SkillType;
+            Defaultable = updateTo.Defaultable;
+            Description = updateTo.Description;
         }
 
         private int GetCharacterAttribute(Attributes a)
         {
             if (_assignedCharacter == null)
             {
+                //TODO: Should I be asserting this is never null?
+                return 0;
             }
+
             switch (a)
             {
                 case Attributes.AGI:

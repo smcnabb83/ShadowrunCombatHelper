@@ -20,11 +20,9 @@ namespace ShadowrunCombatHelper.Models
             ResistDrainAttributes = attr;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public List<Skill.Attributes> ResistDrainAttributes
         {
-            get { return _resistDrainAttributes; }
+            get => _resistDrainAttributes;
             set
             {
                 _resistDrainAttributes = value;
@@ -37,10 +35,10 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
-                string attributeString = "";
-                foreach (var attr in ResistDrainAttributes)
+                var attributeString = "";
+                foreach (Skill.Attributes attr in ResistDrainAttributes)
                 {
-                    attributeString += attr.ToString() + " + ";
+                    attributeString += attr + " + ";
                 }
 
                 return attributeString.TrimEnd(' ').TrimEnd('+').TrimEnd();
@@ -49,7 +47,7 @@ namespace ShadowrunCombatHelper.Models
 
         public string TraditionName
         {
-            get { return _traditionName; }
+            get => _traditionName;
             set
             {
                 _traditionName = value;
@@ -57,19 +55,23 @@ namespace ShadowrunCombatHelper.Models
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
-            MagicTradition compObj = (MagicTradition)obj;
-            return TraditionName == compObj.TraditionName && ResistDrainAttributes.SequenceEqual(compObj.ResistDrainAttributes);
+
+            var compObj = (MagicTradition) obj;
+            return TraditionName == compObj.TraditionName &&
+                   ResistDrainAttributes.SequenceEqual(compObj.ResistDrainAttributes);
         }
 
         public override int GetHashCode()
         {
-            int hash = 191;
+            var hash = 191;
             hash = hash * 47 + TraditionName.GetHashCode();
             hash = hash * 47 + ResistDrainAttributes.GetHashCode();
             return hash;
@@ -77,10 +79,7 @@ namespace ShadowrunCombatHelper.Models
 
         public void NotifyPropertyChanged(string propName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

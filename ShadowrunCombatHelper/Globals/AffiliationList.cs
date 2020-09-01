@@ -1,55 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ShadowrunCombatHelper.Models;
+﻿using System.Collections.Generic;
 using ShadowrunCombatHelper.ExternalData;
 using ShadowrunCombatHelper.Interfaces;
-using System.Windows.Media;
+using ShadowrunCombatHelper.Models;
 
 namespace ShadowrunCombatHelper.Globals
 {
     public sealed class AffiliationList
     {
+        private readonly IDataReadWriter<Affiliation> _readWriter = new XMLDataReadWriter<Affiliation>();
 
-        private List<Affiliation> _affiliations = new List<Affiliation>();
-
-        private IDataReadWriter<Affiliation> readWriter = new XMLDataReadWriter<Affiliation>();
-
-        public List<Affiliation> Affiliations
+        static AffiliationList()
         {
-            get
-            {
-                return _affiliations;
-            }
-            set
-            {
-                _affiliations = value;
-            }
         }
-
-        static AffiliationList() { }
 
         private AffiliationList()
         {
-            Affiliations = readWriter.ReadFileToList(ApplicationXmlFiles.fileType.AFFILIATIONDATA);
+            Affiliations = _readWriter.ReadFileToList(ApplicationXmlFiles.FileType.AffiliationData);
 
-            if(Affiliations.Count <= 0)
+            if (Affiliations.Count <= 0)
             {
-                Affiliations.Add(new Affiliation() { Name = "Player", BackgroundColor = new int[] { 128, 0, 0, 255 }, ForegroundColor = new int[] { 255, 0, 0, 0 } });
-                Affiliations.Add(new Affiliation() { Name = "Enemy", BackgroundColor = new int[] { 128, 255, 0, 0 }, ForegroundColor = new int[] { 255, 0, 0, 0 } });
+                Affiliations.Add(new Affiliation
+                {
+                    Name = "Player", BackgroundColor = new[] {128, 0, 0, 255}, ForegroundColor = new[] {255, 0, 0, 0}
+                });
+                Affiliations.Add(new Affiliation
+                    {Name = "Enemy", BackgroundColor = new[] {128, 255, 0, 0}, ForegroundColor = new[] {255, 0, 0, 0}});
             }
         }
+
+        public List<Affiliation> Affiliations { get; set; } = new List<Affiliation>();
+
+        public static AffiliationList Instance { get; } = new AffiliationList();
 
         public void OverWriteAffiliations(List<Affiliation> newAffiliations)
         {
             Affiliations = newAffiliations;
-            readWriter.WriteListToFile(ApplicationXmlFiles.fileType.AFFILIATIONDATA, Affiliations);
+            _readWriter.WriteListToFile(ApplicationXmlFiles.FileType.AffiliationData, Affiliations);
         }
-
-        public static AffiliationList Instance { get; } = new AffiliationList();
-
-        
     }
 }

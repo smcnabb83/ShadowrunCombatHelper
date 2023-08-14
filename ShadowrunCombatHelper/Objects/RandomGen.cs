@@ -5,7 +5,7 @@ namespace ShadowrunCombatHelper.Objects
 {
     internal class RandomGen : IRandomGenerator
     {
-        private Random actualGen = new Random();
+        private readonly Random actualGen = new Random();
 
         public RandomGen()
         {

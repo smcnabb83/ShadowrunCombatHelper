@@ -36,8 +36,7 @@ namespace ShadowrunCombatHelper.Models
         private string _skillType;
         private int _trainingValue;
 
-        public Skill(string skillName, int trainingValue, Character assigned, List<Attributes> attr, Attributes limit,
-            string skillType = "Generic")
+        public Skill(string skillName, Character assigned, List<Attributes> attr, Attributes limit, string skillType = "Generic")
         {
             SkillName = skillName;
             _assignedCharacter = assigned;
@@ -203,9 +202,10 @@ namespace ShadowrunCombatHelper.Models
 
         public static Skill Clone(Skill oldSkill)
         {
-            var clone = new Skill(oldSkill.SkillName, 0, null, oldSkill.RelatedAttributes.ToList(), oldSkill.LimitBy,
-                oldSkill.SkillType);
-            clone.Defaultable = oldSkill.Defaultable;
+            var clone = new Skill(oldSkill.SkillName, null, oldSkill.RelatedAttributes.ToList(), oldSkill.LimitBy, oldSkill.SkillType)
+            {
+                Defaultable = oldSkill.Defaultable
+            };
             return clone;
         }
 

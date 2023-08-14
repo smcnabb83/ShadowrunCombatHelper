@@ -42,7 +42,7 @@ namespace ShadowrunCombatHelper.Objects
             base.OnCollectionChanged(e);
         }
 
-        private void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
@@ -53,7 +53,7 @@ namespace ShadowrunCombatHelper.Objects
             {
                 if (item != null)
                 {
-                    item.PropertyChanged += item_PropertyChanged;
+                    item.PropertyChanged += Item_PropertyChanged;
                 }
             }
         }
@@ -64,7 +64,7 @@ namespace ShadowrunCombatHelper.Objects
             {
                 if (item != null)
                 {
-                    item.PropertyChanged -= item_PropertyChanged;
+                    item.PropertyChanged -= Item_PropertyChanged;
                 }
             }
         }

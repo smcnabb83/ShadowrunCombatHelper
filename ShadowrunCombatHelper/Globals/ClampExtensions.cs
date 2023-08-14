@@ -2,7 +2,7 @@
 
 namespace ShadowrunCombatHelper.Globals
 {
-    public static class UtilityFunctions
+    public static class ClampExtensions
     {
         public static T ClampLower<T>(this T val, T min) where T : IComparable<T>
         {

@@ -112,7 +112,7 @@
     <Compile Include="Objects\ItemChangeObservableCollection.cs" />
     <Compile Include="Globals\SkillsList.cs" />
     <Compile Include="Globals\TraditionsList.cs" />
-    <Compile Include="Globals\UtilityFunctions.cs" />
+    <Compile Include="Globals\ClampExtensions.cs" />
     <Compile Include="Interfaces\ICharacterBindable.cs" />
     <Compile Include="Models\Affiliation.cs" />
     <Compile Include="Models\CharacterSettings.cs" />

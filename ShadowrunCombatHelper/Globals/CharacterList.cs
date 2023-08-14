@@ -45,14 +45,11 @@ namespace ShadowrunCombatHelper.Globals
 
         public void RemoveCharacterAtIndex(int i)
         {
-            if (i >= 0 && i < CharList.Count)
-            {
-                CharList.RemoveAt(i);
-            }
-            else
+            if (i < 0 || i >= CharList.Count)
             {
                 throw new IndexOutOfRangeException();
             }
+            CharList.RemoveAt(i);
         }
 
         public void ReadCharacterDataFromFile()

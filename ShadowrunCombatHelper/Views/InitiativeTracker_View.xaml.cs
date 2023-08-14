@@ -36,18 +36,13 @@ namespace ShadowrunCombatHelper.Views
             }
         }
 
-        private void mnuEndRound_Click(object sender, RoutedEventArgs e)
+        private void MnuEndRound_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.EndTurn();
         }
 
-        private void NavigateBackOnCombatEntryFail()
-        {
-            NavigationService?.Navigate(new BlankPage(), MainWindow.GoBack.Disallow);
-        }
-
-        private void btnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
+        private void BtnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             if (boundCharacter != null)
@@ -56,7 +51,7 @@ namespace ShadowrunCombatHelper.Views
             }
         }
 
-        private void btnDealDamage_Click(object sender, RoutedEventArgs e)
+        private void BtnDealDamage_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             var dealDamage = new DealDamageDialog(boundCharacter);
@@ -74,19 +69,19 @@ namespace ShadowrunCombatHelper.Views
             }
         }
 
-        private void mnuFullDefense_Click(object sender, RoutedEventArgs e)
+        private void MnuFullDefense_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.FullDefense();
         }
 
-        private void mnuBlock_Click(object sender, RoutedEventArgs e)
+        private void MnuBlock_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.Block();
         }
 
-        private void mnuDodge_Click(object sender, RoutedEventArgs e)
+        private void MnuDodge_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.Dodge();
@@ -98,43 +93,43 @@ namespace ShadowrunCombatHelper.Views
             boundCharacter?.HitTheDirt();
         }
 
-        private void mnuIntercept_Click(object sender, RoutedEventArgs e)
+        private void MnuIntercept_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.Intercept();
         }
 
-        private void mnuParry_Click(object sender, RoutedEventArgs e)
+        private void MnuParry_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.Parry();
         }
 
-        private void mnuRunningToggle_Click(object sender, RoutedEventArgs e)
+        private void MnuRunningToggle_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.ToggleRunning();
         }
 
-        private void mnuSimpleAction_Click(object sender, RoutedEventArgs e)
+        private void MnuSimpleAction_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.ConsumeSimpleAction();
         }
 
-        private void mnuComplexAction_Click(object sender, RoutedEventArgs e)
+        private void MnuComplexAction_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.ConsumeComplexAction();
         }
 
-        private void mnuFreeAction_Click(object sender, RoutedEventArgs e)
+        private void MnuFreeAction_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             boundCharacter?.ConsumeFreeAction();
         }
 
-        private void mnuMoveCharacter_Click(object sender, RoutedEventArgs e)
+        private void MnuMoveCharacter_Click(object sender, RoutedEventArgs e)
         {
             Character boundCharacter = (DataContext as InitiativeTracker_ViewModel)?.CurrentCharacter;
             if (boundCharacter != null)

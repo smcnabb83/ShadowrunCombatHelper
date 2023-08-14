@@ -32,13 +32,16 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        public Character CurrentCharacter()  {
+        public Character CurrentCharacter  {
 
-            if(CombatQueue.Count == 0)
+            get
             {
-                return null;
+                if(CombatQueue.Count == 0)
+                {
+                    return null;
+                }
+                return CombatQueue.Aggregate(CustomAggregator);
             }
-            return CombatQueue.Aggregate(CustomAggregator);
 
         }
 

@@ -14,15 +14,15 @@
         <DockPanel Grid.Row="0">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="File">
-                    <MenuItem Header="Exit" Click="mnuExit_Click" />
+                    <MenuItem Header="Exit" Click="MnuExit_Click" />
                 </MenuItem>
                 <MenuItem Header="Edit">
-                    <MenuItem Header="Create/Edit Characters" Click="btnCharacterCreator_Click" />
-                    <MenuItem Header="Create/Edit Skills" Click="mnuCreateEditSkills_Click" />
-                    <MenuItem Header="Create/Edit Affiliations" Name="mnuCreateEditAffiliations" Click="mnuCreateEditAffiliations_Click"/>
+                    <MenuItem Header="Create/Edit Characters" Click="BtnCharacterCreator_Click" />
+                    <MenuItem Header="Create/Edit Skills" Click="MnuCreateEditSkills_Click" />
+                    <MenuItem Header="Create/Edit Affiliations" Name="mnuCreateEditAffiliations" Click="MnuCreateEditAffiliations_Click"/>
                 </MenuItem>
-                <MenuItem Header="Start Combat" Click="btnInitiativeTracker_Click" />
-                <MenuItem Header="About" Name="mnuAbout" Click="mnuAbout_Click" />
+                <MenuItem Header="Start Combat" Click="BtnInitiativeTracker_Click" />
+                <MenuItem Header="About" Name="mnuAbout" Click="MnuAbout_Click" />
             </Menu>
         </DockPanel>
         <Frame Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden">

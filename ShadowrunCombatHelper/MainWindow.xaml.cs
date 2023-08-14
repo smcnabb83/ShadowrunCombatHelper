@@ -2,6 +2,7 @@
 using ShadowrunCombatHelper.Views;
 using System.Windows;
 using System.Windows.Navigation;
+using LiteDB;
 
 namespace ShadowrunCombatHelper
 {
@@ -15,33 +16,34 @@ namespace ShadowrunCombatHelper
         public MainWindow()
         {
             InitializeComponent();
+            var db = new LiteDatabase("localdata.db");
             this.WindowState = WindowState.Maximized;
             CharacterList.Instance.ReadCharacterDataFromFile();
-            mainFrame.Navigated += handleNavigatedObject;
+            mainFrame.Navigated += HandleNavigatedObject;
             mainFrame.Navigate(new BlankPage());
         }
 
-        private void btnCharacterCreator_Click(object sender, RoutedEventArgs e)
+        private void BtnCharacterCreator_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(new CharacterCreator_View());
         }
 
-        private void btnInitiativeTracker_Click(object sender, RoutedEventArgs e)
+        private void BtnInitiativeTracker_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(new InitiativeTracker_View());
         }
 
-        private void mnuExit_Click(object sender, RoutedEventArgs e)
+        private void MnuExit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        private void mnuCreateEditSkills_Click(object sender, RoutedEventArgs e)
+        private void MnuCreateEditSkills_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(new SkillsEditor_View());
         }
 
-        private void handleNavigatedObject(object sender, NavigationEventArgs e)
+        private void HandleNavigatedObject(object sender, NavigationEventArgs e)
         {
             if ((e.ExtraData is GoBack canGoBack) && canGoBack == GoBack.Disallow)
             {
@@ -54,12 +56,12 @@ namespace ShadowrunCombatHelper
             }
         }
 
-        private void mnuCreateEditAffiliations_Click(object sender, RoutedEventArgs e)
+        private void MnuCreateEditAffiliations_Click(object sender, RoutedEventArgs e)
         {
             mainFrame.Navigate(new AffiliationEditor_View());
         }
 
-        private void mnuAbout_Click(object sender, RoutedEventArgs e)
+        private void MnuAbout_Click(object sender, RoutedEventArgs e)
         {
             new AboutApp().Show();
         }

@@ -10,7 +10,7 @@ namespace ShadowrunCombatHelperTests
     [TestClass]
     public class CharacterTest
     {
-        Character testChar = new Character();
+        readonly Character testChar = new Character();
         string prop;
 
         
@@ -51,7 +51,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.BaseArmor;
 
-            testChar.BOD = testChar.BOD + change;
+            testChar.BOD += change;
 
             Assert.IsTrue(priorBase + change == testChar.BaseArmor);
         }
@@ -172,7 +172,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.Composure;
 
-            testChar.CHA = testChar.CHA + change;
+            testChar.CHA += change;
 
             Assert.IsTrue(priorBase + change == testChar.Composure);
         }
@@ -185,7 +185,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.Composure;
 
-            testChar.WIL = testChar.WIL + change;
+            testChar.WIL += change;
 
             Assert.IsTrue(priorBase + change == testChar.Composure);
         }
@@ -268,7 +268,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.JudgeIntentions;
 
-            testChar.CHA = testChar.CHA + change;
+            testChar.CHA += change;
 
             Assert.IsTrue(priorBase + change == testChar.JudgeIntentions);
         }
@@ -281,7 +281,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.JudgeIntentions;
 
-            testChar.INTU = testChar.INTU + change;
+            testChar.INTU += change;
 
             Assert.IsTrue(priorBase + change == testChar.JudgeIntentions);
         }
@@ -294,7 +294,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.LiftCarry;
 
-            testChar.BOD = testChar.BOD + change;
+            testChar.BOD += change;
 
             Assert.IsTrue(priorBase + change == testChar.LiftCarry);
         }
@@ -307,7 +307,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.LiftCarry;
 
-            testChar.STR = testChar.STR + change;
+            testChar.STR += change;
 
             Assert.IsTrue(priorBase + change == testChar.LiftCarry);
         }
@@ -351,7 +351,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.Memory;
 
-            testChar.LOG = testChar.LOG + change;
+            testChar.LOG += change;
 
             Assert.IsTrue(priorBase + change == testChar.Memory);
         }
@@ -364,7 +364,7 @@ namespace ShadowrunCombatHelperTests
         {
             int priorBase = testChar.Memory;
 
-            testChar.WIL = testChar.WIL + change;
+            testChar.WIL += change;
 
             Assert.IsTrue(priorBase + change == testChar.Memory);
         }

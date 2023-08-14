@@ -21,14 +21,12 @@ namespace ShadowrunCombatHelper.ExternalData
 
             if (File.Exists(filepath))
             {
-                List<T> readTo = new List<T>();
-
                 using (var reader = new StreamReader(filepath))
                 {
                     try
                     {
                         XmlSerializer deserializer = new XmlSerializer(typeof(List<T>));
-                        readTo = (List<T>)deserializer.Deserialize(reader);
+                        List<T> readTo = (List<T>)deserializer.Deserialize(reader);
                         return readTo;
                     }
                     catch
@@ -48,7 +46,6 @@ namespace ShadowrunCombatHelper.ExternalData
         {
             string filepath = ApplicationXmlFiles.GetFilePath(fileType);
             XmlSerializer serializer = new XmlSerializer(typeof(List<T>));
-            CharacterList clist = CharacterList.Instance;
 
             using (var writer = new StreamWriter(filepath))
             {

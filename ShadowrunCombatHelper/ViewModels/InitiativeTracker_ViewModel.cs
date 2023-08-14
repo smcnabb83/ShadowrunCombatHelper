@@ -32,7 +32,15 @@ namespace ShadowrunCombatHelper.ViewModels
             }
         }
 
-        public Character CurrentCharacter => CombatQueue.Aggregate(CustomAggregator);
+        public Character CurrentCharacter()  {
+
+            if(CombatQueue.Count == 0)
+            {
+                return null;
+            }
+            return CombatQueue.Aggregate(CustomAggregator);
+
+        }
 
         public int CurrentRound
         {

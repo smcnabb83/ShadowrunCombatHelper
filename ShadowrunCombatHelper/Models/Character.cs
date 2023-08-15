@@ -333,26 +333,55 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
+                return $"Roll {MinInitiative} + {InitiativeDice}d6";
+            }
+        }
+         
+        public int MinInitiative
+        {
+            get
+            {
                 switch (CharCombatState)
                 {
                     case CombatState.PHYSICAL:
-                        return $"Roll {REA + INTU} + 1D6";
+                        return REA + INTU;
 
                     case CombatState.ASTRAL:
-                        return $"Roll {INTU * 2} + 2D6";
+                        return INTU * 2;
 
                     case CombatState.AR:
-                        return $"Roll {REA + INTU} + 1D6";
+                        return REA + INTU;
 
                     case CombatState.VRCOLDSIM:
-                        return $"Roll {LOG + INTU} + 3D6";
+                        return LOG + INTU;
 
                     case CombatState.VRHOTSIM:
-                        return $"Roll {LOG + INTU} + 4D6";
+                        return LOG + INTU;
 
                     default:
-                        return "";
+                        return 0;
                 }
+            }
+        }
+        
+        public int InitiativeDice
+        {
+            get
+            {
+                switch (CharCombatState)
+                {
+                    case CombatState.PHYSICAL:
+                        return 1;
+                    case CombatState.ASTRAL:
+                        return 2;
+                    case CombatState.VRCOLDSIM:
+                        return 3;
+                    case CombatState.VRHOTSIM:
+                        return 4;
+                    case CombatState.AR:
+                        return 1;
+                }
+                return 0;
             }
         }
 
@@ -472,26 +501,7 @@ namespace ShadowrunCombatHelper.Models
         {
             get
             {
-                switch (CharCombatState)
-                {
-                    case CombatState.PHYSICAL:
-                        return REA + INTU + roller.Next(1, 7);
-
-                    case CombatState.ASTRAL:
-                        return INTU * 2 + roller.Next(2, 13);
-
-                    case CombatState.AR:
-                        return REA + INTU + roller.Next(1, 7);
-
-                    case CombatState.VRCOLDSIM:
-                        return LOG + INTU + roller.Next(3, 19);
-
-                    case CombatState.VRHOTSIM:
-                        return LOG + INTU + roller.Next(4, 25);
-
-                    default:
-                        return 1;
-                }
+                return MinInitiative + roller.Next(InitiativeDice, 6*InitiativeDice + 1);
             }
         }
 

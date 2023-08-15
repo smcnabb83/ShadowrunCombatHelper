@@ -11,6 +11,7 @@ namespace ShadowrunCombatHelper.UserControls
     /// </summary>
     public partial class InitiativeDialog : Window
     {
+        private readonly Character initiativeCharacter;
         public InitiativeDialog(Character charForInitiative)
         {
             InitializeComponent();
@@ -18,6 +19,7 @@ namespace ShadowrunCombatHelper.UserControls
             InitiativeLabel.Text =
                 $"Please {charForInitiative.InitiativeRollText} for initiative and put the result below: ";
             Title += $" for {charForInitiative.CharacterName}.";
+            initiativeCharacter = charForInitiative;
         }
 
 
@@ -35,6 +37,14 @@ namespace ShadowrunCombatHelper.UserControls
             try
             {
                 InitiativeRolledValue = int.Parse(InitiativeInput.Text);
+                if(InitiativeRolledValue < initiativeCharacter.MinInitiative || InitiativeRolledValue > initiativeCharacter.MinInitiative + initiativeCharacter.InitiativeDice * 6)
+                {
+                    var res = MessageBox.Show("Selected initiative is outside of the range of possible values for this character. Are you sure this is correct?", "Abnormal Initiative", MessageBoxButton.YesNo, MessageBoxImage.Warning);                        
+                    if(res.Equals(MessageBoxResult.No)) {
+                        return;    
+                    }
+                }
+
                 DialogResult = true;
             }
             catch

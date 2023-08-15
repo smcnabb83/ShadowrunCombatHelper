@@ -19,26 +19,21 @@ namespace ShadowrunCombatHelper.ExternalData
                      Directory.CreateDirectory(ApplicationXmlFiles.UserFileDirectory);
             }
 
-            if (File.Exists(filepath))
+            if(!File.Exists(filepath)) return new List<T>();
+
+            using (var reader = new StreamReader(filepath))
             {
-                using (var reader = new StreamReader(filepath))
+                try
                 {
-                    try
-                    {
-                        XmlSerializer deserializer = new XmlSerializer(typeof(List<T>));
-                        List<T> readTo = (List<T>)deserializer.Deserialize(reader);
-                        return readTo;
-                    }
-                    catch
-                    {
-                        MessageBox.Show($"There was an error reading {filepath}. The file will be overwritten with a new file.", "Error reading file", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return new List<T>();
-                    }
+                    XmlSerializer deserializer = new XmlSerializer(typeof(List<T>));
+                    List<T> readTo = (List<T>)deserializer.Deserialize(reader);
+                    return readTo;
                 }
-            }
-            else
-            {
-                return new List<T>();
+                catch
+                {
+                    MessageBox.Show($"There was an error reading {filepath}. The file will be overwritten with a new file.", "Error reading file", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return new List<T>();
+                }
             }
         }
 

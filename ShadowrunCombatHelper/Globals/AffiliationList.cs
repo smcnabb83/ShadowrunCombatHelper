@@ -17,15 +17,14 @@ namespace ShadowrunCombatHelper.Globals
         {
             Affiliations = _readWriter.ReadFileToList(ApplicationXmlFiles.FileType.AffiliationData);
 
-            if (Affiliations.Count <= 0)
+            if (Affiliations.Count > 0) return; 
+
+            Affiliations.Add(new Affiliation
             {
-                Affiliations.Add(new Affiliation
-                {
-                    Name = "Player", BackgroundColor = new[] {128, 0, 0, 255}, ForegroundColor = new[] {255, 0, 0, 0}
-                });
-                Affiliations.Add(new Affiliation
-                    {Name = "Enemy", BackgroundColor = new[] {128, 255, 0, 0}, ForegroundColor = new[] {255, 0, 0, 0}});
-            }
+                Name = "Player", BackgroundColor = new[] {128, 0, 0, 255}, ForegroundColor = new[] {255, 0, 0, 0}
+            });
+            Affiliations.Add(new Affiliation
+                {Name = "Enemy", BackgroundColor = new[] {128, 255, 0, 0}, ForegroundColor = new[] {255, 0, 0, 0}});
         }
 
         public List<Affiliation> Affiliations { get; set; } = new List<Affiliation>();

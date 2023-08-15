@@ -1,5 +1,4 @@
 ﻿using ShadowrunCombatHelper.Models;
-using System;
 using System.ComponentModel;
 
 namespace ShadowrunCombatHelper.Interfaces

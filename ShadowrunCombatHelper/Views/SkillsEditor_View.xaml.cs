@@ -69,7 +69,7 @@ namespace ShadowrunCombatHelper.Views
             e.Handled = true;
         }
 
-        private void btnSaveChanges_Click(object sender, RoutedEventArgs e)
+        private void BtnSaveChanges_Click(object sender, RoutedEventArgs e)
         {
             (DataContext as SkillsEditor_ViewModel)?.WriteToGlobalSkillsList();
         }

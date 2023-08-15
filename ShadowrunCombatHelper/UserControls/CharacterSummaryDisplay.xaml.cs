@@ -29,7 +29,7 @@ namespace ShadowrunCombatHelper.UserControls
         {
         }
 
-        private void mnuEndRound_Click(object sender, RoutedEventArgs e)
+        private void MnuEndRound_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.EndTurn();
         }
@@ -42,12 +42,12 @@ namespace ShadowrunCombatHelper.UserControls
             }
         }
 
-        private void btnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
+        private void BtnDealOnePhysicalDamage_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.CurrentPhysicalDamage++;
         }
 
-        private void btnDealDamage_Click(object sender, RoutedEventArgs e)
+        private void BtnDealDamage_Click(object sender, RoutedEventArgs e)
         {
             var dealDamage = new DealDamageDialog(BoundCharacter);
             bool? result = dealDamage.ShowDialog();
@@ -64,17 +64,17 @@ namespace ShadowrunCombatHelper.UserControls
             }
         }
 
-        private void mnuFullDefense_Click(object sender, RoutedEventArgs e)
+        private void MnuFullDefense_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.FullDefense();
         }
 
-        private void mnuBlock_Click(object sender, RoutedEventArgs e)
+        private void MnuBlock_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.Block();
         }
 
-        private void mnuDodge_Click(object sender, RoutedEventArgs e)
+        private void MnuDodge_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.Dodge();
         }
@@ -84,37 +84,37 @@ namespace ShadowrunCombatHelper.UserControls
             BoundCharacter.HitTheDirt();
         }
 
-        private void mnuIntercept_Click(object sender, RoutedEventArgs e)
+        private void MnuIntercept_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.Intercept();
         }
 
-        private void mnuParry_Click(object sender, RoutedEventArgs e)
+        private void MnuParry_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.Parry();
         }
 
-        private void mnuRunningToggle_Click(object sender, RoutedEventArgs e)
+        private void MnuRunningToggle_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.ToggleRunning();
         }
 
-        private void mnuSimpleAction_Click(object sender, RoutedEventArgs e)
+        private void MnuSimpleAction_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.ConsumeSimpleAction();
         }
 
-        private void mnuComplexAction_Click(object sender, RoutedEventArgs e)
+        private void MnuComplexAction_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.ConsumeComplexAction();
         }
 
-        private void mnuFreeAction_Click(object sender, RoutedEventArgs e)
+        private void MnuFreeAction_Click(object sender, RoutedEventArgs e)
         {
             BoundCharacter.ConsumeFreeAction();
         }
 
-        private void mnuMoveCharacter_Click(object sender, RoutedEventArgs e)
+        private void MnuMoveCharacter_Click(object sender, RoutedEventArgs e)
         {
             int amountMoved =
                 GetInputDialog<int>.Show($"Input {BoundCharacter.CharacterName} Movement", "Enter Movement");
